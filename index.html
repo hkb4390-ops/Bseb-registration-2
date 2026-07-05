@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Telegram Web App API Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
     <style>
         /* CSS Reset & Variable Base Engines */
         * {
@@ -378,27 +381,29 @@
                 }, 4000);
             }
 
-            // Step 4: Telegram In-App Browser Bypass Protocol
+            // Step 4: Telegram In-App Browser & Mini App Bypass Protocol
             registerBtn.addEventListener("click", (e) => {
                 e.preventDefault();
 
-                // चेक करें कि क्या यूजर टेलीग्राम मिनी ऐप या इन-ऐप ब्राउज़र में है
-                const isTelegram = /Telegram/i.test(navigator.userAgent) || (window.Telegram && window.Telegram.WebApp);
+                // चेक करें कि क्या यूजर Telegram Mini App के अंदर है
+                if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) {
+                    // Telegram Mini App का आधिकारिक तरीका लिंक ओपन करने का
+                    window.Telegram.WebApp.openLink(targetLink);
+                } 
+                else {
+                    // नॉर्मल ब्राउज़र या रेगुलर टेलीग्राम इन-ऐप ब्राउज़र के लिए
+                    const isTelegram = /Telegram/i.test(navigator.userAgent);
+                    const isAndroid = /Android/i.test(navigator.userAgent);
 
-                if (isTelegram) {
-                    // एंड्रॉइड यूजर्स के लिए गूगल क्रोम फ़ोर्स रिडायरेक्शन इंटेंट (Intent Protocol)
-                    if (/Android/i.test(navigator.userAgent)) {
+                    if (isTelegram && isAndroid) {
+                        // अगर यूजर मिनी ऐप में नहीं है, लेकिन टेलीग्राम चैट के ब्राउज़र में है (Android)
                         const cleanUrl = targetLink.replace(/^https?:\/\//, '');
                         const androidIntent = `intent://${cleanUrl}#Intent;scheme=https;package=com.android.chrome;end;`;
                         window.location.href = androidIntent;
                     } else {
-                        // iOS (iPhone) या अन्य डिवाइसेज के लिए सिस्टम डिफ़ॉल्ट ब्राउज़र कमांड
-                        window.open(targetLink, '_system');
-                        window.open(targetLink, '_blank');
+                        // iOS या नॉर्मल Chrome/Safari ब्राउज़र के लिए
+                        window.open(targetLink, '_blank') || (window.location.href = targetLink);
                     }
-                } else {
-                    // अगर नॉर्मल क्रोम/ब्राउज़र है, तो सीधे लिंक ओपन करें
-                    window.location.href = targetLink;
                 }
             });
         });
