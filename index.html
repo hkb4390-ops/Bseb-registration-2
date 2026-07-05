@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bihar Board Class 10th - Verified Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variable Base Engines */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-glow-1: #ff007f;
+            --bg-glow-2: #00f0ff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #dae5ef;
+            --accent-color: #00f0ff;
+        }
+
+        body {
+            background: #060813;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Ambient Dynamic Background Glows */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #0c0f26 0%, #050711 100%);
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.25;
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: var(--bg-glow-1);
+        }
+
+        .orb-2 {
+            bottom: -20%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: var(--bg-glow-2);
+            animation-delay: -4s;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 80px) scale(1.15); }
+        }
+
+        /* JioStar Inspired Opening Animation & Loader Screen */
+        #app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050711;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .jiostar-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+        }
+
+        .loader-logo {
+            width: 105px;
+            height: 105px;
+            object-fit: contain;
+            border-radius: 24px;
+            z-index: 2;
+            transform: scale(0);
+            animation: jioStarSplash 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .jiostar-ring {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 1;
+            animation: jioRingExpand 2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes jioStarSplash {
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 20px rgba(0,240,255,0.4)); }
+        }
+
+        @keyframes jioRingExpand {
+            0% { width: 40px; height: 40px; opacity: 0; }
+            70% { opacity: 0.8; border-color: var(--bg-glow-1); }
+            100% { width: 240px; height: 240px; opacity: 0; }
+        }
+
+        /* Main Structural Reveal Frame */
+        .main-app-container {
+            width: 100%;
+            max-width: 460px;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 10;
+        }
+
+        body.loaded .main-app-container {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Premium Crystal Glass Card Design */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(35px) saturate(200%);
+            -webkit-backdrop-filter: blur(35px) saturate(200%);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 35px 22px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+
+        .app-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border-radius: 22px;
+            margin-bottom: 12px;
+        }
+
+        .brand-title {
+            font-size: 25px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 40%, #c7d2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge-tag {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #00f0ff;
+            margin-bottom: 20px;
+        }
+
+        /* Live Registered Counter Box */
+        .counter-section {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .counter-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #2ed573;
+            border-radius: 50%;
+            animation: liveBlink 1s infinite alternate;
+            box-shadow: 0 0 8px #2ed573;
+        }
+
+        @keyframes liveBlink {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .counter-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(180deg, #fff, #9dd6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Video Widget Glass Box (iOS 2026 UI) */
+        .video-widget-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 12px;
+            margin-top: 15px;
+            box-shadow: inset 0 1px 10px rgba(255, 255, 255, 0.03);
+            overflow: hidden;
+        }
+
+        .video-header {
+            font-size: 13px;
+            font-weight: 600;
+            color: #dae5ef;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .video-widget-box video {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Action Registration Button */
+        .btn-register {
+            width: 100%;
+            background: linear-gradient(135deg, #00f0ff 0%, #ff007f 100%);
+            border: none;
+            outline: none;
+            padding: 16px;
+            border-radius: 18px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 0, 127, 0.25), inset 0 2px 2px rgba(255,255,255,0.2);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 240, 255, 0.35);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Ambient Background -->
+    <div class="ambient-bg">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- App Splash Loader -->
+    <div id="app-loader">
+        <div class="jiostar-container">
+            <div class="jiostar-ring"></div>
+            <img class="loader-logo" src="https://i.postimg.cc/dVgYpBcq/file-00000000623871fa99bd94425e624e26.png" alt="Loader Logo">
+        </div>
+    </div>
+
+    <!-- Main Card Body Container -->
+    <main class="main-app-container">
+        <div class="glass-card">
+            <img class="app-logo" src="https://i.postimg.cc/dVgYpBcq/file-00000000623871fa99bd94425e624e26.png" alt="App Main Logo">
+            
+            <h1 class="brand-title">Bihar Board (BSEB)</h1>
+            <div class="badge-tag">Class 10th: All Batches Free</div>
+
+            <!-- Live Counter Widget -->
+            <div class="counter-section">
+                <div class="counter-label"><span class="live-dot"></span> Live Registered Students</div>
+                <div id="live-counter" class="counter-number">Connecting...</div>
+            </div>
+
+            <!-- Auto Play Video Widget Box -->
+            <div class="video-widget-box">
+                <div class="video-header">
+                    <span>🎬</span> How to Register (पूरा वीडियो देखें)
+                </div>
+                <video id="tutorial-video" autoplay loop muted playsinline controls>
+                    <source src="https://ia800902.us.archive.org/20/items/video_20260705_114435/video_20260705_114435.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Interactive Registration Button -->
+            <div id="registration-action-zone" style="margin-top: 25px;">
+                <button id="trigger-register-flow" class="btn-register">Start Registration Now</button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const appLoader = document.getElementById("app-loader");
+            const liveCounterNode = document.getElementById("live-counter");
+            const registerBtn = document.getElementById("trigger-register-flow");
+            const targetLink = "https://vplink.in/cKG0CU";
+
+            // Step 1: Manage Launch Transition Animation
+            setTimeout(() => {
+                appLoader.style.transform = "translateY(-100%)";
+                document.body.classList.add("loaded");
+                initializeLiveCounter();
+                attemptVideoAutoplay();
+            }, 2300);
+
+            // Step 2: Auto-play Video Safe Handler
+            function attemptVideoAutoplay() {
+                const video = document.getElementById("tutorial-video");
+                if (video) {
+                    video.muted = true; // म्यूट रखना ज़रूरी है वरना ब्राउज़र ब्लॉक कर देगा
+                    video.play().catch(error => {
+                        console.log("Autoplay interrupted. Waiting for user touch interaction.");
+                        // बैकअप: स्क्रीन पर पहली क्लिक होते ही वीडियो चालू हो जायेगा
+                        document.addEventListener('click', () => { video.play(); }, { once: true });
+                    });
+                }
+            }
+
+            // Step 3: Realtime Counter Animation Logic
+            function initializeLiveCounter() {
+                let currentCount = Math.floor(Math.random() * (4900 - 4650) + 4650);
+                liveCounterNode.innerText = currentCount.toLocaleString('en-IN');
+
+                setInterval(() => {
+                    currentCount += Math.floor(Math.random() * 3) + 1;
+                    liveCounterNode.innerText = currentCount.toLocaleString('en-IN');
+                }, 4000);
+            }
+
+            // Step 4: Telegram In-App Browser Bypass Protocol
+            registerBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                // चेक करें कि क्या यूजर टेलीग्राम मिनी ऐप या इन-ऐप ब्राउज़र में है
+                const isTelegram = /Telegram/i.test(navigator.userAgent) || (window.Telegram && window.Telegram.WebApp);
+
+                if (isTelegram) {
+                    // एंड्रॉइड यूजर्स के लिए गूगल क्रोम फ़ोर्स रिडायरेक्शन इंटेंट (Intent Protocol)
+                    if (/Android/i.test(navigator.userAgent)) {
+                        const cleanUrl = targetLink.replace(/^https?:\/\//, '');
+                        const androidIntent = `intent://${cleanUrl}#Intent;scheme=https;package=com.android.chrome;end;`;
+                        window.location.href = androidIntent;
+                    } else {
+                        // iOS (iPhone) या अन्य डिवाइसेज के लिए सिस्टम डिफ़ॉल्ट ब्राउज़र कमांड
+                        window.open(targetLink, '_system');
+                        window.open(targetLink, '_blank');
+                    }
+                } else {
+                    // अगर नॉर्मल क्रोम/ब्राउज़र है, तो सीधे लिंक ओपन करें
+                    window.location.href = targetLink;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
