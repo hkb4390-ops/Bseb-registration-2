@@ -80,21 +80,44 @@
             box-shadow: 0 4px 12px rgba(255, 8, 68, 0.4);
         }
 
+        .ad-video-wrapper {
+            transition: filter 1s ease;
+        }
         .ad-video-wrapper video, .ad-video-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
         
+        /* Ad Buffering State Overlay inside video */
+        #adBufferingOverlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 5; display: none; flex-direction: column; 
+            justify-content: center; align-items: center; gap: 10px; border-radius: 16px;
+            color: var(--primary); font-family: var(--font-head); font-weight: 700; 
+            font-size: 16px; text-align: center; backdrop-filter: blur(5px);
+        }
+
         #adCloseBtn {
             background: var(--danger); color: #fff; border: none; padding: 10px 20px; 
             font-family: var(--font-head); font-weight: 900; border-radius: 12px; 
-            cursor: pointer; box-shadow: 0 5px 15px rgba(255, 8, 68, 0.4); transition: all 0.3s ease;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(255, 8, 68, 0.4); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         #adCloseBtn:disabled {
             background: #444; box-shadow: none; cursor: not-allowed;
         }
+
+        #adSponsorWrapper {
+            position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 15; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
         
+        #adLearnMoreLabel {
+            font-family: var(--font-head); font-size: 12px; font-weight: 900; color: #fff; 
+            background: rgba(0,0,0,0.7); padding: 4px 14px; border-radius: 8px; 
+            margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; 
+            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1);
+        }
+
         #adSponsorBtn {
             padding: 14px; background: var(--glass-bg); border: 1px solid var(--glass-border);
             color: #fff; font-family: var(--font-body); font-weight: 700; font-size: 15px;
-            cursor: pointer; text-decoration: none; display: inline-flex;
+            cursor: pointer; text-decoration: none; display: inline-flex; width: 100%;
             align-items: center; justify-content: center; gap: 8px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
@@ -105,15 +128,17 @@
         .ad-layout-16-9 .sponsor-label-box { margin-bottom: 12px; }
         .ad-layout-16-9 .ad-video-wrapper { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 16px; overflow: hidden; border: 2px solid var(--danger); margin-bottom: 20px; position: relative; }
         .ad-layout-16-9 #adCloseBtn { position: absolute; top: -55px; right: 0; }
-        .ad-layout-16-9 #adSponsorBtn { width: 100%; border-radius: 16px; }
+        .ad-layout-16-9 #adSponsorWrapper { width: 100%; }
+        .ad-layout-16-9 #adSponsorBtn { border-radius: 16px; }
 
         /* 9:16 Aspect Ratio Layout Rules (Pura Full Screen View) */
         .ad-layout-9-16 {
             position: absolute; top: 0; left: 0; width: 100vw !important; height: 100vh !important; max-width: 100vw !important; margin: 0 !important; padding: 0 !important;
         }
         .ad-layout-9-16 .ad-video-wrapper {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #000;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #000; border-radius: 0;
         }
+        .ad-layout-9-16 #adBufferingOverlay { border-radius: 0; }
         .ad-layout-9-16 .ad-video-wrapper video, .ad-layout-9-16 .ad-video-wrapper iframe {
             width: 100%; height: 100%; object-fit: cover;
         }
@@ -123,8 +148,33 @@
         .ad-layout-9-16 #adCloseBtn {
             position: absolute; top: 20px; right: 20px; z-index: 10;
         }
+        .ad-layout-9-16 #adSponsorWrapper {
+            position: absolute; bottom: max(12vh, 85px); left: 5%; width: 90%; z-index: 10;
+        }
         .ad-layout-9-16 #adSponsorBtn {
-            position: absolute; bottom: 40px; left: 5%; width: 90%; z-index: 10; border-radius: 16px;
+            border-radius: 16px;
+        }
+
+        /* Post-Ad State Classes */
+        .video-blur-dark {
+            filter: blur(10px) brightness(0.3) !important;
+        }
+        .sponsor-center-mode {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(1.1) !important;
+            bottom: auto !important;
+            width: 85% !important;
+            z-index: 20 !important;
+        }
+        .close-btn-big-red {
+            transform: scale(1.2) !important;
+            background: #d50000 !important;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.9) !important;
+            padding: 12px 25px !important;
+            font-size: 16px !important;
+            border: 2px solid #ff4d4d !important;
         }
 
         /* BLUE BLINK ATTENTION SPICEAL ANIMATION */
@@ -138,7 +188,7 @@
         }
         @keyframes blueAttentionPulse {
             0% { transform: scale(1); box-shadow: 0 0 12px rgba(0, 85, 255, 0.5); filter: brightness(1); }
-            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 212, 255, 0.9), 0 0 35px rgba(0, 85, 255, 0.6); filter: brightness(1.2); }
+            50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(0, 212, 255, 0.9), 0 0 35px rgba(0, 85, 255, 0.6); filter: brightness(1.2); }
             100% { transform: scale(1); box-shadow: 0 0 12px rgba(0, 85, 255, 0.5); filter: brightness(1); }
         }
 
@@ -494,8 +544,18 @@
         <div id="adContentState">
             <button id="adCloseBtn" onclick="closeAdOverlay()">X CLOSE</button>
             <div class="sponsor-label-box"><i class="fas fa-rectangle-ad"></i> SPONSORED VIDEO AD</div>
+            
             <div class="ad-video-wrapper" id="adVideoWrapper"></div>
-            <a href="#" id="adSponsorBtn" target="_blank">Sponsor Link</a>
+            
+            <div id="adBufferingOverlay">
+                <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+                <span>Ads is loading...</span>
+            </div>
+
+            <div id="adSponsorWrapper">
+                <div id="adLearnMoreLabel">Learn More</div>
+                <a href="#" id="adSponsorBtn" target="_blank">Sponsor Link</a>
+            </div>
         </div>
     </div>
 
@@ -1114,7 +1174,7 @@
             }
         }
 
-        // FULLY FIXED AD ENGINE (Sync Timers + MP4 Support + Exact Play States)
+        // FULLY FIXED AD ENGINE (Sync Timers + Buffering Support + EXACT Play States)
         function launchSponsorAd(appObj, callbackSuccess, useGlobal = false) {
             const overlay = document.getElementById('adOverlay');
             const loadingState = document.getElementById('adLoadingState');
@@ -1123,8 +1183,10 @@
             const videoWrapper = document.getElementById('adVideoWrapper');
             const closeBtn = document.getElementById('adCloseBtn');
             const sponsorBtn = document.getElementById('adSponsorBtn');
+            const sponsorWrapper = document.getElementById('adSponsorWrapper');
+            const bufferingOverlay = document.getElementById('adBufferingOverlay');
 
-            // Overlay Setup
+            // Overlay & Initial Reset Setup
             overlay.style.display = 'flex';
             loadingState.style.display = 'flex';
             contentState.style.display = 'none';
@@ -1132,6 +1194,12 @@
             sponsorBtn.className = 'adSponsorBtn blue-blink-btn'; 
             videoWrapper.innerHTML = '';
             loadingText.innerText = "Loading Ad, Please Wait...";
+            
+            // Reset Post-Ad Classes exactly
+            videoWrapper.classList.remove('video-blur-dark');
+            sponsorWrapper.classList.remove('sponsor-center-mode');
+            closeBtn.classList.remove('close-btn-big-red');
+            bufferingOverlay.style.display = 'flex'; // Initial load buffering state
 
             let durationSec = 5;
             let rawVideoUrl = '';
@@ -1158,10 +1226,8 @@
             // Dynamic Screen Framework Setup
             if(finalRatio === '9:16') {
                 contentState.className = "ad-layout-9-16";
-                videoWrapper.className = "ad-video-wrapper";
             } else {
                 contentState.className = "ad-layout-16-9";
-                videoWrapper.className = "ad-video-wrapper";
             }
 
             const matchedInternal = globalAppsData.find(a => a.customAppId === btnDestination || a.id === btnDestination);
@@ -1185,6 +1251,7 @@
             closeBtn.disabled = true;
             closeBtn.style.opacity = '0.5';
             closeBtn.innerText = `Loading...`;
+            let isAdDone = false;
 
             if(isYouTube) {
                 // YOUTUBE INTEGRATION LOGIC
@@ -1197,42 +1264,48 @@
                     }
                 }
                 
-                // Audio force flag injected securely
                 videoWrapper.innerHTML = `<iframe src="${embedUrl}?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
                 
                 setTimeout(() => {
                     loadingState.style.display = 'none';
                     contentState.style.display = 'block';
                     closeBtn.style.display = 'block';
+                    bufferingOverlay.style.display = 'none'; // hide on YouTube after timeout assumption
                     let timeLeft = durationSec;
                     
                     window.adCountdownInterval = setInterval(() => {
                         timeLeft--;
                         if (timeLeft <= 0) {
                             clearInterval(window.adCountdownInterval);
-                            closeBtn.disabled = false;
-                            closeBtn.style.opacity = '1';
-                            closeBtn.innerText = 'X CLOSE';
-                            localStorage.setItem('hrry_last_ad_timestamp', Date.now().toString());
+                            if(!isAdDone){
+                                isAdDone = true;
+                                closeBtn.disabled = false;
+                                closeBtn.style.opacity = '1';
+                                closeBtn.innerText = 'X CLOSE';
+                                videoWrapper.classList.add('video-blur-dark');
+                                sponsorWrapper.classList.add('sponsor-center-mode');
+                                closeBtn.classList.add('close-btn-big-red');
+                                localStorage.setItem('hrry_last_ad_timestamp', Date.now().toString());
+                            }
                         } else {
                             closeBtn.innerText = `Close (${timeLeft}s)`;
                         }
                     }, 1000);
-                }, 1200);
+                }, 1500); // give YouTube iframe a bit of load time
 
             } else {
                 // PERFECT SYNC MP4 DIRECT LOGIC
                 videoWrapper.innerHTML = `<video id="adMp4Player" src="${rawVideoUrl}" playsinline loop style="width:100%; height:100%; object-fit:cover;"></video>`;
                 let videoEl = document.getElementById('adMp4Player');
                 
-                // Forcing explicit user gesture pass-through
                 videoEl.muted = false; 
 
-                // Unmute fallback feature for mobile strictly secure browsers
+                // FIX: Mute hatane par sirf unmute hoga. Toggle nahi karega taaki sound humesha on rahe.
                 videoEl.onclick = () => {
-                    videoEl.muted = !videoEl.muted;
-                    if(!videoEl.muted) showToast("Volume On 🔊", "success");
-                    else showToast("Volume Muted", "warning");
+                    if(videoEl.muted) {
+                        videoEl.muted = false;
+                        showToast("Volume On 🔊", "success");
+                    }
                 };
 
                 let playPromise = videoEl.play();
@@ -1248,8 +1321,6 @@
                 loadingState.style.display = 'none';
                 contentState.style.display = 'block';
                 closeBtn.style.display = 'block';
-
-                let isAdDone = false;
                 
                 // Sync EXACTLY based on time updates. If it pauses, timer pauses!
                 videoEl.ontimeupdate = () => {
@@ -1261,16 +1332,28 @@
                         closeBtn.disabled = false;
                         closeBtn.style.opacity = '1';
                         closeBtn.innerText = 'X CLOSE';
+                        videoWrapper.classList.add('video-blur-dark');
+                        sponsorWrapper.classList.add('sponsor-center-mode');
+                        closeBtn.classList.add('close-btn-big-red');
                         localStorage.setItem('hrry_last_ad_timestamp', Date.now().toString());
                     } else {
                         closeBtn.innerText = `Close (${timeLeft}s)`;
                     }
                 };
                 
-                // Real-time loading/buffering alert feedback on button
-                videoEl.onwaiting = () => { if(!isAdDone) closeBtn.innerText = 'Buffering...'; };
+                // Real-time loading/buffering alert feedback on button and UI
+                videoEl.onwaiting = () => { 
+                    if(!isAdDone) {
+                        bufferingOverlay.style.display = 'flex';
+                        closeBtn.innerText = 'Buffering...'; 
+                    }
+                };
                 videoEl.onplaying = () => { 
+                    bufferingOverlay.style.display = 'none';
                     if(!isAdDone) closeBtn.innerText = `Close (${Math.ceil(durationSec - videoEl.currentTime)}s)`; 
+                };
+                videoEl.oncanplay = () => {
+                    bufferingOverlay.style.display = 'none';
                 };
             }
 
@@ -1284,6 +1367,10 @@
             clearTimeout(adTimeoutTracker);
             clearTimeout(bufferTimeoutTracker);
             if (window.adCountdownInterval) clearInterval(window.adCountdownInterval);
+            
+            let videoEl = document.getElementById('adMp4Player');
+            if (videoEl) videoEl.pause();
+            
             document.getElementById('adVideoWrapper').innerHTML = '';
             document.getElementById('adOverlay').style.display = 'none';
             if(window.activeAdCallback) window.activeAdCallback();
@@ -1348,9 +1435,13 @@
                 const cleanRouteId = app.customAppId || app.id;
                 const dynamicShareUrl = 'https://hrry.online/?id=' + cleanRouteId;
                 
-                const dummyEl = document.createElement('input');
+                // Enhanced Share Message Output
+                const shortDesc = app.description ? app.description.substring(0, 60) + "..." : "Access premium features & tools!";
+                const shareTextMsg = `🚀 *${app.name}* is now available!\n\n✨ ${shortDesc}\n\n📥 Download and unlock premium features directly at HRRY Store. Check it out now! 👇\n${dynamicShareUrl}`;
+                
+                const dummyEl = document.createElement('textarea');
                 document.body.appendChild(dummyEl);
-                dummyEl.value = dynamicShareUrl;
+                dummyEl.value = shareTextMsg;
                 dummyEl.select();
                 document.execCommand('copy');
                 document.body.removeChild(dummyEl);
@@ -1358,8 +1449,7 @@
                 if(navigator.share) {
                     navigator.share({
                         title: app.name,
-                        text: `Download ${app.name} premium applications tools directly from HRRY Store!`,
-                        url: dynamicShareUrl
+                        text: shareTextMsg
                     }).then(() => showToast("Link Shared!"))
                     .catch(() => showToast("URL Copied to Clipboard!"));
                 } else {
