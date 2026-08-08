@@ -64,6 +64,7 @@
             align-items: center;
             gap: 16px;
             text-decoration: none;
+            cursor: pointer;
         }
 
         .brand-icon {
@@ -295,7 +296,7 @@
         .loading-text { color: #fff; font-size: 14px; font-weight: 800; letter-spacing: 3px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ================= NEW: iOS 2026 Overlay (Timer & Bot Loader) ================= */
+        /* iOS 2026 Overlay (Timer & Bot Loader) */
         .fullscreen-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6);
@@ -341,12 +342,11 @@
 <body>
 
     <header class="navbar">
-        <a href="/" class="brand">
+        <a class="brand" onclick="launchBot(event)">
             <div class="brand-icon"><i class="fas fa-play"></i></div>
             <div class="brand-text-wrapper">
                 <span class="brand-title">Hrry.Stream</span>
-                <!-- Added bot launch to this link -->
-                <span class="brand-subtitle" onclick="launchBot(event)">hrry.online | @himanshurajyadav</span>
+                <span class="brand-subtitle">hrry.online | @himanshurajyadav</span>
             </div>
         </a>
     </header>
@@ -381,8 +381,7 @@
 
             <!-- Detailed Developer Section -->
             <div class="dev-section">
-                <!-- Added bot launch to dev badge -->
-                <a href="javascript:void(0)" onclick="launchBot(event)" class="dev-badge"><i class="fas fa-code"></i> Developer Profile</a>
+                <a onclick="launchBot(event)" class="dev-badge"><i class="fas fa-code"></i> Developer Profile</a>
                 <h2 class="dev-name">Himanshu RAJ Yadav</h2>
                 <div class="dev-role">Lead Developer & System Architect</div>
                 <p class="dev-desc">
@@ -402,8 +401,8 @@
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
-                    <!-- Added autoplay attribute -->
-                    <video id="player" controls playsinline autoplay>
+                    <!-- Added muted autoplay to bypass browser restrictions and play instantly -->
+                    <video id="player" controls playsinline autoplay muted>
                         <source id="videoSource" src="" type="video/mp4">
                     </video>
                 </div>
@@ -416,7 +415,7 @@
                     </div>
 
                     <div class="action-buttons">
-                        <!-- Attached Timer Function Here -->
+                        <!-- Attached 15s Timer Function Here -->
                         <button id="dlBtn" class="btn btn-primary" onclick="startDownloadTimer(event)">
                             <i class="fas fa-cloud-download-alt"></i> Download Media File
                         </button>
@@ -432,10 +431,10 @@
         </section>
     </div>
 
-    <!-- Telegram Launch Button with Loader Event -->
-    <a href="javascript:void(0)" onclick="launchBot(event)" class="floating-bot-btn" id="floatingBtn">
+    <!-- Telegram Launch Button -->
+    <div onclick="launchBot(event)" class="floating-bot-btn" id="floatingBtn">
         <i class="fab fa-telegram-plane"></i> Launch Telegram Bot Now
-    </a>
+    </div>
 
     <!-- ================= Overlays (Timer & Loader) ================= -->
     
@@ -484,43 +483,12 @@
         let plyrPlayer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Plyr Player with autoplay: true
+            // Initialize Plyr Player with autoplay
             plyrPlayer = new Plyr('#player', {
                 controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
                 autoplay: true,
+                muted: true,
                 tooltips: { controls: true, seeking: true }
-            });
-
-            plyrPlayer.on('ready', () => {
-                const loaderHTML = `
-                    <div class="loading-overlay" id="customLoader">
-                        <div class="spinner" style="margin: 0 auto 20px;"></div>
-                        <div class="loading-text">hrry.streaming...</div>
-                    </div>
-                `;
-                plyrPlayer.elements.container.insertAdjacentHTML('beforeend', loaderHTML);
-                
-                const customLoader = document.getElementById('customLoader');
-                const showLoader = () => customLoader.classList.add('active');
-                const hideLoader = () => customLoader.classList.remove('active');
-
-                plyrPlayer.on('play', () => {
-                    if (plyrPlayer.media.readyState < 3) showLoader();
-                });
-                plyrPlayer.on('waiting', showLoader);
-                plyrPlayer.on('seeking', showLoader);
-                plyrPlayer.on('playing', hideLoader);
-                plyrPlayer.on('canplay', hideLoader);
-                plyrPlayer.on('pause', hideLoader);
-                plyrPlayer.on('error', () => {
-                    hideLoader();
-                    showToast("System Error: Media source unreadable");
-                });
-                
-                // Force Autoplay Request on ready
-                plyrPlayer.play().catch(() => {
-                    console.log("Browser blocked autoplay, waiting for user interaction.");
-                });
             });
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -540,6 +508,11 @@
                     type: 'video',
                     sources: [{ src: videoUrl }]
                 };
+
+                // Force play
+                setTimeout(() => {
+                    plyrPlayer.play().catch(() => {});
+                }, 500);
             } else {
                 // Showing Grand Home UI
                 document.getElementById('welcomeSection').style.display = 'block';
@@ -547,7 +520,7 @@
             }
         });
 
-        // iOS 2026 Timer Logic
+        // iOS 2026 Timer Logic for Download Button
         function startDownloadTimer(e) {
             e.preventDefault();
             const overlay = document.getElementById('timerOverlay');
@@ -557,7 +530,6 @@
             const statusText = document.getElementById('timerStatusText');
             const subText = document.getElementById('timerSubText');
             
-            // Set link to final button
             const videoUrl = document.getElementById('videoSource').src;
             finalBtn.href = videoUrl;
             
@@ -573,7 +545,6 @@
                 timeLeft--;
                 digitalText.innerText = timeLeft;
                 
-                // SVG circle animation
                 const offset = circumference - (timeLeft / 15) * circumference;
                 circle.style.strokeDashoffset = offset;
 
@@ -589,17 +560,15 @@
             }, 1000);
         }
 
-        // Bot Launch Logic with Loader
+        // Guaranteed Bot Launch with iOS Glass Loader
         function launchBot(e) {
             if(e) e.preventDefault();
             const loader = document.getElementById('botLoaderOverlay');
             loader.classList.add('active'); 
             
-            // Show loader for 1.5 seconds, then open bot link
             setTimeout(() => {
                 window.location.href = "https://t.me/PoltPulse_File_Id_bot";
-                setTimeout(() => { loader.classList.remove('active'); }, 2000);
-            }, 1500); 
+            }, 1200); 
         }
 
         function copyLink() {
