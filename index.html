@@ -3,409 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamVault - HRRY.ONLINE Video Player</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>StreamVault - HRRY.ONLINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Plyr HTML5 Player CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
     <style>
-        :root {
-            --bg-color: #07090e;
-            --card-bg: rgba(18, 24, 38, 0.75);
-            --primary: #6366f1;
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --accent: #06b6d4;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --border: rgba(255, 255, 255, 0.08);
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        /* --- HEADER NAVBAR --- */
-        .navbar {
-            background: rgba(7, 9, 14, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #9ca3af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .brand-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--primary-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-            -webkit-text-fill-color: initial;
-        }
-
-        .container {
-            max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 24px 20px;
-            flex: 1;
-        }
-
-        /* --- WELCOME HERO SECTION --- */
-        #welcomeSection {
-            text-align: center;
-            padding: 40px 10px;
-            display: none;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #818cf8;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .hero-title {
-            font-size: 36px;
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 16px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-desc {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto 32px auto;
-        }
-
-        .input-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 8px;
-            border-radius: 20px;
-            display: flex;
-            gap: 8px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            max-width: 650px;
-            margin: 0 auto 40px auto;
-        }
-
-        .input-card input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 12px 16px;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .feature-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 18px;
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-box i {
-            font-size: 24px;
-            color: var(--accent);
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .feature-box h4 {
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
-
-        .feature-box p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* --- VIDEO PLAYER SECTION --- */
-        #playerSection {
-            display: none;
-        }
-
-        .video-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(16px);
-        }
-
-        .video-wrapper {
-            width: 100%;
-            background: #000;
-            aspect-ratio: 16/9;
-            position: relative;
-        }
-
-        /* LIVE STATUS & OVERLAY ANIMATION */
-        .player-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(7, 9, 14, 0.88);
-            backdrop-filter: blur(12px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            text-align: center;
-            z-index: 10;
-            transition: opacity 0.4s ease, visibility 0.4s;
-        }
-
-        .player-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .spinner-ring {
-            width: 56px;
-            height: 56px;
-            border: 4px solid rgba(99, 102, 241, 0.15);
-            border-left-color: var(--primary);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .status-badge-live {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--success);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-badge-live .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--success);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-        }
-
-        .status-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .status-sub {
-            font-size: 13px;
-            color: var(--text-muted);
-            max-width: 480px;
-            line-height: 1.5;
-        }
-
-        /* Error Box in Overlay */
-        .error-card {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .error-card i {
-            font-size: 42px;
-            color: var(--danger);
-        }
-
-        /* Video Info Bar */
-        .video-details {
-            padding: 24px;
-        }
-
-        .video-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            word-break: break-word;
-        }
-
-        .video-meta {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 12px;
-        }
-
-        @media (max-width: 600px) {
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            .hero-title {
-                font-size: 26px;
-            }
-        }
-
-        /* Buttons */
-        .btn {
-            border: none;
-            outline: none;
-            padding: 14px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        /* Toast Popup */
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #1e293b;
-            border: 1px solid var(--primary);
-            padding: 12px 24px;
-            border-radius: 50px;
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
+        :root { --bg: #07090e; --card: rgba(18, 24, 38, 0.8); --primary: #6366f1; --accent: #06b6d4; --text: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+        .navbar { background: rgba(7, 9, 14, 0.9); padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; }
+        .brand { font-size: 20px; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .brand-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #6366f1, #a855f7); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 900px; width: 100%; margin: 20px auto; padding: 0 16px; flex: 1; }
+        #welcomeSection { text-align: center; padding: 60px 20px; }
+        .video-card { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; }
+        .video-wrapper { aspect-ratio: 16/9; background: #000; position: relative; }
+        .video-details { padding: 20px; }
+        .action-buttons { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .btn { padding: 12px 20px; border-radius: 10px; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
+        .btn-primary { background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <header class="navbar">
         <a href="/" class="brand">
             <div class="brand-icon"><i class="fas fa-play"></i></div>
@@ -413,284 +34,51 @@
         </a>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <div class="container">
-
-        <!-- 1. WELCOME SECTION (Direct Visit) -->
-        <section id="welcomeSection">
-            <div class="badge"><i class="fas fa-bolt"></i> Fast Cloud Streaming</div>
-            <h1 class="hero-title">Welcome to HRRY.ONLINE Portal</h1>
-            <p class="hero-desc">
-                Your personal high-speed video player and downloader. Send video files or direct links to our Telegram bot, click the generated link, and stream instantly without downloading delays.
-            </p>
-
-            <!-- Manual URL Input -->
-            <div class="input-card">
-                <input type="text" id="manualUrl" placeholder="Paste Direct Stream URL (e.g. https://stream.hrry.online/stream?id=...)...">
-                <button class="btn btn-primary" onclick="playManualUrl()"><i class="fas fa-play"></i> Stream Now</button>
-            </div>
-
-            <!-- Features -->
-            <div class="features-grid">
-                <div class="feature-box">
-                    <i class="fab fa-telegram"></i>
-                    <h4>Telegram Integration</h4>
-                    <p>Direct Termux bot integration for instant web streaming link generation.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-gauge-high"></i>
-                    <h4>High-Speed Stream</h4>
-                    <p>Lag-free cloud playback with HD multi-format video player support.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-download"></i>
-                    <h4>Direct Downloads</h4>
-                    <p>One-click direct high speed file downloader without popups or ads.</p>
-                </div>
-            </div>
+        <section id="welcomeSection" style="display:none;">
+            <h1>Welcome to HRRY.ONLINE</h1>
+            <p style="color:#9ca3af; margin-top:10px;">Telegram bot generated stream links will play here automatically.</p>
         </section>
 
-
-        <!-- 2. VIDEO PLAYER SECTION -->
-        <section id="playerSection">
+        <section id="playerSection" style="display:none;">
             <div class="video-card">
                 <div class="video-wrapper">
-                    
-                    <!-- REAL-TIME OVERLAY STATUS & LOADER -->
-                    <div id="playerOverlay" class="player-overlay">
-                        <div id="loadingContent">
-                            <div class="spinner-ring"></div>
-                            <div class="status-badge-live">
-                                <div class="dot"></div>
-                                <span id="liveStatusTag">Connecting</span>
-                            </div>
-                            <div class="status-title" id="statusTitle">Connecting to Termux Server...</div>
-                            <div class="status-sub" id="statusSub">Establishing secure connection with Cloudflare Tunnel & fetching video metadata.</div>
-                        </div>
-
-                        <!-- ERROR CONTAINER (Shown if offline/failed) -->
-                        <div id="errorContent" class="error-card">
-                            <i class="fas fa-plug-circle-xmark"></i>
-                            <div class="status-title" style="color:var(--danger);">Stream Offline or Link Expired</div>
-                            <div class="status-sub" id="errorDetailMsg">
-                                Cloudflare Tunnel disconnected or Termux bot is offline. Please check Termux on your phone and try again.
-                            </div>
-                            <div style="margin-top:16px; display:flex; gap:10px;">
-                                <button class="btn btn-primary" onclick="location.reload()">
-                                    <i class="fas fa-rotate-right"></i> Retry Connection
-                                </button>
-                                <a id="externalPlayerBtn" href="#" class="btn btn-secondary" target="_blank">
-                                    <i class="fas fa-circle-play"></i> Open External Player
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- VIDEO ELEMENT -->
-                    <video id="player" controls playsinline crossorigin="anonymous" preload="auto">
+                    <video id="player" controls playsinline crossorigin="anonymous">
                         <source id="videoSource" src="" type="video/mp4">
-                        Your browser does not support HTML5 video playback.
                     </video>
                 </div>
-
-                <!-- VIDEO METADATA & BUTTONS -->
                 <div class="video-details">
-                    <h2 class="video-title" id="displayTitle">Telegram Streamed File</h2>
-                    <div class="video-meta">
-                        <span><i class="fas fa-signal" id="signalIcon" style="color:var(--warning);"></i> <span id="connectionText">Checking Connection...</span></span>
-                        <span><i class="fas fa-shield-halved" style="color:var(--accent);"></i> Secure Cloud Stream</span>
-                    </div>
-
+                    <h2 id="displayTitle" style="font-size:18px;">Telegram Video</h2>
                     <div class="action-buttons">
-                        <a id="dlBtn" href="#" class="btn btn-primary" download target="_blank">
-                            <i class="fas fa-download"></i> Direct High-Speed Download
-                        </a>
-                        <button class="btn btn-secondary" onclick="copyLink()">
-                            <i class="fas fa-link"></i> Copy Link
-                        </button>
-                        <button class="btn btn-secondary" onclick="shareVideo()">
-                            <i class="fas fa-share-alt"></i> Share
-                        </button>
+                        <a id="dlBtn" href="#" class="btn btn-primary" download target="_blank"><i class="fas fa-download"></i> Download Video</a>
+                        <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(window.location.href); alert('Link Copied!');"><i class="fas fa-link"></i> Copy Link</button>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
 
-    <!-- TOAST POPUP -->
-    <div class="toast" id="toast">
-        <i class="fas fa-info-circle" style="color:var(--accent);"></i>
-        <span id="toastMsg">Notification Message</span>
-    </div>
-
-    <!-- PLYR PLAYER JS -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-
     <script>
-        let plyrPlayer = null;
-
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const videoUrl = urlParams.get('url');
-            const videoTitle = urlParams.get('title') || 'Telegram Streamed Video';
+            const videoTitle = urlParams.get('title') || 'Telegram Stream Video';
 
-            if (videoUrl && videoUrl.trim() !== '') {
-                // LINK DETECTED
-                document.getElementById('welcomeSection').style.display = 'none';
+            if (videoUrl) {
                 document.getElementById('playerSection').style.display = 'block';
-
-                const decodedTitle = decodeURIComponent(videoTitle);
-                document.getElementById('displayTitle').innerText = decodedTitle;
-                
-                // Set Download & External Player Links
+                document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 document.getElementById('dlBtn').href = videoUrl;
-                document.getElementById('externalPlayerBtn').href = `vlc://${videoUrl}`;
 
                 const videoEl = document.getElementById('player');
-                const sourceEl = document.getElementById('videoSource');
-                
-                sourceEl.src = videoUrl;
+                document.getElementById('videoSource').src = videoUrl;
                 videoEl.load();
 
-                // Initialize Plyr Video Player Controls
-                plyrPlayer = new Plyr('#player', {
-                    controls: [
-                        'play-large', 'play', 'progress', 'current-time', 
-                        'duration', 'mute', 'volume', 'captions', 
-                        'settings', 'pip', 'airplay', 'fullscreen'
-                    ],
-                    tooltips: { controls: true, seeking: true },
-                    autoplay: true
-                });
-
-                // Attach real-time status listeners
-                attachVideoStatusListeners(videoEl, videoUrl);
-
+                new Plyr('#player', { autoplay: true });
             } else {
-                // DIRECT VISIT
                 document.getElementById('welcomeSection').style.display = 'block';
-                document.getElementById('playerSection').style.display = 'none';
             }
         });
-
-        // STATUS MONITORING ENGINE
-        function attachVideoStatusListeners(videoEl, videoUrl) {
-            const overlay = document.getElementById('playerOverlay');
-            const loadingContent = document.getElementById('loadingContent');
-            const errorContent = document.getElementById('errorContent');
-            const liveStatusTag = document.getElementById('liveStatusTag');
-            const statusTitle = document.getElementById('statusTitle');
-            const statusSub = document.getElementById('statusSub');
-            const signalIcon = document.getElementById('signalIcon');
-            const connectionText = document.getElementById('connectionText');
-
-            function updateStatus(tag, title, sub, statusType) {
-                liveStatusTag.innerText = tag;
-                statusTitle.innerText = title;
-                statusSub.innerText = sub;
-                
-                if(statusType === 'success') {
-                    signalIcon.style.color = 'var(--success)';
-                    connectionText.innerText = 'Connected & Streaming';
-                } else if(statusType === 'warning') {
-                    signalIcon.style.color = 'var(--warning)';
-                    connectionText.innerText = 'Buffering Stream Chunks...';
-                } else if(statusType === 'error') {
-                    signalIcon.style.color = 'var(--danger)';
-                    connectionText.innerText = 'Server Disconnected';
-                }
-            }
-
-            // 1. Initial Load Start
-            videoEl.addEventListener('loadstart', () => {
-                overlay.classList.remove('hidden');
-                loadingContent.style.display = 'block';
-                errorContent.style.display = 'none';
-                updateStatus('Connecting', 'Connecting to Termux Server...', 'Sending byte-range requests to Cloudflare Tunnel & fetching stream chunks.', 'warning');
-            });
-
-            // 2. Metadata Loaded
-            videoEl.addEventListener('loadedmetadata', () => {
-                updateStatus('Processing', 'Metadata Loaded Successfully!', 'Video header parsed. Preparing video buffer for smooth playback...', 'warning');
-            });
-
-            // 3. Can Play / Ready
-            videoEl.addEventListener('canplay', () => {
-                updateStatus('Ready', 'Stream Ready! Starting Playback...', 'Buffer ready.', 'success');
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                }, 800);
-            });
-
-            // 4. Playing
-            videoEl.addEventListener('playing', () => {
-                overlay.classList.add('hidden');
-                signalIcon.style.color = 'var(--success)';
-                connectionText.innerText = 'Live Streaming Active';
-            });
-
-            // 5. Waiting / Buffering Chunks
-            videoEl.addEventListener('waiting', () => {
-                overlay.classList.remove('hidden');
-                loadingContent.style.display = 'block';
-                errorContent.style.display = 'none';
-                updateStatus('Buffering', 'Buffering Chunks...', 'Downloading video chunks from Telegram through Termux engine...', 'warning');
-            });
-
-            // 6. Error Handling
-            videoEl.addEventListener('error', () => {
-                overlay.classList.remove('hidden');
-                loadingContent.style.display = 'none';
-                errorContent.style.display = 'flex';
-                updateStatus('Offline', 'Server Error', 'Unable to stream video chunk.', 'error');
-            });
-
-            // Fallback Timeout (15 Seconds)
-            setTimeout(() => {
-                if (videoEl.readyState === 0 && !overlay.classList.contains('hidden')) {
-                    loadingContent.style.display = 'none';
-                    errorContent.style.display = 'flex';
-                    updateStatus('Timeout', 'Connection Timeout', 'Termux server not responding.', 'error');
-                }
-            }, 15000);
-        }
-
-        // Play Manual Input URL
-        function playManualUrl() {
-            const url = document.getElementById('manualUrl').value.trim();
-            if (!url) {
-                showToast("Please enter a valid video stream URL");
-                return;
-            }
-            window.location.href = `?url=${encodeURIComponent(url)}&title=${encodeURIComponent('Cloud Streamed Video')}`;
-        }
-
-        // Copy Direct Link
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href);
-            showToast("Video Link Copied to Clipboard!");
-        }
-
-        // Share Video
-        function shareVideo() {
-            if (navigator.share) {
-                navigator.share({
-                    title: document.getElementById('displayTitle').innerText,
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                copyLink();
-            }
-        }
-
-        // Toast Helper
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
     </script>
 </body>
 </html>
