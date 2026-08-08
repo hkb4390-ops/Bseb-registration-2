@@ -64,7 +64,6 @@
             align-items: center;
             gap: 16px;
             text-decoration: none;
-            cursor: pointer;
         }
 
         .brand-icon {
@@ -95,7 +94,6 @@
             background-size: 200% auto;
             color: #fff; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: gradientShine 3s linear infinite;
-            cursor: pointer;
         }
 
         @keyframes gradientShine { to { background-position: 200% center; } }
@@ -176,7 +174,7 @@
         .dev-badge {
             display: inline-block; padding: 6px 16px; background: rgba(124, 58, 237, 0.2);
             color: #A78BFA; border-radius: 100px; font-size: 14px; font-weight: 700; margin-bottom: 20px;
-            border: 1px solid rgba(124, 58, 237, 0.4); text-decoration: none; cursor: pointer;
+            border: 1px solid rgba(124, 58, 237, 0.4);
         }
 
         .dev-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 10px; }
@@ -240,13 +238,12 @@
             position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #0088cc 0%, #00aaff 100%);
             color: #fff; padding: 20px 40px; border-radius: 100px;
-            font-size: 18px; font-weight: 800; text-decoration: none; cursor: pointer;
+            font-size: 18px; font-weight: 800; text-decoration: none;
             display: flex; align-items: center; gap: 15px;
             box-shadow: 0 20px 40px rgba(0, 136, 204, 0.5), inset 0 2px 4px rgba(255,255,255,0.4);
             border: 2px solid rgba(255,255,255,0.2); z-index: 1000;
             animation: giantPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap; backdrop-filter: blur(10px);
-            -webkit-tap-highlight-color: transparent;
         }
 
         .floating-bot-btn i { font-size: 26px; animation: wigglex 2s infinite ease-in-out; }
@@ -288,49 +285,12 @@
             z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s;
         }
         .loading-overlay.active { opacity: 1; pointer-events: all; }
-        
         .spinner {
             width: 60px; height: 60px; border: 4px solid rgba(255, 255, 255, 0.1); border-top-color: var(--primary);
             border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; margin-bottom: 20px;
         }
         .loading-text { color: #fff; font-size: 14px; font-weight: 800; letter-spacing: 3px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* iOS 2026 Overlay (Timer & Bot Loader) */
-        .fullscreen-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(25px) saturate(150%);
-            -webkit-backdrop-filter: blur(25px) saturate(150%);
-            z-index: 2000; display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: all 0.5s ease;
-        }
-        .fullscreen-overlay.active { opacity: 1; pointer-events: all; }
-        
-        .glass-box {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px; padding: 40px; text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.05);
-            transform: scale(0.8); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            width: 90%; max-width: 400px;
-        }
-        .fullscreen-overlay.active .glass-box { transform: scale(1); }
-
-        /* Watch Timer CSS */
-        .timer-circle-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px auto; }
-        .timer-circle-wrap svg { transform: rotate(-90deg); width: 140px; height: 140px; }
-        .circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 8; }
-        .circle-progress {
-            fill: none; stroke: url(#gradientStroke); stroke-width: 8;
-            stroke-dasharray: 377; stroke-dashoffset: 0; stroke-linecap: round;
-            transition: stroke-dashoffset 1s linear;
-        }
-        .timer-text-digital {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 40px; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-        .glass-box h3 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-        .glass-box p { color: var(--text-muted); font-size: 14px; }
 
         @media (max-width: 768px) {
             .hero-title { font-size: 36px; }
@@ -342,7 +302,7 @@
 <body>
 
     <header class="navbar">
-        <a class="brand" onclick="launchBot(event)">
+        <a href="/" class="brand">
             <div class="brand-icon"><i class="fas fa-play"></i></div>
             <div class="brand-text-wrapper">
                 <span class="brand-title">Hrry.Stream</span>
@@ -381,7 +341,7 @@
 
             <!-- Detailed Developer Section -->
             <div class="dev-section">
-                <a onclick="launchBot(event)" class="dev-badge"><i class="fas fa-code"></i> Developer Profile</a>
+                <div class="dev-badge"><i class="fas fa-code"></i> Developer Profile</div>
                 <h2 class="dev-name">Himanshu RAJ Yadav</h2>
                 <div class="dev-role">Lead Developer & System Architect</div>
                 <p class="dev-desc">
@@ -401,8 +361,7 @@
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
-                    <!-- Added muted autoplay to bypass browser restrictions and play instantly -->
-                    <video id="player" controls playsinline autoplay muted>
+                    <video id="player" controls playsinline>
                         <source id="videoSource" src="" type="video/mp4">
                     </video>
                 </div>
@@ -415,10 +374,9 @@
                     </div>
 
                     <div class="action-buttons">
-                        <!-- Attached 15s Timer Function Here -->
-                        <button id="dlBtn" class="btn btn-primary" onclick="startDownloadTimer(event)">
+                        <a id="dlBtn" href="#" class="btn btn-primary" download>
                             <i class="fas fa-cloud-download-alt"></i> Download Media File
-                        </button>
+                        </a>
                         <button class="btn btn-secondary" onclick="copyLink()">
                             <i class="fas fa-copy"></i> Copy Direct Link
                         </button>
@@ -431,46 +389,10 @@
         </section>
     </div>
 
-    <!-- Telegram Launch Button -->
-    <div onclick="launchBot(event)" class="floating-bot-btn" id="floatingBtn">
+    <!-- Telegram Launch Button With Your Bot Link -->
+    <a href="https://t.me/PoltPulse_File_Id_bot" target="_blank" class="floating-bot-btn" id="floatingBtn">
         <i class="fab fa-telegram-plane"></i> Launch Telegram Bot Now
-    </div>
-
-    <!-- ================= Overlays (Timer & Loader) ================= -->
-    
-    <!-- 15s Download Timer Overlay (iOS 2026 Style) -->
-    <div class="fullscreen-overlay" id="timerOverlay">
-        <div class="glass-box">
-            <div class="timer-circle-wrap">
-                <svg>
-                    <defs>
-                        <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#3B82F6" />
-                            <stop offset="100%" stop-color="#7C3AED" />
-                        </linearGradient>
-                    </defs>
-                    <circle class="circle-bg" cx="70" cy="70" r="60"></circle>
-                    <circle class="circle-progress" id="timerCircle" cx="70" cy="70" r="60"></circle>
-                </svg>
-                <div class="timer-text-digital" id="digitalTimerText">15</div>
-            </div>
-            <h3 id="timerStatusText">Generating Link...</h3>
-            <p id="timerSubText">Please wait 15 seconds to download the secure media file.</p>
-            
-            <a id="finalDownloadBtn" href="#" class="btn btn-primary" style="display: none; width: 100%; margin-top: 20px; padding: 16px; font-size: 16px;" download>
-                <i class="fas fa-download"></i> Download Now
-            </a>
-        </div>
-    </div>
-
-    <!-- Bot Launching Loader (iOS 2026 Style) -->
-    <div class="fullscreen-overlay" id="botLoaderOverlay">
-        <div class="glass-box" style="padding: 50px 40px;">
-            <div class="spinner" style="margin: 0 auto 25px;"></div>
-            <h3>Connecting to Bot...</h3>
-            <p>Launching Telegram securely. Please wait.</p>
-        </div>
-    </div>
+    </a>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">
@@ -483,12 +405,37 @@
         let plyrPlayer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Plyr Player with autoplay
+            // Initialize Plyr Player
             plyrPlayer = new Plyr('#player', {
                 controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
-                autoplay: true,
-                muted: true,
                 tooltips: { controls: true, seeking: true }
+            });
+
+            plyrPlayer.on('ready', () => {
+                const loaderHTML = `
+                    <div class="loading-overlay" id="customLoader">
+                        <div class="spinner"></div>
+                        <div class="loading-text">hrry.streaming...</div>
+                    </div>
+                `;
+                plyrPlayer.elements.container.insertAdjacentHTML('beforeend', loaderHTML);
+                
+                const customLoader = document.getElementById('customLoader');
+                const showLoader = () => customLoader.classList.add('active');
+                const hideLoader = () => customLoader.classList.remove('active');
+
+                plyrPlayer.on('play', () => {
+                    if (plyrPlayer.media.readyState < 3) showLoader();
+                });
+                plyrPlayer.on('waiting', showLoader);
+                plyrPlayer.on('seeking', showLoader);
+                plyrPlayer.on('playing', hideLoader);
+                plyrPlayer.on('canplay', hideLoader);
+                plyrPlayer.on('pause', hideLoader);
+                plyrPlayer.on('error', () => {
+                    hideLoader();
+                    showToast("System Error: Media source unreadable");
+                });
             });
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -503,73 +450,18 @@
                 document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 
                 document.getElementById('videoSource').src = videoUrl;
+                document.getElementById('dlBtn').href = videoUrl;
 
                 plyrPlayer.source = {
                     type: 'video',
                     sources: [{ src: videoUrl }]
                 };
-
-                // Force play
-                setTimeout(() => {
-                    plyrPlayer.play().catch(() => {});
-                }, 500);
             } else {
                 // Showing Grand Home UI
                 document.getElementById('welcomeSection').style.display = 'block';
                 document.getElementById('playerSection').style.display = 'none';
             }
         });
-
-        // iOS 2026 Timer Logic for Download Button
-        function startDownloadTimer(e) {
-            e.preventDefault();
-            const overlay = document.getElementById('timerOverlay');
-            const circle = document.getElementById('timerCircle');
-            const digitalText = document.getElementById('digitalTimerText');
-            const finalBtn = document.getElementById('finalDownloadBtn');
-            const statusText = document.getElementById('timerStatusText');
-            const subText = document.getElementById('timerSubText');
-            
-            const videoUrl = document.getElementById('videoSource').src;
-            finalBtn.href = videoUrl;
-            
-            overlay.classList.add('active');
-            
-            let timeLeft = 15;
-            const circumference = 2 * Math.PI * 60; // 377
-            circle.style.strokeDasharray = circumference;
-            circle.style.strokeDashoffset = 0;
-            digitalText.innerText = timeLeft;
-
-            const interval = setInterval(() => {
-                timeLeft--;
-                digitalText.innerText = timeLeft;
-                
-                const offset = circumference - (timeLeft / 15) * circumference;
-                circle.style.strokeDashoffset = offset;
-
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    digitalText.innerText = "0";
-                    circle.style.strokeDashoffset = circumference;
-                    
-                    statusText.innerText = "Download Ready!";
-                    subText.style.display = 'none';
-                    finalBtn.style.display = 'inline-flex';
-                }
-            }, 1000);
-        }
-
-        // Guaranteed Bot Launch with iOS Glass Loader
-        function launchBot(e) {
-            if(e) e.preventDefault();
-            const loader = document.getElementById('botLoaderOverlay');
-            loader.classList.add('active'); 
-            
-            setTimeout(() => {
-                window.location.href = "https://t.me/PoltPulse_File_Id_bot";
-            }, 1200); 
-        }
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
