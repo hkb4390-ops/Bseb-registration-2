@@ -88,11 +88,11 @@
             flex: 1;
         }
 
-        /* --- WELCOME HERO SECTION (Direct Visit) --- */
+        /* --- WELCOME HERO SECTION --- */
         #welcomeSection {
             text-align: center;
             padding: 40px 10px;
-            display: none; /* Controlled via JS */
+            display: none; 
         }
 
         .badge {
@@ -127,7 +127,6 @@
             margin: 0 auto 32px auto;
         }
 
-        /* Manual Input Box */
         .input-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -151,7 +150,6 @@
             font-size: 14px;
         }
 
-        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -186,9 +184,9 @@
             line-height: 1.4;
         }
 
-        /* --- VIDEO PLAYER SECTION (Telegram Link Visit) --- */
+        /* --- VIDEO PLAYER SECTION --- */
         #playerSection {
-            display: none; /* Controlled via JS */
+            display: none; 
         }
 
         .video-card {
@@ -200,11 +198,64 @@
             backdrop-filter: blur(16px);
         }
 
+        /* NEW: Relative position needed for absolute loader overlay */
         .video-wrapper {
             width: 100%;
             background: #000;
             aspect-ratio: 16/9;
+            position: relative; 
         }
+
+        /* NEW: Custom Loading Overlay */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50; /* Top of video, below some controls */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        .loading-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        /* END NEW */
 
         .video-details {
             padding: 24px;
@@ -241,7 +292,6 @@
             }
         }
 
-        /* Buttons */
         .btn {
             border: none;
             outline: none;
@@ -279,7 +329,6 @@
             background: rgba(255, 255, 255, 0.12);
         }
 
-        /* Toast Popup */
         .toast {
             position: fixed;
             bottom: 24px;
@@ -318,7 +367,6 @@
     <!-- MAIN CONTENT CONTAINER -->
     <div class="container">
 
-        <!-- 1. WELCOME SECTION (Direct Search Mode) -->
         <section id="welcomeSection">
             <div class="badge"><i class="fas fa-bolt"></i> Fast Cloud Streaming</div>
             <h1 class="hero-title">Welcome to StreamVault Portal</h1>
@@ -326,13 +374,11 @@
                 Your personal high-speed video player and downloader. Send video files or direct links to our Telegram bot, click the generated link, and stream instantly without downloading delays.
             </p>
 
-            <!-- Manual URL Input -->
             <div class="input-card">
                 <input type="text" id="manualUrl" placeholder="Paste Direct Video Stream URL (.mp4, .mkv)...">
                 <button class="btn btn-primary" onclick="playManualUrl()"><i class="fas fa-play"></i> Stream Now</button>
             </div>
 
-            <!-- Features -->
             <div class="features-grid">
                 <div class="feature-box">
                     <i class="fab fa-telegram"></i>
@@ -353,10 +399,16 @@
         </section>
 
 
-        <!-- 2. VIDEO PLAYER SECTION (Auto-Detected via Link) -->
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
+                    
+                    <!-- NEW: Custom Loading Overlay -->
+                    <div class="loading-overlay active" id="videoLoader">
+                        <div class="spinner"></div>
+                        <div class="loading-text">FETCHING DATA...</div>
+                    </div>
+
                     <video id="player" controls playsinline>
                         <source id="videoSource" src="" type="video/mp4">
                         Your browser does not support HTML5 video playback.
@@ -386,7 +438,6 @@
 
     </div>
 
-    <!-- TOAST POPUP -->
     <div class="toast" id="toast">
         <i class="fas fa-info-circle" style="color:var(--accent);"></i>
         <span id="toastMsg">Notification Message</span>
@@ -399,42 +450,53 @@
         let plyrPlayer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Plyr Video Controls
+            
             plyrPlayer = new Plyr('#player', {
                 controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
                 tooltips: { controls: true, seeking: true }
             });
 
-            // Parse URL Parameters (Auto Detect)
+            // NEW: Loader Logic
+            const videoElement = document.getElementById('player');
+            const loader = document.getElementById('videoLoader');
+
+            // When video is buffering or seeking, show loader
+            videoElement.addEventListener('loadstart', () => loader.classList.add('active'));
+            videoElement.addEventListener('waiting', () => loader.classList.add('active'));
+            videoElement.addEventListener('seeking', () => loader.classList.add('active'));
+
+            // When video is ready to play or playing, hide loader
+            videoElement.addEventListener('canplay', () => loader.classList.remove('active'));
+            videoElement.addEventListener('playing', () => loader.classList.remove('active'));
+            videoElement.addEventListener('error', () => {
+                loader.classList.remove('active'); // Hide loader if error happens
+                showToast("Error loading video stream");
+            });
+
             const urlParams = new URLSearchParams(window.location.search);
             const videoUrl = urlParams.get('url');
             const videoTitle = urlParams.get('title') || 'Telegram Streamed Video';
 
             if (videoUrl && videoUrl.trim() !== '') {
-                // LINK DETECTED: Show Video Player Section
                 document.getElementById('welcomeSection').style.display = 'none';
                 document.getElementById('playerSection').style.display = 'block';
 
                 document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 
-                // Update Video Source & Download Button
                 const sourceEl = document.getElementById('videoSource');
                 sourceEl.src = videoUrl;
                 document.getElementById('dlBtn').href = videoUrl;
 
-                // Reload Player
                 plyrPlayer.source = {
                     type: 'video',
                     sources: [{ src: videoUrl }]
                 };
             } else {
-                // DIRECT VISIT: Show Welcome Hero Section
                 document.getElementById('welcomeSection').style.display = 'block';
                 document.getElementById('playerSection').style.display = 'none';
             }
         });
 
-        // Play Manual URL Input
         function playManualUrl() {
             const url = document.getElementById('manualUrl').value.trim();
             if (!url) {
@@ -444,13 +506,11 @@
             window.location.href = `?url=${encodeURIComponent(url)}&title=${encodeURIComponent('Cloud Streamed Video')}`;
         }
 
-        // Copy Direct Link
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
             showToast("Video Link Copied!");
         }
 
-        // Share Video
         function shareVideo() {
             if (navigator.share) {
                 navigator.share({
@@ -462,7 +522,6 @@
             }
         }
 
-        // Toast Helper
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
