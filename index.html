@@ -3,30 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hrry.Stream - Premium Cloud Video Engine</title>
+    <title>Hrry.Stream - Premium Cloud Media Engine</title>
     
     <!-- Google AdSense Verification Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7492042462374083" crossorigin="anonymous"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
     <style>
         :root {
-            --bg-base: #030712;
-            --glass-bg: rgba(17, 24, 39, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-glow: rgba(99, 102, 241, 0.15);
-            --primary: #6366f1;
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --accent: #06b6d4;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --success: #10b981;
+            --bg-base: #050505;
+            --glass-bg: rgba(20, 20, 25, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #7C3AED;
+            --primary-gradient: linear-gradient(135deg, #7C3AED 0%, #3B82F6 50%, #06B6D4 100%);
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-base);
@@ -36,196 +33,258 @@
             flex-direction: column;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 40%);
+                radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.15), transparent 25%);
+            animation: pulseBg 10s ease-in-out infinite alternate;
         }
 
-        /* Glass Navbar */
+        @keyframes pulseBg {
+            0% { background-size: 100% 100%; }
+            100% { background-size: 120% 120%; }
+        }
+
+        /* Grand Navbar */
         .navbar {
-            background: rgba(3, 7, 18, 0.75);
+            background: rgba(5, 5, 5, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
-            padding: 16px 28px;
+            padding: 16px 5%;
             position: sticky;
             top: 0;
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 20px;
-            font-weight: 800;
-            color: #fff;
+            gap: 16px;
             text-decoration: none;
-            letter-spacing: -0.5px;
         }
 
         .brand-icon {
-            width: 40px; height: 40px;
+            width: 50px; height: 50px;
             background: var(--primary-gradient);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 16px;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+            color: #fff; font-size: 22px;
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.5);
+            animation: floatIcon 3s ease-in-out infinite;
         }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .brand-text-wrapper { display: flex; flex-direction: column; }
+        
+        .brand-title {
+            font-size: 26px; font-weight: 800; color: #fff;
+            letter-spacing: 0.5px; line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-size: 13px; font-weight: 600;
+            background: linear-gradient(90deg, #F59E0B, #EF4444, #EC4899, #8B5CF6, #3B82F6, #F59E0B);
+            background-size: 200% auto;
+            color: #fff; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: gradientShine 3s linear infinite;
+        }
+
+        @keyframes gradientShine { to { background-position: 200% center; } }
 
         .container {
-            max-width: 960px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 32px 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            max-width: 1100px; width: 100%; margin: 0 auto;
+            padding: 40px 20px 120px 20px; flex: 1;
         }
 
-        /* Welcome & Input Section */
-        #welcomeSection { text-align: center; padding: 20px 0; display: none; }
-        .badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #818cf8; padding: 6px 18px;
-            border-radius: 100px; font-size: 13px; font-weight: 600;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(99,102,241,0.1);
+        /* Welcome Section - Big & Bold */
+        #welcomeSection { text-align: center; display: none; animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
         .hero-title {
-            font-size: 40px; font-weight: 800; line-height: 1.2;
-            margin-bottom: 16px;
-            background: linear-gradient(180deg, #ffffff 0%, #9ca3af 100%);
+            font-size: 48px; font-weight: 900; margin-bottom: 15px;
+            background: var(--primary-gradient);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
         }
-        .hero-desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; max-width: 580px; margin: 0 auto 36px auto; }
 
-        .input-card {
-            background: var(--glass-bg);
+        .hero-desc { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin-inline: auto; line-height: 1.6; }
+
+        .poster-container {
+            position: relative; max-width: 380px; margin: 0 auto 50px auto;
+            border-radius: 30px; padding: 10px; background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
-            padding: 8px;
-            border-radius: 20px;
-            display: flex; gap: 8px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-            backdrop-filter: blur(16px);
-            max-width: 620px;
-            margin: 0 auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(124, 58, 237, 0.2);
+            transition: all 0.5s ease;
         }
-        .input-card input {
-            flex: 1; background: transparent; border: none; outline: none;
-            padding: 12px 16px; color: #fff; font-size: 14px;
-        }
-        .input-card input::placeholder { color: #6b7280; }
+        
+        .poster-container:hover { transform: scale(1.05) translateY(-10px); box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(124, 58, 237, 0.4); }
+        .poster-image { width: 100%; height: auto; border-radius: 24px; display: block; }
 
-        /* iOS Style Video Card */
-        #playerSection { display: none; width: 100%; }
+        /* Premium Details Section */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 30px; text-align: left;
+            backdrop-filter: blur(20px); transition: transform 0.4s ease, border-color 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+
+        .feature-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.4s; pointer-events: none;
+        }
+
+        .feature-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.3); }
+        .feature-card:hover::after { opacity: 1; }
+
+        .feature-icon {
+            width: 60px; height: 60px; border-radius: 18px;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: #3B82F6; margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .feature-card h3 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+        .feature-card p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+
+        /* Developer Section */
+        .dev-section {
+            background: linear-gradient(180deg, var(--glass-bg), rgba(0,0,0,0.8));
+            border: 1px solid var(--glass-border);
+            border-radius: 30px; padding: 40px; margin-top: 20px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+
+        .dev-badge {
+            display: inline-block; padding: 6px 16px; background: rgba(124, 58, 237, 0.2);
+            color: #A78BFA; border-radius: 100px; font-size: 14px; font-weight: 700; margin-bottom: 20px;
+            border: 1px solid rgba(124, 58, 237, 0.4);
+        }
+
+        .dev-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+        .dev-role { font-size: 16px; color: #06B6D4; font-weight: 600; margin-bottom: 20px; letter-spacing: 1px; }
+        .dev-desc { font-size: 16px; color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.7; }
+        
+        .tech-stack { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .tech-pill {
+            background: rgba(255,255,255,0.05); padding: 8px 20px; border-radius: 12px;
+            font-size: 14px; font-weight: 600; color: #E2E8F0; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Player Section */
+        #playerSection { display: none; width: 100%; animation: slideUp 0.6s ease; }
+        
         .video-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px var(--glass-glow);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 30px; overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(124, 58, 237, 0.2);
+            backdrop-filter: blur(30px);
         }
         
-        .video-wrapper {
-            width: 100%;
-            background: #000;
-            aspect-ratio: 16/9;
-            position: relative;
-        }
+        .video-wrapper { width: 100%; background: #000; aspect-ratio: 16/9; position: relative; }
 
-        /* Custom High-Depth Loader */
-        .loading-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 7, 18, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .loading-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-        .spinner {
-            width: 54px; height: 54px;
-            border: 3px solid rgba(255, 255, 255, 0.08);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            margin-bottom: 14px;
-            box-shadow: 0 0 20px rgba(99,102,241,0.3);
-        }
-        .loading-text {
-            color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-        /* Video Info Panel */
-        .video-details { padding: 28px; }
-        .video-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; word-break: break-word; letter-spacing: -0.3px; }
-        .video-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+        .video-details { padding: 40px; }
+        .video-title { font-size: 28px; font-weight: 800; margin-bottom: 15px; color: #fff; line-height: 1.3; }
+        .video-meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 15px; color: var(--text-muted); margin-bottom: 30px; font-weight: 500; }
+        .video-meta span { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); padding: 8px 16px; border-radius: 12px; }
         
-        .action-buttons { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
+        .action-buttons { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
 
-        @media (max-width: 640px) {
-            .action-buttons { grid-template-columns: 1fr; }
-            .hero-title { font-size: 30px; }
-            .container { padding: 16px 12px; }
-            .video-details { padding: 20px; }
-        }
-
-        /* Buttons with Apple/iOS feel */
         .btn {
-            border: none; outline: none; padding: 14px 20px; border-radius: 16px;
-            font-size: 14px; font-weight: 600; cursor: pointer;
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none;
+            border: none; outline: none; padding: 18px 24px; border-radius: 20px;
+            font-size: 16px; font-weight: 700; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none;
         }
         .btn-primary {
-            background: var(--primary-gradient);
-            color: #fff;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+            background: var(--primary-gradient); color: #fff;
+            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4); background-size: 200% auto;
         }
-        .btn-primary:hover { opacity: 0.92; transform: translateY(-2px); box-shadow: 0 12px 25px rgba(99, 102, 241, 0.45); }
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .btn-primary:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 20px 40px rgba(124, 58, 237, 0.6); }
+        
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
 
-        /* Toast Popup */
+        /* Giant Floating Button */
+        .floating-bot-btn {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #0088cc 0%, #00aaff 100%);
+            color: #fff; padding: 20px 40px; border-radius: 100px;
+            font-size: 18px; font-weight: 800; text-decoration: none;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 20px 40px rgba(0, 136, 204, 0.5), inset 0 2px 4px rgba(255,255,255,0.4);
+            border: 2px solid rgba(255,255,255,0.2); z-index: 1000;
+            animation: giantPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap; backdrop-filter: blur(10px);
+        }
+
+        .floating-bot-btn i { font-size: 26px; animation: wigglex 2s infinite ease-in-out; }
+
+        @keyframes giantPulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 170, 255, 0.5); transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 170, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 170, 255, 0); transform: translateX(-50%) scale(1); }
+        }
+
+        @keyframes wigglex {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* Toast */
         .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(99, 102, 241, 0.4);
-            backdrop-filter: blur(20px); padding: 12px 26px; border-radius: 100px;
-            color: #fff; font-size: 13px; font-weight: 600;
-            display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000;
+            position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 15, 20, 0.95); border: 1px solid rgba(124, 58, 237, 0.5);
+            padding: 16px 32px; border-radius: 100px; color: #fff; font-size: 15px; font-weight: 700;
+            display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1001; opacity: 0;
         }
-        .toast.show { transform: translateX(-50%) translateY(0); }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast i { font-size: 20px; color: #06B6D4; }
 
-        /* Customizing Plyr to look ultra sleek */
-        .plyr { --plyr-color-main: var(--primary); font-family: 'Plus Jakarta Sans', sans-serif !important; border-radius: 0 !important; }
+        .plyr { --plyr-color-main: var(--primary); font-family: 'Outfit', sans-serif !important; }
         .plyr video { object-fit: contain; }
+
+        /* Loader */
+        .loading-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .loading-overlay.active { opacity: 1; pointer-events: all; }
+        .spinner {
+            width: 60px; height: 60px; border: 4px solid rgba(255, 255, 255, 0.1); border-top-color: var(--primary);
+            border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; margin-bottom: 20px;
+        }
+        .loading-text { color: #fff; font-size: 14px; font-weight: 800; letter-spacing: 3px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 36px; }
+            .action-buttons { grid-template-columns: 1fr; }
+            .floating-bot-btn { width: 92%; justify-content: center; font-size: 16px; padding: 18px; }
+        }
     </style>
 </head>
 <body>
@@ -233,24 +292,60 @@
     <header class="navbar">
         <a href="/" class="brand">
             <div class="brand-icon"><i class="fas fa-play"></i></div>
-            <span>Hrry.Stream</span>
+            <div class="brand-text-wrapper">
+                <span class="brand-title">Hrry.Stream</span>
+                <span class="brand-subtitle">by hrry.online | @himanshurajyadav</span>
+            </div>
         </a>
     </header>
 
     <div class="container">
-        <!-- Welcome Screen for manual input -->
+        <!-- Grand Welcome Section -->
         <section id="welcomeSection">
-            <div class="badge"><i class="fas fa-bolt"></i> High-Speed Cloud Streaming Engine</div>
-            <h1 class="hero-title">Experience Video Playback, Elevated.</h1>
-            <p class="hero-desc">Stream media directly from Telegram cloud servers instantly with zero buffering lag, high depth glass interface, and lightning-fast direct downloads.</p>
+            <h1 class="hero-title">Cloud Media Engine Pro</h1>
+            <p class="hero-desc">Experience lightning-fast video streaming powered by advanced cloud infrastructure. Secure, encrypted, and built for performance.</p>
+            
+            <div class="poster-container">
+                <img src="https://i.postimg.cc/XqWfysjM/file-000000006ad8820ba2d59769f2cbc99c.png" alt="Bot Overview" class="poster-image">
+            </div>
 
-            <div class="input-card">
-                <input type="text" id="manualUrl" placeholder="Paste direct stream URL (.mp4, .mkv)...">
-                <button class="btn btn-primary" onclick="playManualUrl()"><i class="fas fa-play"></i> Stream Now</button>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fab fa-telegram-plane"></i></div>
+                    <h3>Smart Telegram Bot</h3>
+                    <p>Simply forward your media to our highly optimized cloud bot to generate a direct streaming link instantly without any limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Ultra-Fast Streaming</h3>
+                    <p>Enjoy buffer-free playback with our globally distributed servers ensuring the highest quality delivery anywhere in the world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Secure & Private</h3>
+                    <p>Your files are processed with state-of-the-art encryption protocols ensuring complete privacy and security for your content.</p>
+                </div>
+            </div>
+
+            <!-- Detailed Developer Section -->
+            <div class="dev-section">
+                <div class="dev-badge"><i class="fas fa-code"></i> Developer Profile</div>
+                <h2 class="dev-name">Himanshu RAJ Yadav</h2>
+                <div class="dev-role">Lead Developer & System Architect</div>
+                <p class="dev-desc">
+                    Passionate creator specializing in advanced Telegram Bots, dynamic Android applications, and robust web solutions. 
+                    Dedicated to building high-performance tools and stunning digital experiences that push the boundaries of modern technology.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-pill"><i class="fab fa-android"></i> Android Dev</span>
+                    <span class="tech-pill"><i class="fas fa-robot"></i> Bot Architecture</span>
+                    <span class="tech-pill"><i class="fas fa-layer-group"></i> UI/UX Design</span>
+                    <span class="tech-pill"><i class="fas fa-server"></i> Cloud Systems</span>
+                </div>
             </div>
         </section>
 
-        <!-- Player Screen -->
+        <!-- Grand Player Section -->
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
@@ -259,21 +354,22 @@
                     </video>
                 </div>
                 <div class="video-details">
-                    <h2 class="video-title" id="displayTitle">Hrry.Stream Cloud Media</h2>
+                    <h2 class="video-title" id="displayTitle">Hrry.Stream Secure Media</h2>
                     <div class="video-meta">
-                        <span><i class="fas fa-check-circle" style="color:var(--success);"></i> Stream Optimized</span>
-                        <span><i class="fas fa-shield-halved"></i> Secured & Encrypted</span>
+                        <span><i class="fas fa-check-circle" style="color:#10B981;"></i> Status: Online & Optimized</span>
+                        <span><i class="fas fa-lock" style="color:#F59E0B;"></i> E2E Encrypted</span>
+                        <span><i class="fas fa-server" style="color:#3B82F6;"></i> Cloud Routed</span>
                     </div>
 
                     <div class="action-buttons">
                         <a id="dlBtn" href="#" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Download File
+                            <i class="fas fa-cloud-download-alt"></i> Download Media File
                         </a>
                         <button class="btn btn-secondary" onclick="copyLink()">
-                            <i class="fas fa-link"></i> Copy Link
+                            <i class="fas fa-copy"></i> Copy Direct Link
                         </button>
                         <button class="btn btn-secondary" onclick="shareVideo()">
-                            <i class="fas fa-share-alt"></i> Share
+                            <i class="fas fa-share-nodes"></i> Share File
                         </button>
                     </div>
                 </div>
@@ -281,9 +377,15 @@
         </section>
     </div>
 
+    <!-- Giant Floating Action Button -->
+    <a href="https://t.me/PoltPulse_File_Id_bot" target="_blank" class="floating-bot-btn" id="floatingBtn">
+        <i class="fab fa-telegram-plane"></i> Launch Telegram Bot Now
+    </a>
+
+    <!-- Toast Notification -->
     <div class="toast" id="toast">
-        <i class="fas fa-info-circle" style="color:var(--accent);"></i>
-        <span id="toastMsg">Notification message</span>
+        <i class="fas fa-bell"></i>
+        <span id="toastMsg">System Notification</span>
     </div>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
@@ -291,6 +393,7 @@
         let plyrPlayer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Plyr Player
             plyrPlayer = new Plyr('#player', {
                 controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
                 tooltips: { controls: true, seeking: true }
@@ -300,7 +403,7 @@
                 const loaderHTML = `
                     <div class="loading-overlay" id="customLoader">
                         <div class="spinner"></div>
-                        <div class="loading-text">HRRY STREAM ENGINE...</div>
+                        <div class="loading-text">INITIALIZING ENGINE...</div>
                     </div>
                 `;
                 plyrPlayer.elements.container.insertAdjacentHTML('beforeend', loaderHTML);
@@ -319,17 +422,19 @@
                 plyrPlayer.on('pause', hideLoader);
                 plyrPlayer.on('error', () => {
                     hideLoader();
-                    showToast("Error connecting to stream source");
+                    showToast("System Error: Media source unreadable");
                 });
             });
 
             const urlParams = new URLSearchParams(window.location.search);
             const videoUrl = urlParams.get('url');
-            const videoTitle = urlParams.get('title') || 'Hrry.Stream Cloud Video';
+            const videoTitle = urlParams.get('title') || 'Hrry.Stream Cloud Media';
 
             if (videoUrl && videoUrl.trim() !== '') {
+                // Showing Player Engine
                 document.getElementById('welcomeSection').style.display = 'none';
                 document.getElementById('playerSection').style.display = 'block';
+                document.getElementById('floatingBtn').style.display = 'none'; 
                 document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 
                 document.getElementById('videoSource').src = videoUrl;
@@ -340,33 +445,33 @@
                     sources: [{ src: videoUrl }]
                 };
             } else {
+                // Showing Grand Home UI
                 document.getElementById('welcomeSection').style.display = 'block';
                 document.getElementById('playerSection').style.display = 'none';
             }
         });
 
-        function playManualUrl() {
-            const url = document.getElementById('manualUrl').value.trim();
-            if (!url) { showToast("Please enter a valid video stream URL"); return; }
-            window.location.href = `?url=${encodeURIComponent(url)}&title=${encodeURIComponent('Manual Streamed Video')}`;
-        }
-
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
-            showToast("Secure Link Copied to Clipboard!");
+            showToast("Secure Direct Link Copied!");
         }
 
         function shareVideo() {
             if (navigator.share) {
-                navigator.share({ title: document.getElementById('displayTitle').innerText, url: window.location.href }).catch(() => {});
-            } else { copyLink(); }
+                navigator.share({ 
+                    title: document.getElementById('displayTitle').innerText, 
+                    url: window.location.href 
+                }).catch(() => {});
+            } else { 
+                copyLink(); 
+            }
         }
 
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 3500);
         }
     </script>
 </body>
