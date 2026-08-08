@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamVault - HRRY.ONLINE Video Player</title>
+    <title>StreamVault - Premium Telegram Video Player & Downloader</title>
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -409,7 +409,7 @@
     <header class="navbar">
         <a href="/" class="brand">
             <div class="brand-icon"><i class="fas fa-play"></i></div>
-            <span>hrry.online</span>
+            <span>StreamVault</span>
         </a>
     </header>
 
@@ -419,14 +419,14 @@
         <!-- 1. WELCOME SECTION (Direct Visit) -->
         <section id="welcomeSection">
             <div class="badge"><i class="fas fa-bolt"></i> Fast Cloud Streaming</div>
-            <h1 class="hero-title">Welcome to HRRY.ONLINE Portal</h1>
+            <h1 class="hero-title">Welcome to StreamVault Portal</h1>
             <p class="hero-desc">
                 Your personal high-speed video player and downloader. Send video files or direct links to our Telegram bot, click the generated link, and stream instantly without downloading delays.
             </p>
 
             <!-- Manual URL Input -->
             <div class="input-card">
-                <input type="text" id="manualUrl" placeholder="Paste Direct Stream URL (e.g. https://stream.hrry.online/stream?id=...)...">
+                <input type="text" id="manualUrl" placeholder="Paste Direct Video Stream URL (.mp4, .mkv)...">
                 <button class="btn btn-primary" onclick="playManualUrl()"><i class="fas fa-play"></i> Stream Now</button>
             </div>
 
@@ -464,7 +464,7 @@
                                 <div class="dot"></div>
                                 <span id="liveStatusTag">Connecting</span>
                             </div>
-                            <div class="status-title" id="statusTitle">Connecting to Termux Server...</div>
+                            <div class="status-title" id="statusTitle">Connecting to Termux Stream Server...</div>
                             <div class="status-sub" id="statusSub">Establishing secure connection with Cloudflare Tunnel & fetching video metadata.</div>
                         </div>
 
@@ -479,7 +479,7 @@
                                 <button class="btn btn-primary" onclick="location.reload()">
                                     <i class="fas fa-rotate-right"></i> Retry Connection
                                 </button>
-                                <a id="externalPlayerBtn" href="#" class="btn btn-secondary" target="_blank">
+                                <a id="externalPlayerBtn" href="#" class="btn btn-secondary">
                                     <i class="fas fa-circle-play"></i> Open External Player
                                 </a>
                             </div>
@@ -502,7 +502,7 @@
                     </div>
 
                     <div class="action-buttons">
-                        <a id="dlBtn" href="#" class="btn btn-primary" download target="_blank">
+                        <a id="dlBtn" href="#" class="btn btn-primary" download>
                             <i class="fas fa-download"></i> Direct High-Speed Download
                         </a>
                         <button class="btn btn-secondary" onclick="copyLink()">
@@ -542,8 +542,6 @@
 
                 const decodedTitle = decodeURIComponent(videoTitle);
                 document.getElementById('displayTitle').innerText = decodedTitle;
-                
-                // Set Download & External Player Links
                 document.getElementById('dlBtn').href = videoUrl;
                 document.getElementById('externalPlayerBtn').href = `vlc://${videoUrl}`;
 
@@ -555,16 +553,12 @@
 
                 // Initialize Plyr Video Player Controls
                 plyrPlayer = new Plyr('#player', {
-                    controls: [
-                        'play-large', 'play', 'progress', 'current-time', 
-                        'duration', 'mute', 'volume', 'captions', 
-                        'settings', 'pip', 'airplay', 'fullscreen'
-                    ],
+                    controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
                     tooltips: { controls: true, seeking: true },
                     autoplay: true
                 });
 
-                // Attach real-time status listeners
+                // ATTACH REAL-TIME STREAMING STATUS LISTENERS
                 attachVideoStatusListeners(videoEl, videoUrl);
 
             } else {
@@ -638,29 +632,30 @@
                 updateStatus('Buffering', 'Buffering Chunks...', 'Downloading video chunks from Telegram through Termux engine...', 'warning');
             });
 
-            // 6. Error Handling
-            videoEl.addEventListener('error', () => {
+            // 6. Error Handling (Cloudflare / Termux Offline)
+            videoEl.addEventListener('error', (e) => {
                 overlay.classList.remove('hidden');
                 loadingContent.style.display = 'none';
                 errorContent.style.display = 'flex';
-                updateStatus('Offline', 'Server Error', 'Unable to stream video chunk.', 'error');
+                updateStatus('Offline', 'Server Error', 'Unable to stream', 'error');
             });
 
-            // Fallback Timeout (15 Seconds)
+            // Timeout Check (Fallback if server hangs forever)
             setTimeout(() => {
-                if (videoEl.readyState === 0 && !overlay.classList.contains('hidden')) {
+                if (videoEl.readyState === 0) {
+                    overlay.classList.remove('hidden');
                     loadingContent.style.display = 'none';
                     errorContent.style.display = 'flex';
-                    updateStatus('Timeout', 'Connection Timeout', 'Termux server not responding.', 'error');
+                    updateStatus('Timeout', 'Connection Timeout', 'Server not responding', 'error');
                 }
             }, 15000);
         }
 
-        // Play Manual Input URL
+        // Play Manual URL Input
         function playManualUrl() {
             const url = document.getElementById('manualUrl').value.trim();
             if (!url) {
-                showToast("Please enter a valid video stream URL");
+                showToast("Please enter a valid video URL");
                 return;
             }
             window.location.href = `?url=${encodeURIComponent(url)}&title=${encodeURIComponent('Cloud Streamed Video')}`;
@@ -669,7 +664,7 @@
         // Copy Direct Link
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
-            showToast("Video Link Copied to Clipboard!");
+            showToast("Video Link Copied!");
         }
 
         // Share Video
