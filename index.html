@@ -12,9 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
-    <!-- HLS.js for Multi-Audio Streaming Support -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
     <style>
         :root {
             --bg-base: #050505;
@@ -219,22 +216,6 @@
         .video-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--text-muted); margin-bottom: 16px; font-weight: 500; }
         .video-meta span { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.03); padding: 6px 12px; border-radius: 10px; }
         
-        /* Audio Selector Styling */
-        #audioTrackContainer {
-            border: 1px solid rgba(167, 139, 250, 0.3);
-            background: rgba(124, 58, 237, 0.1);
-        }
-        #audioSelect {
-            background: #141419;
-            color: #fff;
-            border: 1px solid var(--glass-border);
-            border-radius: 6px;
-            padding: 3px 8px;
-            font-size: 12px;
-            outline: none;
-            cursor: pointer;
-        }
-
         .action-buttons { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; }
 
         .btn {
@@ -325,7 +306,7 @@
             <div class="brand-icon"><i class="fas fa-play"></i></div>
             <div class="brand-text-wrapper">
                 <span class="brand-title">Hrry.Stream</span>
-                <span class="brand-subtitle">by hrry.online | @himanshurajyadav</span>
+                <span class="brand-subtitle">hrry.online | @himanshurajyadav</span>
             </div>
         </a>
     </header>
@@ -380,21 +361,16 @@
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
-                    <video id="player" controls playsinline crossorigin="anonymous">
+                    <video id="player" controls playsinline>
                         <source id="videoSource" src="" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-details">
                     <h2 class="video-title" id="displayTitle">Hrry.Stream Secure Media</h2>
                     <div class="video-meta">
-                        <span><i class="fas fa-check-circle" style="color:#10B981;"></i> Status: Online</span>
-                        <span><i class="fas fa-lock" style="color:#F59E0B;"></i> E2E Encrypted</span>
-                        
-                        <!-- Dynamic Audio Track Switcher (Only visible when multi-audio is detected) -->
-                        <span id="audioTrackContainer" style="display: none;">
-                            <i class="fas fa-language" style="color:#A78BFA;"></i> Audio: 
-                            <select id="audioSelect"></select>
-                        </span>
+                        <span><i class="fas fa-check-circle" style="color:#10B981;"></i> Status: Online & Optimized</span>
+                        <span><i class="fas fa-lock" style="color:#F59E0B;"></i> FULLY SAFE 🔗</span>
+                        <span><i class="fas fa-server" style="color:#3B82F6;"></i> Cloud Routed</span>
                     </div>
 
                     <div class="action-buttons">
@@ -427,22 +403,19 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
         let plyrPlayer = null;
-        let hlsEngine = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            const videoElem = document.getElementById('player');
-
-            // Initialize Plyr Player with Settings Options
+            // Initialize Plyr Player
             plyrPlayer = new Plyr('#player', {
-                controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
-                settings: ['captions', 'quality', 'speed']
+                controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
+                tooltips: { controls: true, seeking: true }
             });
 
             plyrPlayer.on('ready', () => {
                 const loaderHTML = `
                     <div class="loading-overlay" id="customLoader">
                         <div class="spinner"></div>
-                        <div class="loading-text">INITIALIZING ENGINE...</div>
+                        <div class="loading-text">hrry.streaming...</div>
                     </div>
                 `;
                 plyrPlayer.elements.container.insertAdjacentHTML('beforeend', loaderHTML);
@@ -476,87 +449,19 @@
                 document.getElementById('floatingBtn').style.display = 'none'; 
                 document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 
+                document.getElementById('videoSource').src = videoUrl;
                 document.getElementById('dlBtn').href = videoUrl;
 
-                // Check for HLS (.m3u8) Stream
-                if (Hls.isSupported() && (videoUrl.includes('.m3u8') || videoUrl.includes('m3u8'))) {
-                    hlsEngine = new Hls();
-                    hlsEngine.loadSource(videoUrl);
-                    hlsEngine.attachMedia(videoElem);
-
-                    hlsEngine.on(Hls.Events.MANIFEST_PARSED, () => {
-                        setupHlsAudioTracks(hlsEngine);
-                    });
-                } else {
-                    document.getElementById('videoSource').src = videoUrl;
-                    plyrPlayer.source = {
-                        type: 'video',
-                        sources: [{ src: videoUrl }]
-                    };
-
-                    // Check Native Audio Tracks (For MP4/MKV multi-audio)
-                    videoElem.addEventListener('loadedmetadata', detectNativeAudioTracks);
-                    videoElem.addEventListener('loadeddata', detectNativeAudioTracks);
-                }
+                plyrPlayer.source = {
+                    type: 'video',
+                    sources: [{ src: videoUrl }]
+                };
             } else {
                 // Showing Grand Home UI
                 document.getElementById('welcomeSection').style.display = 'block';
                 document.getElementById('playerSection').style.display = 'none';
             }
         });
-
-        // Setup Audio Selector for HLS Streams
-        function setupHlsAudioTracks(hls) {
-            const container = document.getElementById('audioTrackContainer');
-            const select = document.getElementById('audioSelect');
-
-            if (hls.audioTracks && hls.audioTracks.length > 1) {
-                container.style.display = 'inline-flex';
-                select.innerHTML = '';
-
-                hls.audioTracks.forEach((track, index) => {
-                    const opt = document.createElement('option');
-                    opt.value = index;
-                    opt.text = track.name || track.lang || `Audio Track ${index + 1}`;
-                    if (index === hls.audioTrack) opt.selected = true;
-                    select.appendChild(opt);
-                });
-
-                select.onchange = () => {
-                    hls.audioTrack = parseInt(select.value);
-                    showToast("Audio switched: " + select.options[select.selectedIndex].text);
-                };
-            }
-        }
-
-        // Setup Audio Selector for Native HTML5 Video Tracks
-        function detectNativeAudioTracks() {
-            const videoElem = document.getElementById('player');
-            const container = document.getElementById('audioTrackContainer');
-            const select = document.getElementById('audioSelect');
-
-            if (videoElem.audioTracks && videoElem.audioTracks.length > 1) {
-                container.style.display = 'inline-flex';
-                select.innerHTML = '';
-
-                for (let i = 0; i < videoElem.audioTracks.length; i++) {
-                    const track = videoElem.audioTracks[i];
-                    const opt = document.createElement('option');
-                    opt.value = i;
-                    opt.text = track.label || track.language || `Track ${i + 1}`;
-                    if (track.enabled) opt.selected = true;
-                    select.appendChild(opt);
-                }
-
-                select.onchange = () => {
-                    const selectedIdx = parseInt(select.value);
-                    for (let i = 0; i < videoElem.audioTracks.length; i++) {
-                        videoElem.audioTracks[i].enabled = (i === selectedIdx);
-                    }
-                    showToast("Audio switched: " + select.options[select.selectedIndex].text);
-                };
-            }
-        }
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
