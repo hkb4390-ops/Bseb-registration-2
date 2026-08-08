@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamVault - Premium Telegram Video Player & Downloader</title>
-    <!-- Fonts & Icons -->
+    <title>StreamVault - Premium Telegram Video Player</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Plyr HTML5 Player CSS -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
     <style>
@@ -23,340 +21,90 @@
             --success: #10b981;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-        /* --- HEADER NAVBAR --- */
-        .navbar {
-            background: rgba(7, 9, 14, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .navbar { background: rgba(7, 9, 14, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ffffff, #9ca3af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
+        .brand { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 800; background: linear-gradient(90deg, #ffffff, #9ca3af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
 
-        .brand-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--primary-gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-            -webkit-text-fill-color: initial;
-        }
+        .brand-icon { width: 38px; height: 38px; background: var(--primary-gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); -webkit-text-fill-color: initial; }
 
-        .container {
-            max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 24px 20px;
-            flex: 1;
-        }
+        .container { max-width: 900px; width: 100%; margin: 0 auto; padding: 24px 20px; flex: 1; }
 
-        /* --- WELCOME HERO SECTION --- */
-        #welcomeSection {
-            text-align: center;
-            padding: 40px 10px;
-            display: none; 
-        }
+        #welcomeSection { text-align: center; padding: 40px 10px; display: none; }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); color: #818cf8; padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+        .hero-title { font-size: 36px; font-weight: 800; line-height: 1.25; margin-bottom: 16px; background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-desc { color: var(--text-muted); font-size: 15px; line-height: 1.6; max-width: 600px; margin: 0 auto 32px auto; }
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #818cf8;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
+        .input-card { background: var(--card-bg); border: 1px solid var(--border); padding: 8px; border-radius: 20px; display: flex; gap: 8px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); backdrop-filter: blur(12px); max-width: 650px; margin: 0 auto 40px auto; }
+        .input-card input { flex: 1; background: transparent; border: none; outline: none; padding: 12px 16px; color: #fff; font-size: 14px; }
 
-        .hero-title {
-            font-size: 36px;
-            font-weight: 800;
-            line-height: 1.25;
-            margin-bottom: 16px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; text-align: left; margin-top: 20px; }
+        .feature-box { background: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 18px; backdrop-filter: blur(10px); }
+        .feature-box i { font-size: 24px; color: var(--accent); margin-bottom: 12px; display: inline-block; }
+        .feature-box h4 { font-size: 16px; margin-bottom: 6px; }
+        .feature-box p { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
 
-        .hero-desc {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto 32px auto;
-        }
+        #playerSection { display: none; }
+        .video-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); backdrop-filter: blur(16px); }
+        
+        .video-wrapper { width: 100%; background: #000; aspect-ratio: 16/9; position: relative; }
 
-        .input-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 8px;
-            border-radius: 20px;
-            display: flex;
-            gap: 8px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            max-width: 650px;
-            margin: 0 auto 40px auto;
-        }
-
-        .input-card input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            padding: 12px 16px;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        .feature-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 18px;
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-box i {
-            font-size: 24px;
-            color: var(--accent);
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .feature-box h4 {
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
-
-        .feature-box p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* --- VIDEO PLAYER SECTION --- */
-        #playerSection {
-            display: none; 
-        }
-
-        .video-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(16px);
-        }
-
-        /* NEW: Relative position needed for absolute loader overlay */
-        .video-wrapper {
-            width: 100%;
-            background: #000;
-            aspect-ratio: 16/9;
-            position: relative; 
-        }
-
-        /* NEW: Custom Loading Overlay */
+        /* --- Custom Loader CSS --- */
         .loading-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* डार्क बैकग्राउंड ताकि प्लेयर छिप जाए */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 50; /* Top of video, below some controls */
+            z-index: 100; /* Plyr UI के ऊपर */
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
-
         .loading-overlay.active {
             opacity: 1;
             pointer-events: all;
         }
-
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.2);
+            width: 50px; height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-
         .loading-text {
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 1px;
             animation: pulse 1.5s infinite;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        /* ------------------------- */
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        .video-details { padding: 24px; }
+        .video-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; word-break: break-word; }
+        .video-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+        .action-buttons { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        /* END NEW */
+        @media (max-width: 600px) { .action-buttons { grid-template-columns: 1fr; } .hero-title { font-size: 26px; } }
 
-        .video-details {
-            padding: 24px;
-        }
+        .btn { border: none; outline: none; padding: 14px 20px; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease; text-decoration: none; }
+        .btn-primary { background: var(--primary-gradient); color: #fff; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35); }
+        .btn-primary:hover { opacity: 0.95; transform: translateY(-1px); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.06); color: #fff; border: 1px solid var(--border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
 
-        .video-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            word-break: break-word;
-        }
-
-        .video-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 12px;
-        }
-
-        @media (max-width: 600px) {
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            .hero-title {
-                font-size: 26px;
-            }
-        }
-
-        .btn {
-            border: none;
-            outline: none;
-            padding: 14px 20px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #1e293b;
-            border: 1px solid var(--primary);
-            padding: 12px 24px;
-            border-radius: 50px;
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1e293b; border: 1px solid var(--primary); padding: 12px 24px; border-radius: 50px; color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; }
+        .toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <header class="navbar">
         <a href="/" class="brand">
             <div class="brand-icon"><i class="fas fa-play"></i></div>
@@ -364,54 +112,30 @@
         </a>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <div class="container">
-
         <section id="welcomeSection">
             <div class="badge"><i class="fas fa-bolt"></i> Fast Cloud Streaming</div>
-            <h1 class="hero-title">Welcome to StreamVault Portal</h1>
-            <p class="hero-desc">
-                Your personal high-speed video player and downloader. Send video files or direct links to our Telegram bot, click the generated link, and stream instantly without downloading delays.
-            </p>
+            <h1 class="hero-title">Welcome to StreamVault</h1>
+            <p class="hero-desc">Your personal high-speed video player and downloader. Send video files or direct links to our Telegram bot, click the generated link, and stream instantly without downloading delays.</p>
 
             <div class="input-card">
                 <input type="text" id="manualUrl" placeholder="Paste Direct Video Stream URL (.mp4, .mkv)...">
                 <button class="btn btn-primary" onclick="playManualUrl()"><i class="fas fa-play"></i> Stream Now</button>
             </div>
-
+            
             <div class="features-grid">
-                <div class="feature-box">
-                    <i class="fab fa-telegram"></i>
-                    <h4>Telegram Integration</h4>
-                    <p>Direct Termux bot integration for instant web streaming link generation.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-gauge-high"></i>
-                    <h4>High-Speed Stream</h4>
-                    <p>Lag-free cloud playback with HD multi-format video player support.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-download"></i>
-                    <h4>Direct Downloads</h4>
-                    <p>One-click direct high speed file downloader without popups or ads.</p>
-                </div>
+                <div class="feature-box"> <i class="fab fa-telegram"></i> <h4>Telegram Integration</h4> <p>Direct Termux bot integration for instant web streaming link generation.</p> </div>
+                <div class="feature-box"> <i class="fas fa-gauge-high"></i> <h4>High-Speed Stream</h4> <p>Lag-free cloud playback with HD multi-format video player support.</p> </div>
+                <div class="feature-box"> <i class="fas fa-download"></i> <h4>Direct Downloads</h4> <p>One-click direct high speed file downloader without popups or ads.</p> </div>
             </div>
         </section>
-
 
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
-                    
-                    <!-- NEW: Custom Loading Overlay -->
-                    <div class="loading-overlay active" id="videoLoader">
-                        <div class="spinner"></div>
-                        <div class="loading-text">FETCHING DATA...</div>
-                    </div>
-
+                    <!-- HTML5 Player -->
                     <video id="player" controls playsinline>
                         <source id="videoSource" src="" type="video/mp4">
-                        Your browser does not support HTML5 video playback.
                     </video>
                 </div>
                 <div class="video-details">
@@ -423,7 +147,7 @@
 
                     <div class="action-buttons">
                         <a id="dlBtn" href="#" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Download Video
+                            <i class="fas fa-download"></i> Download
                         </a>
                         <button class="btn btn-secondary" onclick="copyLink()">
                             <i class="fas fa-link"></i> Copy Link
@@ -435,7 +159,6 @@
                 </div>
             </div>
         </section>
-
     </div>
 
     <div class="toast" id="toast">
@@ -451,28 +174,52 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             
+            // 1. Initialize Plyr
             plyrPlayer = new Plyr('#player', {
                 controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
                 tooltips: { controls: true, seeking: true }
             });
 
-            // NEW: Loader Logic
-            const videoElement = document.getElementById('player');
-            const loader = document.getElementById('videoLoader');
+            // 2. Add Custom Loader UI directly inside Plyr Container after it's ready
+            plyrPlayer.on('ready', () => {
+                const loaderHTML = `
+                    <div class="loading-overlay" id="customLoader">
+                        <div class="spinner"></div>
+                        <div class="loading-text">FETCHING VIDEO...</div>
+                    </div>
+                `;
+                
+                // Inject loader inside Plyr wrapper so it never hides behind the player
+                plyrPlayer.elements.container.insertAdjacentHTML('beforeend', loaderHTML);
+                
+                const customLoader = document.getElementById('customLoader');
+                
+                const showLoader = () => customLoader.classList.add('active');
+                const hideLoader = () => customLoader.classList.remove('active');
 
-            // When video is buffering or seeking, show loader
-            videoElement.addEventListener('loadstart', () => loader.classList.add('active'));
-            videoElement.addEventListener('waiting', () => loader.classList.add('active'));
-            videoElement.addEventListener('seeking', () => loader.classList.add('active'));
+                // 3. Perfect Logic: Show loader IMMEDIATELY when Play button is clicked but video is not ready
+                plyrPlayer.on('play', () => {
+                    if (plyrPlayer.media.readyState < 3) {
+                        showLoader();
+                    }
+                });
 
-            // When video is ready to play or playing, hide loader
-            videoElement.addEventListener('canplay', () => loader.classList.remove('active'));
-            videoElement.addEventListener('playing', () => loader.classList.remove('active'));
-            videoElement.addEventListener('error', () => {
-                loader.classList.remove('active'); // Hide loader if error happens
-                showToast("Error loading video stream");
+                // Show loader when buffering/seeking
+                plyrPlayer.on('waiting', showLoader);
+                plyrPlayer.on('seeking', showLoader);
+
+                // Hide loader when video actually starts playing or is ready
+                plyrPlayer.on('playing', hideLoader);
+                plyrPlayer.on('canplay', hideLoader);
+                plyrPlayer.on('pause', hideLoader); // Hide if user manually pauses while buffering
+                
+                plyrPlayer.on('error', () => {
+                    hideLoader();
+                    showToast("Error loading video stream");
+                });
             });
 
+            // Handle URL Parameters
             const urlParams = new URLSearchParams(window.location.search);
             const videoUrl = urlParams.get('url');
             const videoTitle = urlParams.get('title') || 'Telegram Streamed Video';
@@ -480,7 +227,6 @@
             if (videoUrl && videoUrl.trim() !== '') {
                 document.getElementById('welcomeSection').style.display = 'none';
                 document.getElementById('playerSection').style.display = 'block';
-
                 document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 
                 const sourceEl = document.getElementById('videoSource');
@@ -499,10 +245,7 @@
 
         function playManualUrl() {
             const url = document.getElementById('manualUrl').value.trim();
-            if (!url) {
-                showToast("Please enter a valid video URL");
-                return;
-            }
+            if (!url) { showToast("Please enter a valid video URL"); return; }
             window.location.href = `?url=${encodeURIComponent(url)}&title=${encodeURIComponent('Cloud Streamed Video')}`;
         }
 
@@ -513,13 +256,8 @@
 
         function shareVideo() {
             if (navigator.share) {
-                navigator.share({
-                    title: document.getElementById('displayTitle').innerText,
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                copyLink();
-            }
+                navigator.share({ title: document.getElementById('displayTitle').innerText, url: window.location.href }).catch(() => {});
+            } else { copyLink(); }
         }
 
         function showToast(msg) {
