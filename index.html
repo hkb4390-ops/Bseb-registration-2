@@ -21,8 +21,6 @@
             --text-muted: #9ca3af;
             --border: rgba(255, 255, 255, 0.08);
             --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
         }
 
         * {
@@ -90,11 +88,11 @@
             flex: 1;
         }
 
-        /* --- WELCOME HERO SECTION --- */
+        /* --- WELCOME HERO SECTION (Direct Visit) --- */
         #welcomeSection {
             text-align: center;
             padding: 40px 10px;
-            display: none;
+            display: none; /* Controlled via JS */
         }
 
         .badge {
@@ -129,6 +127,7 @@
             margin: 0 auto 32px auto;
         }
 
+        /* Manual Input Box */
         .input-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -152,6 +151,7 @@
             font-size: 14px;
         }
 
+        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -186,9 +186,9 @@
             line-height: 1.4;
         }
 
-        /* --- VIDEO PLAYER SECTION --- */
+        /* --- VIDEO PLAYER SECTION (Telegram Link Visit) --- */
         #playerSection {
-            display: none;
+            display: none; /* Controlled via JS */
         }
 
         .video-card {
@@ -204,105 +204,8 @@
             width: 100%;
             background: #000;
             aspect-ratio: 16/9;
-            position: relative;
         }
 
-        /* LIVE STATUS & OVERLAY ANIMATION */
-        .player-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(7, 9, 14, 0.88);
-            backdrop-filter: blur(12px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            text-align: center;
-            z-index: 10;
-            transition: opacity 0.4s ease, visibility 0.4s;
-        }
-
-        .player-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .spinner-ring {
-            width: 56px;
-            height: 56px;
-            border: 4px solid rgba(99, 102, 241, 0.15);
-            border-left-color: var(--primary);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .status-badge-live {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--success);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-badge-live .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--success);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-        }
-
-        .status-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .status-sub {
-            font-size: 13px;
-            color: var(--text-muted);
-            max-width: 480px;
-            line-height: 1.5;
-        }
-
-        /* Error Box in Overlay */
-        .error-card {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .error-card i {
-            font-size: 42px;
-            color: var(--danger);
-        }
-
-        /* Video Info Bar */
         .video-details {
             padding: 24px;
         }
@@ -316,7 +219,6 @@
 
         .video-meta {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             gap: 16px;
             font-size: 13px;
@@ -416,7 +318,7 @@
     <!-- MAIN CONTENT CONTAINER -->
     <div class="container">
 
-        <!-- 1. WELCOME SECTION (Direct Visit) -->
+        <!-- 1. WELCOME SECTION (Direct Search Mode) -->
         <section id="welcomeSection">
             <div class="badge"><i class="fas fa-bolt"></i> Fast Cloud Streaming</div>
             <h1 class="hero-title">Welcome to StreamVault Portal</h1>
@@ -451,59 +353,25 @@
         </section>
 
 
-        <!-- 2. VIDEO PLAYER SECTION -->
+        <!-- 2. VIDEO PLAYER SECTION (Auto-Detected via Link) -->
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
-                    
-                    <!-- REAL-TIME OVERLAY STATUS & LOADER -->
-                    <div id="playerOverlay" class="player-overlay">
-                        <div id="loadingContent">
-                            <div class="spinner-ring"></div>
-                            <div class="status-badge-live">
-                                <div class="dot"></div>
-                                <span id="liveStatusTag">Connecting</span>
-                            </div>
-                            <div class="status-title" id="statusTitle">Connecting to Termux Stream Server...</div>
-                            <div class="status-sub" id="statusSub">Establishing secure connection with Cloudflare Tunnel & fetching video metadata.</div>
-                        </div>
-
-                        <!-- ERROR CONTAINER (Shown if offline/failed) -->
-                        <div id="errorContent" class="error-card">
-                            <i class="fas fa-plug-circle-xmark"></i>
-                            <div class="status-title" style="color:var(--danger);">Stream Offline or Link Expired</div>
-                            <div class="status-sub" id="errorDetailMsg">
-                                Cloudflare Tunnel disconnected or Termux bot is offline. Please check Termux on your phone and try again.
-                            </div>
-                            <div style="margin-top:16px; display:flex; gap:10px;">
-                                <button class="btn btn-primary" onclick="location.reload()">
-                                    <i class="fas fa-rotate-right"></i> Retry Connection
-                                </button>
-                                <a id="externalPlayerBtn" href="#" class="btn btn-secondary">
-                                    <i class="fas fa-circle-play"></i> Open External Player
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- VIDEO ELEMENT -->
-                    <video id="player" controls playsinline crossorigin="anonymous" preload="auto">
+                    <video id="player" controls playsinline>
                         <source id="videoSource" src="" type="video/mp4">
                         Your browser does not support HTML5 video playback.
                     </video>
                 </div>
-
-                <!-- VIDEO METADATA & BUTTONS -->
                 <div class="video-details">
                     <h2 class="video-title" id="displayTitle">Telegram Streamed File</h2>
                     <div class="video-meta">
-                        <span><i class="fas fa-signal" id="signalIcon" style="color:var(--warning);"></i> <span id="connectionText">Checking Connection...</span></span>
-                        <span><i class="fas fa-shield-halved" style="color:var(--accent);"></i> Secure Cloud Stream</span>
+                        <span><i class="fas fa-check-circle" style="color:var(--success);"></i> Stream Ready</span>
+                        <span><i class="fas fa-shield-halved"></i> Secure Link</span>
                     </div>
 
                     <div class="action-buttons">
                         <a id="dlBtn" href="#" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Direct High-Speed Download
+                            <i class="fas fa-download"></i> Download Video
                         </a>
                         <button class="btn btn-secondary" onclick="copyLink()">
                             <i class="fas fa-link"></i> Copy Link
@@ -531,125 +399,40 @@
         let plyrPlayer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Plyr Video Controls
+            plyrPlayer = new Plyr('#player', {
+                controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
+                tooltips: { controls: true, seeking: true }
+            });
+
+            // Parse URL Parameters (Auto Detect)
             const urlParams = new URLSearchParams(window.location.search);
             const videoUrl = urlParams.get('url');
             const videoTitle = urlParams.get('title') || 'Telegram Streamed Video';
 
             if (videoUrl && videoUrl.trim() !== '') {
-                // LINK DETECTED
+                // LINK DETECTED: Show Video Player Section
                 document.getElementById('welcomeSection').style.display = 'none';
                 document.getElementById('playerSection').style.display = 'block';
 
-                const decodedTitle = decodeURIComponent(videoTitle);
-                document.getElementById('displayTitle').innerText = decodedTitle;
-                document.getElementById('dlBtn').href = videoUrl;
-                document.getElementById('externalPlayerBtn').href = `vlc://${videoUrl}`;
-
-                const videoEl = document.getElementById('player');
-                const sourceEl = document.getElementById('videoSource');
+                document.getElementById('displayTitle').innerText = decodeURIComponent(videoTitle);
                 
+                // Update Video Source & Download Button
+                const sourceEl = document.getElementById('videoSource');
                 sourceEl.src = videoUrl;
-                videoEl.load();
+                document.getElementById('dlBtn').href = videoUrl;
 
-                // Initialize Plyr Video Player Controls
-                plyrPlayer = new Plyr('#player', {
-                    controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
-                    tooltips: { controls: true, seeking: true },
-                    autoplay: true
-                });
-
-                // ATTACH REAL-TIME STREAMING STATUS LISTENERS
-                attachVideoStatusListeners(videoEl, videoUrl);
-
+                // Reload Player
+                plyrPlayer.source = {
+                    type: 'video',
+                    sources: [{ src: videoUrl }]
+                };
             } else {
-                // DIRECT VISIT
+                // DIRECT VISIT: Show Welcome Hero Section
                 document.getElementById('welcomeSection').style.display = 'block';
                 document.getElementById('playerSection').style.display = 'none';
             }
         });
-
-        // STATUS MONITORING ENGINE
-        function attachVideoStatusListeners(videoEl, videoUrl) {
-            const overlay = document.getElementById('playerOverlay');
-            const loadingContent = document.getElementById('loadingContent');
-            const errorContent = document.getElementById('errorContent');
-            const liveStatusTag = document.getElementById('liveStatusTag');
-            const statusTitle = document.getElementById('statusTitle');
-            const statusSub = document.getElementById('statusSub');
-            const signalIcon = document.getElementById('signalIcon');
-            const connectionText = document.getElementById('connectionText');
-
-            function updateStatus(tag, title, sub, statusType) {
-                liveStatusTag.innerText = tag;
-                statusTitle.innerText = title;
-                statusSub.innerText = sub;
-                
-                if(statusType === 'success') {
-                    signalIcon.style.color = 'var(--success)';
-                    connectionText.innerText = 'Connected & Streaming';
-                } else if(statusType === 'warning') {
-                    signalIcon.style.color = 'var(--warning)';
-                    connectionText.innerText = 'Buffering Stream Chunks...';
-                } else if(statusType === 'error') {
-                    signalIcon.style.color = 'var(--danger)';
-                    connectionText.innerText = 'Server Disconnected';
-                }
-            }
-
-            // 1. Initial Load Start
-            videoEl.addEventListener('loadstart', () => {
-                overlay.classList.remove('hidden');
-                loadingContent.style.display = 'block';
-                errorContent.style.display = 'none';
-                updateStatus('Connecting', 'Connecting to Termux Server...', 'Sending byte-range requests to Cloudflare Tunnel & fetching stream chunks.', 'warning');
-            });
-
-            // 2. Metadata Loaded
-            videoEl.addEventListener('loadedmetadata', () => {
-                updateStatus('Processing', 'Metadata Loaded Successfully!', 'Video header parsed. Preparing video buffer for smooth playback...', 'warning');
-            });
-
-            // 3. Can Play / Ready
-            videoEl.addEventListener('canplay', () => {
-                updateStatus('Ready', 'Stream Ready! Starting Playback...', 'Buffer ready.', 'success');
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                }, 800);
-            });
-
-            // 4. Playing
-            videoEl.addEventListener('playing', () => {
-                overlay.classList.add('hidden');
-                signalIcon.style.color = 'var(--success)';
-                connectionText.innerText = 'Live Streaming Active';
-            });
-
-            // 5. Waiting / Buffering Chunks
-            videoEl.addEventListener('waiting', () => {
-                overlay.classList.remove('hidden');
-                loadingContent.style.display = 'block';
-                errorContent.style.display = 'none';
-                updateStatus('Buffering', 'Buffering Chunks...', 'Downloading video chunks from Telegram through Termux engine...', 'warning');
-            });
-
-            // 6. Error Handling (Cloudflare / Termux Offline)
-            videoEl.addEventListener('error', (e) => {
-                overlay.classList.remove('hidden');
-                loadingContent.style.display = 'none';
-                errorContent.style.display = 'flex';
-                updateStatus('Offline', 'Server Error', 'Unable to stream', 'error');
-            });
-
-            // Timeout Check (Fallback if server hangs forever)
-            setTimeout(() => {
-                if (videoEl.readyState === 0) {
-                    overlay.classList.remove('hidden');
-                    loadingContent.style.display = 'none';
-                    errorContent.style.display = 'flex';
-                    updateStatus('Timeout', 'Connection Timeout', 'Server not responding', 'error');
-                }
-            }, 15000);
-        }
 
         // Play Manual URL Input
         function playManualUrl() {
