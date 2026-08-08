@@ -94,7 +94,7 @@
             background-size: 200% auto;
             color: #fff; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: gradientShine 3s linear infinite;
-            cursor: pointer; text-decoration: none;
+            cursor: pointer;
         }
 
         @keyframes gradientShine { to { background-position: 200% center; } }
@@ -104,7 +104,7 @@
             padding: 40px 20px 120px 20px; flex: 1;
         }
 
-        /* Welcome Section */
+        /* Welcome Section - Big & Bold */
         #welcomeSection { text-align: center; display: none; animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         
         @keyframes slideUp {
@@ -132,7 +132,10 @@
         .poster-container:hover { transform: scale(1.05) translateY(-10px); box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(124, 58, 237, 0.4); }
         .poster-image { width: 100%; height: auto; border-radius: 24px; display: block; }
 
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 60px; }
+        /* Premium Details Section */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 60px;
+        }
 
         .feature-card {
             background: var(--glass-bg); border: 1px solid var(--glass-border);
@@ -140,7 +143,15 @@
             backdrop-filter: blur(20px); transition: transform 0.4s ease, border-color 0.4s ease;
             position: relative; overflow: hidden;
         }
+
+        .feature-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.4s; pointer-events: none;
+        }
+
         .feature-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.3); }
+        .feature-card:hover::after { opacity: 1; }
 
         .feature-icon {
             width: 60px; height: 60px; border-radius: 18px;
@@ -156,21 +167,26 @@
         /* Developer Section */
         .dev-section {
             background: linear-gradient(180deg, var(--glass-bg), rgba(0,0,0,0.8));
-            border: 1px solid var(--glass-border); border-radius: 30px; padding: 40px; 
-            margin-top: 20px; text-align: center; position: relative; overflow: hidden;
+            border: 1px solid var(--glass-border);
+            border-radius: 30px; padding: 40px; margin-top: 20px;
+            text-align: center; position: relative; overflow: hidden;
         }
 
         .dev-badge {
-            display: inline-block; padding: 8px 20px; background: rgba(124, 58, 237, 0.2);
-            color: #fff; border-radius: 100px; font-size: 14px; font-weight: 700; margin-bottom: 20px;
-            border: 1px solid rgba(124, 58, 237, 0.5); cursor: pointer; text-decoration: none;
-            transition: 0.3s;
+            display: inline-block; padding: 6px 16px; background: rgba(124, 58, 237, 0.2);
+            color: #A78BFA; border-radius: 100px; font-size: 14px; font-weight: 700; margin-bottom: 20px;
+            border: 1px solid rgba(124, 58, 237, 0.4); text-decoration: none; cursor: pointer;
         }
-        .dev-badge:hover { background: rgba(124, 58, 237, 0.4); }
 
         .dev-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 10px; }
         .dev-role { font-size: 16px; color: #06B6D4; font-weight: 600; margin-bottom: 20px; letter-spacing: 1px; }
         .dev-desc { font-size: 16px; color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.7; }
+        
+        .tech-stack { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .tech-pill {
+            background: rgba(255,255,255,0.05); padding: 8px 20px; border-radius: 12px;
+            font-size: 14px; font-weight: 600; color: #E2E8F0; border: 1px solid rgba(255,255,255,0.1);
+        }
 
         /* Player Section */
         #playerSection { display: none; width: 100%; animation: slideUp 0.6s ease; }
@@ -184,8 +200,20 @@
         
         .video-wrapper { width: 100%; background: #000; aspect-ratio: 16/9; position: relative; }
 
+        /* Compact Video Details */
         .video-details { padding: 24px; }
-        .video-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #fff; line-height: 1.4; }
+        .video-title { 
+            font-size: 18px; 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            color: #fff; 
+            line-height: 1.4; 
+            word-wrap: break-word; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+        }
         .video-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; color: var(--text-muted); margin-bottom: 16px; font-weight: 500; }
         .video-meta span { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.03); padding: 6px 12px; border-radius: 10px; }
         
@@ -201,7 +229,7 @@
             background: var(--primary-gradient); color: #fff;
             box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3); background-size: 200% auto;
         }
-        .btn-primary:hover { background-position: right center; transform: translateY(-3px); }
+        .btn-primary:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(124, 58, 237, 0.5); }
         
         .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid var(--glass-border); }
         .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.3); transform: translateY(-3px); }
@@ -212,13 +240,14 @@
             background: linear-gradient(135deg, #0088cc 0%, #00aaff 100%);
             color: #fff; padding: 20px 40px; border-radius: 100px;
             font-size: 18px; font-weight: 800; text-decoration: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 15px;
+            display: flex; align-items: center; gap: 15px;
             box-shadow: 0 20px 40px rgba(0, 136, 204, 0.5), inset 0 2px 4px rgba(255,255,255,0.4);
             border: 2px solid rgba(255,255,255,0.2); z-index: 1000;
             animation: giantPulse 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap; backdrop-filter: blur(10px);
             -webkit-tap-highlight-color: transparent;
         }
+
         .floating-bot-btn i { font-size: 26px; animation: wigglex 2s infinite ease-in-out; }
 
         @keyframes giantPulse {
@@ -227,13 +256,46 @@
             70% { box-shadow: 0 0 0 20px rgba(0, 170, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 170, 255, 0); transform: translateX(-50%) scale(1); }
         }
+
         @keyframes wigglex {
-            0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-15deg); } 50% { transform: rotate(15deg); } 75% { transform: rotate(-5deg); }
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            50% { transform: rotate(15deg); }
+            75% { transform: rotate(-5deg); }
         }
 
-        /* -------------------------------------
-           iOS 2026 Glass Timer & Fullscreen Overlays
-           ------------------------------------- */
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 15, 20, 0.95); border: 1px solid rgba(124, 58, 237, 0.5);
+            padding: 16px 32px; border-radius: 100px; color: #fff; font-size: 15px; font-weight: 700;
+            display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1001; opacity: 0;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast i { font-size: 20px; color: #06B6D4; }
+
+        .plyr { --plyr-color-main: var(--primary); font-family: 'Outfit', sans-serif !important; }
+        .plyr video { object-fit: contain; }
+
+        /* Loader */
+        .loading-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .loading-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .spinner {
+            width: 60px; height: 60px; border: 4px solid rgba(255, 255, 255, 0.1); border-top-color: var(--primary);
+            border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; margin-bottom: 20px;
+        }
+        .loading-text { color: #fff; font-size: 14px; font-weight: 800; letter-spacing: 3px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ================= NEW: iOS 2026 Overlay (Timer & Bot Loader) ================= */
         .fullscreen-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6);
@@ -245,8 +307,7 @@
         .fullscreen-overlay.active { opacity: 1; pointer-events: all; }
         
         .glass-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 40px; padding: 40px; text-align: center;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.05);
             transform: scale(0.8); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -254,42 +315,26 @@
         }
         .fullscreen-overlay.active .glass-box { transform: scale(1); }
 
-        /* SVG Circular Timer */
+        /* Watch Timer CSS */
         .timer-circle-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px auto; }
         .timer-circle-wrap svg { transform: rotate(-90deg); width: 140px; height: 140px; }
         .circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 8; }
         .circle-progress {
             fill: none; stroke: url(#gradientStroke); stroke-width: 8;
-            stroke-dasharray: 377; /* 2 * pi * 60 */
-            stroke-dashoffset: 0; stroke-linecap: round;
+            stroke-dasharray: 377; stroke-dashoffset: 0; stroke-linecap: round;
             transition: stroke-dashoffset 1s linear;
         }
         .timer-text-digital {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 40px; font-weight: 900; color: #fff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
-        
         .glass-box h3 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
         .glass-box p { color: var(--text-muted); font-size: 14px; }
-
-        /* Loader */
-        .spinner { width: 60px; height: 60px; border: 4px solid rgba(255, 255, 255, 0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; margin: 0 auto 20px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Toast */
-        .toast {
-            position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: rgba(15, 15, 20, 0.95); border: 1px solid rgba(124, 58, 237, 0.5);
-            padding: 16px 32px; border-radius: 100px; color: #fff; font-size: 15px; font-weight: 700;
-            display: flex; align-items: center; gap: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1001; opacity: 0;
-        }
-        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         @media (max-width: 768px) {
             .hero-title { font-size: 36px; }
             .action-buttons { grid-template-columns: 1fr; }
-            .floating-bot-btn { width: 92%; padding: 18px; }
+            .floating-bot-btn { width: 92%; justify-content: center; font-size: 16px; padding: 18px; }
         }
     </style>
 </head>
@@ -300,7 +345,8 @@
             <div class="brand-icon"><i class="fas fa-play"></i></div>
             <div class="brand-text-wrapper">
                 <span class="brand-title">Hrry.Stream</span>
-                <span class="brand-subtitle" onclick="launchBot(event)">Connect to Bot 🚀</span>
+                <!-- Added bot launch to this link -->
+                <span class="brand-subtitle" onclick="launchBot(event)">hrry.online | @himanshurajyadav</span>
             </div>
         </a>
     </header>
@@ -326,13 +372,29 @@
                     <h3>Ultra-Fast Streaming</h3>
                     <p>Enjoy buffer-free playback with our globally distributed servers ensuring the highest quality delivery anywhere in the world.</p>
                 </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Secure & Private</h3>
+                    <p>Your files are processed with state-of-the-art encryption protocols ensuring complete privacy and security for your content.</p>
+                </div>
             </div>
 
+            <!-- Detailed Developer Section -->
             <div class="dev-section">
-                <a href="javascript:void(0)" onclick="launchBot(event)" class="dev-badge"><i class="fab fa-telegram"></i> Launch My Telegram Bot</a>
+                <!-- Added bot launch to dev badge -->
+                <a href="javascript:void(0)" onclick="launchBot(event)" class="dev-badge"><i class="fas fa-code"></i> Developer Profile</a>
                 <h2 class="dev-name">Himanshu RAJ Yadav</h2>
                 <div class="dev-role">Lead Developer & System Architect</div>
-                <p class="dev-desc">Passionate creator specializing in advanced Telegram Bots, dynamic Android applications, and robust web solutions.</p>
+                <p class="dev-desc">
+                    Passionate creator specializing in advanced Telegram Bots, dynamic Android applications, and robust web solutions. 
+                    Dedicated to building high-performance tools and stunning digital experiences that push the boundaries of modern technology.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-pill"><i class="fab fa-android"></i> Android Dev</span>
+                    <span class="tech-pill"><i class="fas fa-robot"></i> Bot Architecture</span>
+                    <span class="tech-pill"><i class="fas fa-layer-group"></i> UI/UX Design</span>
+                    <span class="tech-pill"><i class="fas fa-server"></i> Cloud Systems</span>
+                </div>
             </div>
         </section>
 
@@ -340,7 +402,7 @@
         <section id="playerSection">
             <div class="video-card">
                 <div class="video-wrapper">
-                    <!-- Added autoplay and playsinline to force auto play without clicking -->
+                    <!-- Added autoplay attribute -->
                     <video id="player" controls playsinline autoplay>
                         <source id="videoSource" src="" type="video/mp4">
                     </video>
@@ -348,12 +410,13 @@
                 <div class="video-details">
                     <h2 class="video-title" id="displayTitle">Hrry.Stream Secure Media</h2>
                     <div class="video-meta">
-                        <span><i class="fas fa-check-circle" style="color:#10B981;"></i> Online & Optimized</span>
+                        <span><i class="fas fa-check-circle" style="color:#10B981;"></i> Status: Online & Optimized</span>
                         <span><i class="fas fa-lock" style="color:#F59E0B;"></i> FULLY SAFE 🔗</span>
+                        <span><i class="fas fa-server" style="color:#3B82F6;"></i> Cloud Routed</span>
                     </div>
 
                     <div class="action-buttons">
-                        <!-- Changed this button to open the Timer -->
+                        <!-- Attached Timer Function Here -->
                         <button id="dlBtn" class="btn btn-primary" onclick="startDownloadTimer(event)">
                             <i class="fas fa-cloud-download-alt"></i> Download Media File
                         </button>
@@ -369,12 +432,14 @@
         </section>
     </div>
 
-    <!-- Telegram Launch Button (Fixed Click & Action) -->
-    <div class="floating-bot-btn" id="floatingBtn" onclick="launchBot(event)">
+    <!-- Telegram Launch Button with Loader Event -->
+    <a href="javascript:void(0)" onclick="launchBot(event)" class="floating-bot-btn" id="floatingBtn">
         <i class="fab fa-telegram-plane"></i> Launch Telegram Bot Now
-    </div>
+    </a>
 
-    <!-- Download Timer Overlay (iOS 2026 Style) -->
+    <!-- ================= Overlays (Timer & Loader) ================= -->
+    
+    <!-- 15s Download Timer Overlay (iOS 2026 Style) -->
     <div class="fullscreen-overlay" id="timerOverlay">
         <div class="glass-box">
             <div class="timer-circle-wrap">
@@ -390,24 +455,25 @@
                 </svg>
                 <div class="timer-text-digital" id="digitalTimerText">15</div>
             </div>
-            <h3 id="timerStatusText">Preparing Secure Link...</h3>
-            <p id="timerSubText">Please wait while we generate a high-speed download link for you.</p>
+            <h3 id="timerStatusText">Generating Link...</h3>
+            <p id="timerSubText">Please wait 15 seconds to download the secure media file.</p>
             
             <a id="finalDownloadBtn" href="#" class="btn btn-primary" style="display: none; width: 100%; margin-top: 20px; padding: 16px; font-size: 16px;" download>
-                <i class="fas fa-download"></i> Open Download Link Now
+                <i class="fas fa-download"></i> Download Now
             </a>
         </div>
     </div>
 
     <!-- Bot Launching Loader (iOS 2026 Style) -->
     <div class="fullscreen-overlay" id="botLoaderOverlay">
-        <div class="glass-box">
-            <div class="spinner"></div>
+        <div class="glass-box" style="padding: 50px 40px;">
+            <div class="spinner" style="margin: 0 auto 25px;"></div>
             <h3>Connecting to Bot...</h3>
-            <p>Launching Telegram safely via secure routing.</p>
+            <p>Launching Telegram securely. Please wait.</p>
         </div>
     </div>
 
+    <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-bell"></i>
         <span id="toastMsg">System Notification</span>
@@ -418,11 +484,43 @@
         let plyrPlayer = null;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Added Autoplay in config so it starts directly
+            // Initialize Plyr Player with autoplay: true
             plyrPlayer = new Plyr('#player', {
                 controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'fullscreen'],
                 autoplay: true,
                 tooltips: { controls: true, seeking: true }
+            });
+
+            plyrPlayer.on('ready', () => {
+                const loaderHTML = `
+                    <div class="loading-overlay" id="customLoader">
+                        <div class="spinner" style="margin: 0 auto 20px;"></div>
+                        <div class="loading-text">hrry.streaming...</div>
+                    </div>
+                `;
+                plyrPlayer.elements.container.insertAdjacentHTML('beforeend', loaderHTML);
+                
+                const customLoader = document.getElementById('customLoader');
+                const showLoader = () => customLoader.classList.add('active');
+                const hideLoader = () => customLoader.classList.remove('active');
+
+                plyrPlayer.on('play', () => {
+                    if (plyrPlayer.media.readyState < 3) showLoader();
+                });
+                plyrPlayer.on('waiting', showLoader);
+                plyrPlayer.on('seeking', showLoader);
+                plyrPlayer.on('playing', hideLoader);
+                plyrPlayer.on('canplay', hideLoader);
+                plyrPlayer.on('pause', hideLoader);
+                plyrPlayer.on('error', () => {
+                    hideLoader();
+                    showToast("System Error: Media source unreadable");
+                });
+                
+                // Force Autoplay Request on ready
+                plyrPlayer.play().catch(() => {
+                    console.log("Browser blocked autoplay, waiting for user interaction.");
+                });
             });
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -430,6 +528,7 @@
             const videoTitle = urlParams.get('title') || 'Hrry.Stream Cloud Media';
 
             if (videoUrl && videoUrl.trim() !== '') {
+                // Showing Player Engine
                 document.getElementById('welcomeSection').style.display = 'none';
                 document.getElementById('playerSection').style.display = 'block';
                 document.getElementById('floatingBtn').style.display = 'none'; 
@@ -441,20 +540,14 @@
                     type: 'video',
                     sources: [{ src: videoUrl }]
                 };
-                
-                // Force Autoplay attempt
-                plyrPlayer.on('ready', () => {
-                    plyrPlayer.play().catch(e => {
-                        console.log("Autoplay blocked by browser. User must interact first.");
-                    });
-                });
             } else {
+                // Showing Grand Home UI
                 document.getElementById('welcomeSection').style.display = 'block';
                 document.getElementById('playerSection').style.display = 'none';
             }
         });
 
-        // iOS 2026 Timer Download Logic
+        // iOS 2026 Timer Logic
         function startDownloadTimer(e) {
             e.preventDefault();
             const overlay = document.getElementById('timerOverlay');
@@ -464,6 +557,7 @@
             const statusText = document.getElementById('timerStatusText');
             const subText = document.getElementById('timerSubText');
             
+            // Set link to final button
             const videoUrl = document.getElementById('videoSource').src;
             finalBtn.href = videoUrl;
             
@@ -479,14 +573,14 @@
                 timeLeft--;
                 digitalText.innerText = timeLeft;
                 
-                // Animate circle decreasing
+                // SVG circle animation
                 const offset = circumference - (timeLeft / 15) * circumference;
                 circle.style.strokeDashoffset = offset;
 
                 if (timeLeft <= 0) {
                     clearInterval(interval);
                     digitalText.innerText = "0";
-                    circle.style.strokeDashoffset = circumference; // Empty
+                    circle.style.strokeDashoffset = circumference;
                     
                     statusText.innerText = "Download Ready!";
                     subText.style.display = 'none';
@@ -495,19 +589,17 @@
             }, 1000);
         }
 
-        // Robust Bot Launch Logic (Fixes click issues & adds loader)
+        // Bot Launch Logic with Loader
         function launchBot(e) {
             if(e) e.preventDefault();
             const loader = document.getElementById('botLoaderOverlay');
-            loader.classList.add('active'); // Show iOS Glass Loader
+            loader.classList.add('active'); 
             
+            // Show loader for 1.5 seconds, then open bot link
             setTimeout(() => {
-                // Navigate exactly to your bot
                 window.location.href = "https://t.me/PoltPulse_File_Id_bot";
-                
-                // Hide loader after 2.5 seconds in case it stays on screen
-                setTimeout(() => { loader.classList.remove('active'); }, 2500);
-            }, 1500); // 1.5 second artificial delay for the premium loading effect
+                setTimeout(() => { loader.classList.remove('active'); }, 2000);
+            }, 1500); 
         }
 
         function copyLink() {
@@ -521,7 +613,9 @@
                     title: document.getElementById('displayTitle').innerText, 
                     url: window.location.href 
                 }).catch(() => {});
-            } else { copyLink(); }
+            } else { 
+                copyLink(); 
+            }
         }
 
         function showToast(msg) {
