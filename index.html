@@ -1,493 +1,1093 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyMods Hrry - Premium Download</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* ============================
-           BASE STYLES & BACKGROUND
-           ============================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <meta charset="UTF-8">
 
-        body {
-            background: #0f0c29;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-        /* ============================
-           PRELOADER ANIMATION
-           ============================ */
-        #preloader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #0f0c29;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        .loader-ring {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #00f2fe;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        .loading-text {
-            margin-top: 15px;
-            color: #00f2fe;
-            font-weight: 600;
-            letter-spacing: 2px;
-            animation: pulse 1.5s infinite;
-        }
+  <title>Study Mode Hrry – All Batches, Free Batches & Study Resources</title>
 
-        /* ============================
-           HEADER
-           ============================ */
-        header {
-            padding: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        header h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+  <meta name="description"
+        content="Study Mode Hrry – Get all batches, free batches, PWD, Class, Target, Mood, DPK and useful study resources in one place. Download StudyMods Hrry APK.">
 
-        /* ============================
-           MAIN CONTENT & LOGO
-           ============================ */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+  <meta name="keywords"
+        content="HRRY, Hrry, Study Mode Hrry, StudyMods Hrry, StudyMods, Study Mode, Hrry Study, Hrry Online, All Batches, Free Batches, PWD, Class, Target, Mood, DPK, Study Resources, Study Materials, Educational Resources">
 
-        .logo-box {
-            position: relative;
-            margin-bottom: 25px;
-        }
-        .logo-box img {
-            width: 140px;
-            height: 140px;
-            border-radius: 30px;
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.5);
-            border: 2px solid #00f2fe;
-            animation: float 3.5s ease-in-out infinite;
-        }
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Himanshu Raj Yadav">
 
-        .app-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .app-desc {
-            color: #b3b3b3;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
+  <link rel="canonical" href="https://www.hrry.online/">
 
-        /* ============================
-           DOWNLOAD BUTTON & PROGRESS
-           ============================ */
-        .action-area {
-            width: 100%;
-            max-width: 380px;
-            background: rgba(255,255,255,0.03);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title"
+        content="Study Mode Hrry – All Batches, Free Batches & Study Resources">
+  <meta property="og:description"
+        content="Study Mode Hrry – All batches, free batches and useful study resources in one place.">
+  <meta property="og:url" content="https://www.hrry.online/">
+  <meta property="og:image"
+        content="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png">
 
-        .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(45deg, #ff0844 0%, #ffb199 100%);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 8, 68, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .download-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shine 2.5s infinite;
-        }
-        .download-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 12px 30px rgba(255, 8, 68, 0.6);
-        }
-        .download-btn i {
-            animation: bounce 2s infinite;
-        }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title"
+        content="Study Mode Hrry – All Batches & Study Resources">
+  <meta name="twitter:description"
+        content="Study Mode Hrry – Study resources, batches and educational materials.">
+  <meta name="twitter:image"
+        content="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png">
 
-        /* Progress Bar UI */
-        .progress-wrapper {
-            display: none;
-            width: 100%;
-            text-align: left;
-        }
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            color: #00f2fe;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
-        .progress-track {
-            width: 100%;
-            height: 12px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
-            border-radius: 10px;
-            box-shadow: 0 0 15px #00f2fe;
-            transition: width 0.2s linear;
-        }
-        .progress-details {
-            display: flex;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: #aaa;
-            margin-top: 8px;
-        }
+  <link rel="icon"
+        href="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png">
 
-        /* ============================
-           FEATURES SECTION
-           ============================ */
-        .features {
-            display: flex;
-            gap: 15px;
-            margin-top: 35px;
-            width: 100%;
-            justify-content: center;
-        }
-        .feature-box {
-            flex: 1;
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-        }
-        .feature-box i {
-            color: #00f2fe;
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-        .feature-box h4 {
-            font-size: 0.85rem;
-            color: #fff;
-        }
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        /* ============================
-           FOOTER & DEV CREDIT
-           ============================ */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .developer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            color: #bbb;
-        }
-        .developer span {
-            color: #00f2fe;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .developer a {
-            color: #fff;
-            font-size: 1.5rem;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .developer a:hover {
-            color: #00f2fe;
-            transform: scale(1.2) rotate(360deg);
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-        /* ============================
-           KEYFRAME ANIMATIONS
-           ============================ */
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        @keyframes shine { 100% { left: 100%; } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-        /* Mobile Optimization */
-        @media (max-width: 480px) {
-            .app-title { font-size: 1.8rem; }
-            .logo-box img { width: 120px; height: 120px; }
-            .features { flex-direction: column; }
-        }
-    </style>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Study Mode Hrry",
+    "alternateName":[
+      "StudyMods Hrry",
+      "StudyMods",
+      "HRRY",
+      "Hrry Online"
+    ],
+    "url":"https://www.hrry.online/",
+    "description":"Study Mode Hrry provides study resources, batches and educational materials."
+  }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+      background:
+        radial-gradient(circle at top left, #42176b 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #171b66 0%, transparent 35%),
+        linear-gradient(135deg, #090014, #100021 45%, #05000d);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ================= PRELOADER ================= */
+
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #08000f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+
+    #preloader.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255,255,255,.12);
+      border-top-color: #9d5cff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+      width: 100%;
+      padding: 25px 20px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
+    header h1 i {
+      color: #b66cff;
+      margin-right: 7px;
+    }
+
+    /* ================= MAIN ================= */
+
+    main {
+      width: 100%;
+      max-width: 480px;
+      padding: 10px 20px 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-link {
+      display: block;
+      margin-top: 12px;
+    }
+
+    .logo {
+      width: 125px;
+      height: 125px;
+      object-fit: cover;
+      border-radius: 30px;
+      box-shadow:
+        0 15px 50px rgba(122, 55, 255, .25),
+        0 0 0 1px rgba(255,255,255,.08);
+      transition: transform .3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.04);
+    }
+
+    .hero-title {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 27px;
+      line-height: 1.25;
+      font-weight: 800;
+      background: linear-gradient(90deg, #fff, #cda8ff, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      margin-top: 13px;
+      text-align: center;
+      color: #aaa4b7;
+      font-size: 13px;
+      line-height: 1.8;
+      max-width: 390px;
+    }
+
+    /* ================= DOWNLOAD ================= */
+
+    .download-box {
+      width: 100%;
+      margin-top: 25px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .download-btn {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      padding: 15px 20px;
+      border-radius: 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, #8338ec, #5b20b8);
+      box-shadow: 0 10px 30px rgba(120,50,240,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(120,50,240,.4);
+    }
+
+    .download-btn i {
+      margin-right: 8px;
+    }
+
+    .progress-container {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #a8a1b5;
+      margin-bottom: 7px;
+    }
+
+    .progress-bar {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,#7437e8,#bd79ff);
+      transition: width .2s linear;
+    }
+
+    /* ================= FEATURES ================= */
+
+    .features {
+      width: 100%;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+    }
+
+    .feature {
+      padding: 14px 8px;
+      text-align: center;
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .feature i {
+      display: block;
+      margin-bottom: 7px;
+      color: #b66cff;
+      font-size: 17px;
+    }
+
+    .feature span {
+      color: #aaa4b7;
+      font-size: 9px;
+      font-weight: 500;
+    }
+
+    /* ================= TELEGRAM DASHBOARD ================= */
+
+    .telegram-dashboard {
+      display: block;
+      width: 100%;
+      max-width: 380px;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 22px;
+      text-decoration: none;
+      color: #fff;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(0,180,255,.12),
+          rgba(255,255,255,.035)
+        );
+
+      border: 1px solid rgba(0,190,255,.20);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      box-shadow: 0 12px 35px rgba(0,0,0,.25);
+
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+      cursor: pointer;
+    }
+
+    .telegram-dashboard:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,210,255,.50);
+      box-shadow: 0 15px 40px rgba(0,180,255,.20);
+    }
+
+    .telegram-dashboard:active {
+      transform: scale(.98);
+    }
+
+    .telegram-dashboard-top {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .telegram-icon {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+
+      background: linear-gradient(
+        145deg,
+        #229ed9,
+        #168ac0
+      );
+
+      box-shadow: 0 5px 20px rgba(34,158,217,.30);
+      font-size: 22px;
+    }
+
+    .telegram-channel-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .telegram-title {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .telegram-live {
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      font-size: 9px;
+      letter-spacing: .8px;
+      color: #70d9ff;
+      font-weight: 600;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00ff87;
+      box-shadow: 0 0 8px #00ff87;
+      animation: telegramPulse 1.2s infinite;
+    }
+
+    .telegram-open {
+      color: #72d8ff;
+      font-size: 13px;
+    }
+
+    .telegram-count-area {
+      text-align: center;
+      padding: 18px 0 14px;
+    }
+
+    .telegram-count {
+      font-size: 2.25rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+
+      text-shadow:
+        0 0 20px rgba(0,210,255,.25);
+
+      transition:
+        transform .25s ease,
+        color .25s ease;
+    }
+
+    .telegram-count.count-changing {
+      transform: scale(1.06);
+      color: #70e6ff;
+    }
+
+    .telegram-label {
+      margin-top: 7px;
+      color: #9ba7b9;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .telegram-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.06);
+
+      font-size: 9px;
+      color: #7f8b9d;
+    }
+
+    .telegram-bottom span:first-child {
+      color: #8edfff;
+    }
+
+    .telegram-bottom i {
+      margin-right: 4px;
+    }
+
+    @keyframes telegramPulse {
+      0%,100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .45;
+        transform: scale(.75);
+      }
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      width: 100%;
+      padding: 25px 20px 30px;
+      text-align: center;
+      color: #777184;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    footer a {
+      color: #ad72ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 380px) {
+
+      main {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .telegram-count {
+        font-size: 2rem;
+      }
+
+      .features {
+        gap: 7px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- 1. PRELOADER -->
-    <div id="preloader">
-        <div class="loader-ring"></div>
-        <div class="loading-text">INITIALIZING...</div>
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <h1>
+      <i class="fas fa-layer-group"></i>
+      StudyMods
+    </h1>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- LOGO -->
+    <a
+      class="logo-link"
+      href="https://ibb.co/rG4W3YwQ"
+      target="_blank"
+      rel="noopener"
+    >
+      <img
+        class="logo"
+        src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png"
+        alt="Study Mode Hrry Logo"
+        loading="eager"
+      >
+    </a>
+
+    <!-- TITLE -->
+    <h2 class="hero-title">
+      Study Mode Hrry
+    </h2>
+
+    <!-- DESCRIPTION -->
+    <p class="description">
+      Get the ultimate Study Mode Hrry experience with
+      useful study resources, all batches, free batches,
+      PWD, Class, Target, Mood, DPK and educational materials
+      in one place.
+    </p>
+
+    <!-- DOWNLOAD -->
+    <div class="download-box">
+
+      <button
+        class="download-btn"
+        id="downloadBtn"
+        type="button"
+      >
+        <i class="fas fa-download"></i>
+        Download StudyMods Hrry
+      </button>
+
+      <div
+        class="progress-container"
+        id="progressContainer"
+      >
+
+        <div class="progress-text">
+          <span id="progressStatus">
+            Preparing download...
+          </span>
+
+          <span id="progressPercent">
+            0%
+          </span>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            id="progressFill"
+          ></div>
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- 2. HEADER -->
-    <header>
-        <h1><i class="fas fa-layer-group"></i> StudyMods</h1>
-    </header>
+    <!-- FEATURES -->
+    <div class="features">
 
-    <!-- 3. MAIN CONTENT -->
-    <main>
-        <!-- Floating Logo -->
-        <div class="logo-box">
-            <a href="https://ibb.co/rG4W3YwQ" target="_blank">
-                <img src="https://i.ibb.co/hRDqcbmg/file-0000000035a48211842ec377eca6f642.png" alt="StudyMods Hrry Logo">
-            </a>
+      <div class="feature">
+        <i class="fas fa-bolt"></i>
+        <span>Fast Server</span>
+      </div>
+
+      <div class="feature">
+        <i class="fas fa-shield-halved"></i>
+        <span>100% Safe</span>
+      </div>
+
+      <div class="feature">
+        <i class="fas fa-arrows-rotate"></i>
+        <span>Auto Update</span>
+      </div>
+
+    </div>
+
+    <!-- TELEGRAM LIVE SUBSCRIBER DASHBOARD -->
+
+    <a
+      href="https://t.me/hrbseb10thallcorse"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="telegram-dashboard"
+      aria-label="Open HR BSEB 10th All Course Telegram Channel"
+    >
+
+      <div class="telegram-dashboard-top">
+
+        <div class="telegram-icon">
+          <i class="fab fa-telegram-plane"></i>
         </div>
 
-        <h2 class="app-title">StudyMods Hrry</h2>
-        <p class="app-desc">Get the ultimate Study Mods HRRY experience. Direct high-speed download for the latest version, packed with 20+ educational apps, new batches, study resources and learning content — all designed for a smarter learning journey.</p>
+        <div class="telegram-channel-info">
 
-        <!-- Download & Progress Area -->
-        <div class="action-area">
-            
-            <!-- Download Button -->
-            <button class="download-btn" id="start-btn">
-                <i class="fas fa-download"></i> DOWNLOAD APP
-            </button>
+          <div class="telegram-title">
+            HR BSEB 10th All Course
+          </div>
 
-            <!-- Real-Time Progress Bar -->
-            <div class="progress-wrapper" id="progress-ui">
-                <div class="progress-header">
-                    <span id="status-text">Connecting...</span>
-                    <span id="percent-text">0%</span>
-                </div>
-                <div class="progress-track">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <div class="progress-details" id="size-text">0.0 MB / 0.0 MB</div>
-            </div>
+          <div class="telegram-live">
+            <span class="live-dot"></span>
+            LIVE SUBSCRIBER COUNT
+          </div>
 
         </div>
 
-        <!-- Features -->
-        <div class="features">
-            <div class="feature-box">
-                <i class="fas fa-rocket"></i>
-                <h4>Fast Server</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fas fa-shield-check"></i>
-                <h4>100% Safe</h4>
-            </div>
-            <div class="feature-box">
-                <i class="fas fa-sync-alt"></i>
-                <h4>Auto Update</h4>
-            </div>
+        <div class="telegram-open">
+          <i class="fas fa-arrow-up-right-from-square"></i>
         </div>
-    </main>
 
-    <!-- 4. FOOTER -->
-    <footer>
-        <div class="developer">
-            Developed with <i class="fas fa-heart" style="color: #ff0844;"></i> by <span>Himanshu Raj Yadav</span>
-            <a href="https://github.com/hkb4390-ops" target="_blank" title="Follow on GitHub">
-                <i class="fab fa-github"></i>
-            </a>
+      </div>
+
+      <div class="telegram-count-area">
+
+        <div
+          id="telegram-count"
+          class="telegram-count"
+        >
+          Loading...
         </div>
-    </footer>
 
-    <!-- 5. JAVASCRIPT LOGIC -->
-    <script>
-        // --- Preloader Logic ---
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.style.display = 'none', 500);
-            }, 1000); // 1 sec delay to show the premium loader
-        });
+        <div class="telegram-label">
+          Subscribers
+        </div>
 
-        // --- Real Download Progress Logic ---
-        const startBtn = document.getElementById('start-btn');
-        const progressUi = document.getElementById('progress-ui');
-        const progressFill = document.getElementById('progress-fill');
-        const statusText = document.getElementById('status-text');
-        const percentText = document.getElementById('percent-text');
-        const sizeText = document.getElementById('size-text');
+      </div>
 
-        // Your Direct App Download Link
-        const apkUrl = "https://github.com/hkb4390-ops/Studymodshrry/releases/download/v5/Study.Mods.Hrry.apk";
+      <div class="telegram-bottom">
 
-        startBtn.addEventListener('click', async () => {
-            // UI Switch
-            startBtn.style.display = 'none';
-            progressUi.style.display = 'block';
-            statusText.innerText = "Fetching File...";
+        <span>
+          <i class="fas fa-bolt"></i>
+          Real Telegram Count
+        </span>
 
-            try {
-                // Fetch Request
-                const response = await fetch(apkUrl);
-                
-                if (!response.ok) throw new Error("Network response was not ok");
+        <span id="telegram-updated">
+          Updating...
+        </span>
 
-                // Get File Size
-                const contentLength = response.headers.get('content-length');
-                
-                // GitHub Sometimes blocks 'content-length' via CORS. If so, fallback.
-                if (!contentLength) {
-                    fallbackNativeDownload();
-                    return;
-                }
+      </div>
 
-                const totalBytes = parseInt(contentLength, 10);
-                let loadedBytes = 0;
-                
-                // Read Stream for Real Progress
-                const reader = response.body.getReader();
-                const chunks = [];
+    </a>
 
-                while (true) {
-                    const { done, value } = await reader.read();
-                    
-                    if (done) {
-                        break;
-                    }
-                    
-                    chunks.push(value);
-                    loadedBytes += value.length;
+  </main>
 
-                    // Calculate Math
-                    let percent = Math.floor((loadedBytes / totalBytes) * 100);
-                    let loadedMB = (loadedBytes / (1024 * 1024)).toFixed(2);
-                    let totalMB = (totalBytes / (1024 * 1024)).toFixed(2);
+  <!-- FOOTER -->
+  <footer>
 
-                    // Update UI
-                    progressFill.style.width = percent + '%';
-                    percentText.innerText = percent + '%';
-                    sizeText.innerText = `${loadedMB} MB / ${totalMB} MB`;
-                    statusText.innerText = "Downloading...";
-                }
+    © 2026 StudyMods Hrry.
+    All rights reserved.
 
-                // File Download Complete - Create Blob & Save to Device
-                statusText.innerText = "Processing File...";
-                const blob = new Blob(chunks, { type: 'application/vnd.android.package-archive' });
-                const downloadUrl = window.URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = downloadUrl;
-                a.download = "StudyMods_Hrry_v1.0.0.apk";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(downloadUrl);
+    <br>
 
-                // Success UI
-                statusText.innerText = "Download Complete! \u2714\ufe0f";
-                progressFill.style.background = "#00ff87"; // Green success color
-                progressFill.style.boxShadow = "0 0 15px #00ff87";
-                
-                // Reset after 3 seconds
-                setTimeout(resetUI, 3000);
+    Developed by
+    <a
+      href="https://github.com/hkb4390-ops"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Himanshu Raj Yadav
+    </a>
 
-            } catch (error) {
-                console.error("Fetch API Stream Error:", error);
-                // If anything fails (CORS, AdBlocker, etc), DO NOT break the page. 
-                // Just use standard browser download.
-                fallbackNativeDownload();
+  </footer>
+
+
+  <script>
+
+    /* ================= PRELOADER ================= */
+
+    window.addEventListener("load", function () {
+
+      setTimeout(function () {
+
+        const preloader =
+          document.getElementById("preloader");
+
+        if (preloader) {
+          preloader.classList.add("hide");
+        }
+
+      }, 400);
+
+    });
+
+
+    /* ================= APK DOWNLOAD ================= */
+
+    const APK_URL =
+      "https://github.com/hkb4390-ops/Studymodshrry/releases/download/v5/Study.Mods.Hrry.apk";
+
+    const downloadBtn =
+      document.getElementById("downloadBtn");
+
+    const progressContainer =
+      document.getElementById("progressContainer");
+
+    const progressFill =
+      document.getElementById("progressFill");
+
+    const progressPercent =
+      document.getElementById("progressPercent");
+
+    const progressStatus =
+      document.getElementById("progressStatus");
+
+
+    downloadBtn.addEventListener("click", async function () {
+
+      try {
+
+        downloadBtn.disabled = true;
+
+        progressContainer.style.display = "block";
+
+        progressStatus.textContent =
+          "Connecting to server...";
+
+        progressFill.style.width = "10%";
+        progressPercent.textContent = "10%";
+
+
+        /*
+         * Fetch the APK.
+         * If the browser does not expose the response body,
+         * the normal download URL is opened instead.
+         */
+
+        const response =
+          await fetch(APK_URL, {
+            cache: "no-store"
+          });
+
+
+        if (!response.ok) {
+          throw new Error("Download failed");
+        }
+
+
+        const contentLength =
+          response.headers.get("content-length");
+
+
+        if (!response.body) {
+          window.location.href = APK_URL;
+          return;
+        }
+
+
+        const reader =
+          response.body.getReader();
+
+        const chunks = [];
+
+        let receivedLength = 0;
+
+
+        while (true) {
+
+          const { done, value } =
+            await reader.read();
+
+          if (done) break;
+
+
+          chunks.push(value);
+
+          receivedLength += value.length;
+
+
+          if (contentLength) {
+
+            const percent =
+              Math.min(
+                99,
+                Math.round(
+                  (receivedLength /
+                    Number(contentLength)) * 100
+                )
+              );
+
+            progressFill.style.width =
+              percent + "%";
+
+            progressPercent.textContent =
+              percent + "%";
+
+            progressStatus.textContent =
+              "Downloading...";
+
+          } else {
+
+            progressStatus.textContent =
+              "Downloading...";
+
+          }
+
+        }
+
+
+        progressFill.style.width = "100%";
+        progressPercent.textContent = "100%";
+        progressStatus.textContent =
+          "Download ready!";
+
+
+        const blob =
+          new Blob(chunks);
+
+        const blobUrl =
+          URL.createObjectURL(blob);
+
+
+        const link =
+          document.createElement("a");
+
+        link.href = blobUrl;
+        link.download =
+          "Study.Mods.Hrry.apk";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
+
+        setTimeout(function () {
+          URL.revokeObjectURL(blobUrl);
+        }, 5000);
+
+
+      } catch (error) {
+
+        console.error(
+          "APK download error:",
+          error
+        );
+
+
+        progressStatus.textContent =
+          "Opening download...";
+
+        progressFill.style.width = "100%";
+        progressPercent.textContent = "100%";
+
+
+        /*
+         * Fallback:
+         * Open GitHub's APK URL directly.
+         */
+
+        setTimeout(function () {
+          window.location.href = APK_URL;
+        }, 500);
+
+      } finally {
+
+        setTimeout(function () {
+          downloadBtn.disabled = false;
+        }, 1500);
+
+      }
+
+    });
+
+
+    /* =====================================================
+       TELEGRAM LIVE SUBSCRIBER COUNT
+       ===================================================== */
+
+    const TELEGRAM_API =
+      "https://tg-subscribe-count.onrender.com/api/telegram/subscribers";
+
+
+    const telegramCount =
+      document.getElementById("telegram-count");
+
+    const telegramUpdated =
+      document.getElementById("telegram-updated");
+
+
+    let previousTelegramCount = null;
+
+
+    async function updateTelegramSubscribers() {
+
+      try {
+
+        const response =
+          await fetch(
+            TELEGRAM_API,
+            {
+              method: "GET",
+              cache: "no-store"
             }
-        });
+          );
 
-        // Fail-Safe Function
-        function fallbackNativeDownload() {
-            statusText.innerText = "Downloading via Browser...";
-            percentText.innerText = "";
-            sizeText.innerText = "Check your notification panel";
-            
-            // Fake animation to keep UI looking good
-            progressFill.style.transition = "width 2s ease-in-out";
-            progressFill.style.width = "100%";
-            
-            setTimeout(() => {
-                window.location.href = apkUrl; // Triggers standard download
-            }, 500);
 
-            setTimeout(resetUI, 5000);
+        if (!response.ok) {
+          throw new Error(
+            "Subscriber API failed"
+          );
         }
 
-        function resetUI() {
-            progressUi.style.display = 'none';
-            startBtn.style.display = 'flex';
-            progressFill.style.width = '0%';
-            percentText.innerText = '0%';
-            sizeText.innerText = '0.0 MB / 0.0 MB';
-            progressFill.style.background = "linear-gradient(90deg, #4facfe, #00f2fe)";
-            progressFill.style.boxShadow = "0 0 15px #00f2fe";
+
+        const data =
+          await response.json();
+
+
+        if (
+          !data.ok ||
+          typeof data.subscribers !== "number"
+        ) {
+          throw new Error(
+            "Invalid subscriber data"
+          );
         }
-    </script>
+
+
+        const newCount =
+          data.subscribers;
+
+
+        /*
+         * First load
+         */
+
+        if (
+          previousTelegramCount === null
+        ) {
+
+          telegramCount.textContent =
+            newCount.toLocaleString("en-IN");
+
+        }
+
+
+        /*
+         * Actual Telegram count changed
+         */
+
+        else if (
+          newCount !== previousTelegramCount
+        ) {
+
+          telegramCount.classList.add(
+            "count-changing"
+          );
+
+
+          telegramCount.textContent =
+            newCount.toLocaleString("en-IN");
+
+
+          setTimeout(function () {
+
+            telegramCount.classList.remove(
+              "count-changing"
+            );
+
+          }, 350);
+
+        }
+
+
+        /*
+         * Count did not change
+         */
+
+        else {
+
+          telegramCount.textContent =
+            newCount.toLocaleString("en-IN");
+
+        }
+
+
+        previousTelegramCount =
+          newCount;
+
+
+        /*
+         * Last successful update time
+         */
+
+        const now =
+          new Date();
+
+
+        telegramUpdated.textContent =
+          "Updated " +
+          now.toLocaleTimeString(
+            "en-IN",
+            {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit"
+            }
+          );
+
+
+      } catch (error) {
+
+        console.error(
+          "Telegram subscriber count:",
+          error
+        );
+
+
+        /*
+         * Don't show a fake number.
+         */
+
+        if (
+          previousTelegramCount === null
+        ) {
+
+          telegramCount.textContent =
+            "—";
+
+        }
+
+
+        telegramUpdated.textContent =
+          "Temporarily unavailable";
+
+      }
+
+    }
+
+
+    /*
+     * Initial request
+     */
+
+    updateTelegramSubscribers();
+
+
+    /*
+     * Check the official backend every 5 seconds.
+     * The displayed number changes only when
+     * the backend returns a different real count.
+     */
+
+    setInterval(
+      updateTelegramSubscribers,
+      5000
+    );
+
+  </script>
+
 </body>
 </html>
