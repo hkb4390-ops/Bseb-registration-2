@@ -13,7 +13,7 @@
 
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Himanshu Raj Yadav">
-  <meta name="theme-color" content="#0d051d">
+  <meta name="theme-color" content="#12052c">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="StudyMods Hrry">
@@ -132,21 +132,14 @@
 
   <style>
     /* =====================================================
-       iOS LIQUID GLASS & VIBRANT NEURAL THEME VARIABLES
+       ULTRA-COLORFUL iOS LIQUID GLASS & RAINBOW NEURAL UI
        ===================================================== */
     :root {
-      --ios-glass: rgba(255, 255, 255, 0.07);
-      --ios-glass-strong: rgba(22, 16, 42, 0.78);
-      --ios-border: rgba(255, 255, 255, 0.14);
-      --ios-highlight: rgba(255, 255, 255, 0.25);
-      --accent-purple: #a855f7;
-      --accent-cyan: #06b6d4;
-      --accent-pink: #ec4899;
-      --accent-green: #10b981;
-      --accent-amber: #f59e0b;
+      --ios-border: rgba(255, 255, 255, 0.22);
       --text-main: #ffffff;
-      --text-muted: #b4b0c7;
+      --text-muted: #d8d4f2;
       --spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
+      --rainbow-grad: linear-gradient(90deg, #ff007f, #ff7700, #ffdd00, #00f59b, #00d2ff, #9d4edd, #ff007f);
     }
 
     * {
@@ -164,48 +157,65 @@
       min-height: 100vh;
       font-family: "Plus Jakarta Sans", "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-main);
-      background-color: #070312;
+      background-color: #080218;
       background-image:
-        radial-gradient(circle at 12% 15%, rgba(168, 85, 247, 0.28) 0%, transparent 38%),
-        radial-gradient(circle at 88% 20%, rgba(6, 182, 212, 0.24) 0%, transparent 40%),
-        radial-gradient(circle at 50% 85%, rgba(236, 72, 153, 0.22) 0%, transparent 45%),
-        linear-gradient(160deg, #06020f 0%, #100626 50%, #05020c 100%);
+        radial-gradient(circle at 8% 12%, rgba(255, 0, 128, 0.35) 0%, transparent 38%),
+        radial-gradient(circle at 92% 16%, rgba(0, 229, 255, 0.35) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(255, 165, 0, 0.28) 0%, transparent 42%),
+        radial-gradient(circle at 15% 82%, rgba(0, 255, 149, 0.28) 0%, transparent 42%),
+        linear-gradient(155deg, #09021a 0%, #150534 50%, #070317 100%);
       background-attachment: fixed;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
-      padding-bottom: 95px;
+      padding-bottom: 105px;
     }
 
-    /* Animated Ambient Neural Glow Orbs */
+    /* Animated Colorful Neural Glow Orbs */
     .ambient-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(85px);
+      filter: blur(80px);
       z-index: -1;
       pointer-events: none;
-      opacity: 0.55;
-      animation: floatOrb 14s infinite alternate ease-in-out;
+      opacity: 0.65;
+      animation: floatOrb 12s infinite alternate ease-in-out;
     }
     .orb-1 {
-      width: 300px;
-      height: 300px;
-      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      width: 320px;
+      height: 320px;
+      background: linear-gradient(135deg, #ff007f, #7928ca, #ffb703);
       top: -80px;
       left: -80px;
     }
     .orb-2 {
-      width: 280px;
-      height: 280px;
-      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      width: 310px;
+      height: 310px;
+      background: linear-gradient(135deg, #00f5d4, #00bbf9, #9b5de5);
       bottom: 8%;
       right: -75px;
-      animation-delay: -5s;
+      animation-delay: -4s;
+    }
+    .orb-3 {
+      width: 260px;
+      height: 260px;
+      background: linear-gradient(135deg, #ff9e00, #ff0055, #00f59b);
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.35;
+      animation-delay: -8s;
     }
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(25px, 30px) scale(1.12); }
+      100% { transform: translate(30px, 35px) scale(1.15); }
+    }
+
+    @keyframes rainbowFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* =====================================================
@@ -215,9 +225,9 @@
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(7, 3, 18, 0.94);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+      background: rgba(8, 2, 24, 0.95);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -230,34 +240,38 @@
       visibility: hidden;
     }
     .loader-ring {
-      width: 54px;
-      height: 54px;
+      width: 58px;
+      height: 58px;
       border: 4px solid rgba(255, 255, 255, 0.1);
-      border-top-color: #c084fc;
-      border-right-color: #22d3ee;
+      border-top-color: #ff007f;
+      border-right-color: #00f5d4;
+      border-bottom-color: #ffbe0b;
+      border-left-color: #8338ec;
       border-radius: 50%;
-      animation: spin 0.9s linear infinite;
+      animation: spin 0.85s linear infinite;
     }
     .loader-text {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #e879f9, #38bdf8);
+      background: var(--rainbow-grad);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: rainbowFlow 4s ease infinite;
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
     /* =====================================================
-       TOP iOS DYNAMIC ISLAND HEADER
+       TOP iOS DYNAMIC ISLAND HEADER (COLORFUL BORDER & TEXT)
        ===================================================== */
     header {
       width: 100%;
       max-width: 980px;
-      padding: 16px 18px 8px;
+      padding: 16px 16px 8px;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -269,13 +283,14 @@
       width: 100%;
       padding: 11px 18px;
       border-radius: 999px;
-      background: rgba(18, 12, 36, 0.72);
-      border: 1px solid var(--ios-border);
+      background: linear-gradient(135deg, rgba(35, 12, 68, 0.82), rgba(14, 22, 58, 0.82));
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
       box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
+        0 12px 35px rgba(255, 0, 127, 0.25),
+        0 4px 20px rgba(0, 210, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(25px) saturate(200%);
+      -webkit-backdrop-filter: blur(25px) saturate(200%);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -290,21 +305,23 @@
     }
 
     .brand-mini-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       object-fit: cover;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+      border: 2px solid #00f5d4;
+      box-shadow: 0 0 15px rgba(0, 245, 212, 0.5);
     }
 
     .brand-title {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
       letter-spacing: -0.2px;
-      background: linear-gradient(90deg, #ffffff, #e9d5ff, #67e8f9);
+      background: linear-gradient(90deg, #ff007f, #ffbe0b, #00f5d4, #00bbf9, #ff007f);
+      background-size: 250% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: rainbowFlow 5s linear infinite;
     }
 
     .header-actions {
@@ -314,60 +331,104 @@
     }
 
     .share-pill {
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(6, 182, 212, 0.25));
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, #ff007f, #7928ca, #00bbf9);
+      background-size: 200% 200%;
+      animation: rainbowFlow 4s ease infinite;
       color: #fff;
       font-family: inherit;
       font-size: 12px;
-      font-weight: 700;
-      padding: 7px 13px;
+      font-weight: 800;
+      padding: 8px 15px;
       border-radius: 999px;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 6px 20px rgba(255, 0, 127, 0.4);
       transition: transform 0.25s var(--spring-easing), box-shadow 0.25s ease;
     }
     .share-pill:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 18px rgba(168, 85, 247, 0.35);
+      transform: scale(1.06);
+      box-shadow: 0 8px 25px rgba(0, 245, 212, 0.55);
     }
     .share-pill:active {
       transform: scale(0.95);
     }
 
     /* =====================================================
-       TOP SEGMENTED PILL NAV (DESKTOP & MOBILE)
+       COLORFUL PROMO MARQUEE BANNER
+       ===================================================== */
+    .colorful-promo-banner {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 16px;
+      margin-top: 4px;
+    }
+
+    .promo-banner-inner {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(255, 0, 127, 0.28), rgba(255, 190, 11, 0.25), rgba(0, 245, 212, 0.25), rgba(131, 56, 236, 0.28));
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(255, 0, 127, 0.2);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .promo-pill-badge {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff007f, #ff7700);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      box-shadow: 0 0 12px rgba(255, 0, 127, 0.6);
+      flex-shrink: 0;
+    }
+
+    /* =====================================================
+       TOP SEGMENTED PILL NAV (COLORFUL ACTIVE TABS)
        ===================================================== */
     .section-tabs-wrap {
       width: 100%;
       max-width: 680px;
-      padding: 6px 16px 10px;
+      padding: 10px 16px 8px;
       z-index: 90;
     }
 
     .ios-segmented {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      padding: 6px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.055);
-      border: 1px solid rgba(255, 255, 255, 0.11);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      gap: 7px;
+      padding: 7px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .seg-btn {
-      border: 0;
-      background: transparent;
-      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: #e2e8f0;
       font-family: inherit;
       font-size: 12px;
-      font-weight: 700;
-      padding: 10px 6px;
-      border-radius: 15px;
+      font-weight: 800;
+      padding: 11px 6px;
+      border-radius: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -381,27 +442,37 @@
       font-size: 13px;
     }
 
+    .seg-btn[data-target="home"] i { color: #ffbe0b; }
+    .seg-btn[data-target="cricket"] i { color: #00f59b; }
+    .seg-btn[data-target="livetv"] i { color: #ff007f; }
+    .seg-btn[data-target="movies"] i { color: #00d2ff; }
+
     .seg-btn.active {
       color: #fff;
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(59, 130, 246, 0.85));
+      border-color: rgba(255, 255, 255, 0.45);
+      background: linear-gradient(135deg, #ff007f 0%, #8338ec 50%, #00bbf9 100%);
       box-shadow:
-        0 6px 20px rgba(139, 92, 246, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        0 8px 24px rgba(255, 0, 127, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
       transform: translateY(-1px);
     }
 
+    .seg-btn.active i {
+      color: #fff !important;
+    }
+
     .seg-btn .live-badge-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px #22c55e;
-      animation: pulseGlow 1.3s infinite;
+      background: #00ff87;
+      box-shadow: 0 0 10px #00ff87;
+      animation: pulseGlow 1.2s infinite;
     }
 
     @keyframes pulseGlow {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.75); }
+      50% { opacity: 0.45; transform: scale(0.75); }
     }
 
     /* =====================================================
@@ -440,11 +511,11 @@
     }
 
     /* =====================================================
-       SECTION 1: HOME (HERO + APP DOWNLOAD + ALL HUB CARDS)
+       SECTION 1: HOME (COLORFUL HERO BANNER + CARDS)
        ===================================================== */
     .home-container {
       width: 100%;
-      max-width: 540px;
+      max-width: 560px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -453,14 +524,18 @@
     .hero-card {
       width: 100%;
       padding: 28px 22px 24px;
-      border-radius: 30px;
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025));
-      border: 1px solid var(--ios-border);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 0, 127, 0.28), transparent 55%),
+        radial-gradient(circle at bottom left, rgba(0, 245, 212, 0.24), transparent 55%),
+        linear-gradient(155deg, rgba(45, 16, 84, 0.72), rgba(16, 10, 42, 0.78));
+      border: 1.5px solid rgba(255, 255, 255, 0.24);
       box-shadow:
-        0 24px 60px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+        0 24px 60px rgba(131, 56, 236, 0.35),
+        0 0 35px rgba(255, 0, 127, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -469,88 +544,123 @@
       overflow: hidden;
     }
 
+    /* Top Rainbow Accent Strip inside Hero Banner */
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--rainbow-grad);
+      background-size: 300% 100%;
+      animation: rainbowFlow 4s linear infinite;
+    }
+
     .logo-link {
       display: block;
       position: relative;
     }
 
     .logo {
-      width: 118px;
-      height: 118px;
+      width: 122px;
+      height: 122px;
       object-fit: cover;
-      border-radius: 28px;
+      border-radius: 30px;
+      border: 2.5px solid rgba(255, 255, 255, 0.45);
       box-shadow:
-        0 16px 45px rgba(168, 85, 247, 0.42),
-        0 0 0 2px rgba(255, 255, 255, 0.18);
+        0 16px 45px rgba(255, 0, 127, 0.5),
+        0 0 25px rgba(0, 245, 212, 0.45);
       transition: transform 0.35s var(--spring-easing);
     }
 
     .logo:hover {
-      transform: scale(1.06) rotate(-2deg);
+      transform: scale(1.07) rotate(-2deg);
     }
 
     .verified-pill {
-      margin-top: 14px;
+      margin-top: 15px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 13px;
+      gap: 7px;
+      padding: 6px 15px;
       border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #e9d5ff;
-      background: rgba(168, 85, 247, 0.18);
-      border: 1px solid rgba(168, 85, 247, 0.35);
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(90deg, rgba(255, 0, 127, 0.45), rgba(131, 56, 236, 0.5), rgba(0, 187, 249, 0.45));
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 20px rgba(131, 56, 236, 0.35);
     }
 
     .verified-pill i {
-      color: #38bdf8;
+      color: #00f5d4;
+      font-size: 13px;
     }
 
     .hero-title {
-      margin-top: 12px;
-      font-size: 28px;
+      margin-top: 14px;
+      font-size: 31px;
       line-height: 1.2;
       font-weight: 800;
-      letter-spacing: -0.4px;
-      background: linear-gradient(90deg, #ffffff 0%, #f0abfc 50%, #67e8f9 100%);
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffbe0b 0%, #ff007f 30%, #00f5d4 65%, #00bbf9 100%);
+      background-size: 250% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: rainbowFlow 5s linear infinite;
+      filter: drop-shadow(0 4px 18px rgba(255, 0, 127, 0.3));
     }
 
     .description {
-      margin-top: 10px;
-      color: var(--text-muted);
+      margin-top: 11px;
+      color: #e9e5ff;
       font-size: 13.5px;
-      line-height: 1.65;
-      max-width: 440px;
+      line-height: 1.7;
+      max-width: 450px;
     }
+
+    .highlight-tag {
+      padding: 2px 8px;
+      border-radius: 7px;
+      font-weight: 700;
+      color: #fff;
+      display: inline-block;
+      margin: 1px;
+    }
+    .hl-cricket { background: linear-gradient(135deg, #059669, #10b981); }
+    .hl-tv { background: linear-gradient(135deg, #db2777, #9333ea); }
+    .hl-movies { background: linear-gradient(135deg, #ea580c, #eab308); }
+    .hl-bseb { background: linear-gradient(135deg, #0284c7, #3b82f6); }
 
     /* APK DOWNLOAD BOX */
     .download-box {
       width: 100%;
       margin-top: 20px;
       padding: 16px;
-      border-radius: 22px;
-      background: rgba(10, 5, 24, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.14), rgba(0, 245, 212, 0.12));
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
     }
 
     .download-btn {
       width: 100%;
-      border: 0;
+      border: 1px solid rgba(255, 255, 255, 0.4);
       outline: 0;
       padding: 16px 22px;
-      border-radius: 16px;
+      border-radius: 18px;
       color: #fff;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 800;
       cursor: pointer;
-      background: linear-gradient(135deg, #9333ea 0%, #ec4899 55%, #f97316 100%);
+      background: linear-gradient(135deg, #ff007f 0%, #ff7700 35%, #8338ec 70%, #00bbf9 100%);
+      background-size: 250% 250%;
+      animation: rainbowFlow 4.5s ease infinite;
       box-shadow:
-        0 12px 32px rgba(236, 72, 153, 0.38),
-        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        0 14px 35px rgba(255, 0, 127, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
       transition: transform 0.25s var(--spring-easing), box-shadow 0.25s ease;
       display: flex;
       align-items: center;
@@ -559,8 +669,8 @@
     }
 
     .download-btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 16px 38px rgba(236, 72, 153, 0.52);
+      transform: translateY(-3px) scale(1.015);
+      box-shadow: 0 18px 42px rgba(0, 245, 212, 0.55);
     }
 
     .download-btn:active {
@@ -575,141 +685,176 @@
     .progress-text {
       display: flex;
       justify-content: space-between;
-      font-size: 11.5px;
-      color: #cbd5e1;
+      font-size: 12px;
+      color: #fff;
       margin-bottom: 7px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .progress-bar {
-      height: 8px;
+      height: 9px;
       overflow: hidden;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .progress-fill {
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #a855f7, #ec4899, #22d3ee);
+      background: var(--rainbow-grad);
+      background-size: 200% 100%;
+      animation: rainbowFlow 2s linear infinite;
       transition: width 0.2s linear;
     }
 
-    /* 3 MINI FEATURES */
+    /* 3 COLORFUL MINI FEATURES */
     .features {
       width: 100%;
-      margin-top: 14px;
+      margin-top: 16px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
+      gap: 10px;
     }
 
     .feature {
-      padding: 11px 8px;
+      padding: 12px 8px;
       text-align: center;
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      transition: transform 0.25s ease;
+    }
+    .feature:hover {
+      transform: translateY(-3px);
+    }
+
+    .feat-1 {
+      background: linear-gradient(145deg, rgba(255, 190, 11, 0.28), rgba(255, 0, 110, 0.18));
+      border-color: rgba(255, 190, 11, 0.45);
+    }
+    .feat-2 {
+      background: linear-gradient(145deg, rgba(0, 245, 212, 0.28), rgba(0, 187, 249, 0.18));
+      border-color: rgba(0, 245, 212, 0.45);
+    }
+    .feat-3 {
+      background: linear-gradient(145deg, rgba(155, 93, 229, 0.32), rgba(241, 91, 181, 0.2));
+      border-color: rgba(241, 91, 181, 0.45);
     }
 
     .feature i {
       display: block;
       margin-bottom: 5px;
-      font-size: 15px;
-      background: linear-gradient(135deg, #c084fc, #38bdf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 18px;
     }
+    .feat-1 i { color: #ffbe0b; }
+    .feat-2 i { color: #00f5d4; }
+    .feat-3 i { color: #f15bb5; }
 
     .feature span {
-      color: #cbd5e1;
-      font-size: 10px;
-      font-weight: 600;
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 800;
     }
 
     /* =====================================================
-       ENTERTAINMENT & STREAMING BENTO GRID (iOS WIDGETS)
+       COLORFUL SECTION BANNERS / HEADINGS
        ===================================================== */
-    .section-heading {
+    .colorful-section-banner {
       width: 100%;
-      margin: 26px 0 12px;
+      margin: 26px 0 14px;
+      padding: 12px 16px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, rgba(255, 0, 127, 0.32), rgba(131, 56, 236, 0.32), rgba(0, 187, 249, 0.32));
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 10px 25px rgba(131, 56, 236, 0.25);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 4px;
     }
 
-    .section-heading h3 {
-      font-size: 16px;
+    .colorful-section-banner h3 {
+      font-size: 15.5px;
       font-weight: 800;
       letter-spacing: 0.2px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
+      background: linear-gradient(90deg, #ffffff, #ffbe0b, #00f5d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .section-heading h3 i {
-      color: #f472b6;
+    .colorful-section-banner h3 i {
+      -webkit-text-fill-color: initial;
+      color: #ffbe0b;
+      font-size: 17px;
     }
 
-    .section-heading span {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
+    .banner-badge {
+      font-size: 10.5px;
+      color: #fff;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #00f59b, #00bbf9);
+      color: #06281e;
+      box-shadow: 0 0 12px rgba(0, 245, 155, 0.5);
     }
 
+    /* =====================================================
+       VIBRANT BENTO CARDS (CRICKET, LIVE TV, MOVIES)
+       ===================================================== */
     .bento-grid {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 13px;
     }
 
     .bento-card {
       position: relative;
-      padding: 18px 16px;
-      border-radius: 24px;
+      padding: 19px 17px;
+      border-radius: 26px;
       text-decoration: none;
       color: #fff;
-      border: 1px solid var(--ios-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 142px;
+      min-height: 150px;
       cursor: pointer;
       overflow: hidden;
-      transition: transform 0.3s var(--spring-easing), box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.3s var(--spring-easing), box-shadow 0.3s ease;
       text-align: left;
     }
 
     .bento-card:hover {
-      transform: translateY(-4px) scale(1.015);
+      transform: translateY(-5px) scale(1.02);
     }
 
     .bento-card:active {
       transform: scale(0.97);
     }
 
-    /* Card Specific Colorful Themes */
+    /* Vibrant Card Themes */
     .card-cricket {
-      background: linear-gradient(145deg, rgba(16, 185, 129, 0.24), rgba(6, 182, 212, 0.08));
-      border-color: rgba(16, 185, 129, 0.35);
-      box-shadow: 0 14px 34px rgba(16, 185, 129, 0.16);
+      background: linear-gradient(145deg, rgba(0, 245, 155, 0.38), rgba(0, 187, 249, 0.25), rgba(6, 95, 70, 0.45));
+      border: 1.5px solid rgba(0, 245, 155, 0.55);
+      box-shadow: 0 16px 36px rgba(0, 245, 155, 0.25);
     }
     .card-livetv {
-      background: linear-gradient(145deg, rgba(236, 72, 153, 0.25), rgba(139, 92, 246, 0.1));
-      border-color: rgba(236, 72, 153, 0.35);
-      box-shadow: 0 14px 34px rgba(236, 72, 153, 0.16);
+      background: linear-gradient(145deg, rgba(255, 0, 127, 0.42), rgba(155, 93, 229, 0.32), rgba(88, 28, 135, 0.45));
+      border: 1.5px solid rgba(255, 0, 127, 0.55);
+      box-shadow: 0 16px 36px rgba(255, 0, 127, 0.28);
     }
     .card-movies {
       grid-column: span 2;
-      min-height: 125px;
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(239, 68, 68, 0.18), rgba(168, 85, 247, 0.15));
-      border-color: rgba(245, 158, 11, 0.38);
-      box-shadow: 0 14px 35px rgba(245, 158, 11, 0.16);
+      min-height: 135px;
+      background: linear-gradient(135deg, rgba(255, 158, 0, 0.42), rgba(255, 0, 85, 0.35), rgba(131, 56, 236, 0.35));
+      border: 1.5px solid rgba(255, 190, 11, 0.6);
+      box-shadow: 0 16px 38px rgba(255, 158, 0, 0.28);
     }
 
     .bento-top {
@@ -720,39 +865,41 @@
     }
 
     .bento-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 22px;
       color: #fff;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.45);
     }
 
     .card-cricket .bento-icon {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, #00f59b, #059669);
     }
     .card-livetv .bento-icon {
-      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      background: linear-gradient(135deg, #ff007f, #8338ec);
     }
     .card-movies .bento-icon {
-      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      background: linear-gradient(135deg, #ffbe0b, #ff0055);
     }
 
     .bento-tag {
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.6px;
       text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       display: inline-flex;
       align-items: center;
       gap: 5px;
+      color: #fff;
     }
 
     .bento-body {
@@ -760,49 +907,69 @@
     }
 
     .bento-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
       line-height: 1.25;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
     }
 
     .bento-sub {
-      margin-top: 4px;
-      font-size: 11.5px;
-      color: #d8d4e8;
+      margin-top: 5px;
+      font-size: 12px;
+      color: #f3e8ff;
+      font-weight: 500;
       line-height: 1.4;
     }
 
     /* =====================================================
-       OFFICIAL CHANNELS & COMMUNITY LINKS
+       COLORFUL OFFICIAL CHANNEL BANNERS
        ===================================================== */
     .channels-list {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 12px;
     }
 
     .channel-item {
       width: 100%;
       padding: 15px 16px;
-      border-radius: 22px;
+      border-radius: 24px;
       text-decoration: none;
       color: #fff;
-      background: rgba(255, 255, 255, 0.055);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      transition: transform 0.28s var(--spring-easing), border-color 0.28s ease, background 0.28s ease;
+      transition: transform 0.28s var(--spring-easing), box-shadow 0.28s ease;
     }
 
     .channel-item:hover {
-      transform: translateY(-3px) scale(1.01);
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-3px) scale(1.015);
+    }
+
+    .item-bseb {
+      background: linear-gradient(135deg, rgba(0, 187, 249, 0.32), rgba(59, 130, 246, 0.22));
+      border: 1.5px solid rgba(0, 210, 255, 0.5);
+      box-shadow: 0 12px 28px rgba(0, 187, 249, 0.2);
+    }
+    .item-films {
+      background: linear-gradient(135deg, rgba(255, 158, 0, 0.34), rgba(255, 0, 85, 0.24));
+      border: 1.5px solid rgba(255, 158, 0, 0.5);
+      box-shadow: 0 12px 28px rgba(255, 0, 85, 0.2);
+    }
+    .item-whatsapp {
+      background: linear-gradient(135deg, rgba(0, 245, 155, 0.32), rgba(16, 185, 129, 0.22));
+      border: 1.5px solid rgba(0, 245, 155, 0.5);
+      box-shadow: 0 12px 28px rgba(16, 185, 129, 0.2);
+    }
+    .item-youtube {
+      background: linear-gradient(135deg, rgba(255, 0, 85, 0.36), rgba(239, 68, 68, 0.24));
+      border: 1.5px solid rgba(255, 77, 109, 0.55);
+      box-shadow: 0 12px 28px rgba(239, 68, 68, 0.24);
     }
 
     .channel-left {
@@ -813,79 +980,84 @@
     }
 
     .channel-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 21px;
+      font-size: 22px;
       color: #fff;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
     }
 
-    .icon-bseb { background: linear-gradient(135deg, #0ea5e9, #2563eb); }
-    .icon-films { background: linear-gradient(135deg, #f59e0b, #dc2626); }
-    .icon-whatsapp { background: linear-gradient(135deg, #22c55e, #15803d); }
-    .icon-youtube { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+    .icon-bseb { background: linear-gradient(135deg, #00d2ff, #2563eb); }
+    .icon-films { background: linear-gradient(135deg, #ffbe0b, #ff0055); }
+    .icon-whatsapp { background: linear-gradient(135deg, #00f59b, #059669); }
+    .icon-youtube { background: linear-gradient(135deg, #ff0055, #dc2626); }
 
     .channel-meta {
       min-width: 0;
     }
 
     .channel-name {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
+      color: #fff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .channel-desc {
-      margin-top: 2px;
+      margin-top: 3px;
       font-size: 11.5px;
-      color: var(--text-muted);
+      color: #f1f5f9;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .channel-arrow {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 13px;
-      color: #e2e8f0;
+      color: #ffffff;
       flex-shrink: 0;
     }
 
     /* =====================================================
-       TELEGRAM LIVE SUBSCRIBER DASHBOARD
+       TELEGRAM LIVE SUBSCRIBER DASHBOARD (COLORFUL NEON)
        ===================================================== */
     .telegram-dashboard {
       display: block;
       width: 100%;
-      margin-top: 22px;
-      padding: 20px;
-      border-radius: 26px;
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 28px;
       text-decoration: none;
       color: #fff;
-      background: linear-gradient(145deg, rgba(0, 180, 255, 0.16), rgba(139, 92, 246, 0.08));
-      border: 1px solid rgba(0, 195, 255, 0.28);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
-      transition: transform 0.28s var(--spring-easing), border-color 0.28s ease;
+      background: linear-gradient(135deg, rgba(0, 210, 255, 0.28), rgba(131, 56, 236, 0.28), rgba(255, 0, 127, 0.22));
+      border: 1.5px solid rgba(0, 245, 212, 0.55);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow:
+        0 18px 45px rgba(0, 187, 249, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transition: transform 0.28s var(--spring-easing), box-shadow 0.28s ease;
     }
 
     .telegram-dashboard:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 210, 255, 0.55);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 22px 50px rgba(0, 245, 212, 0.4);
     }
 
     .telegram-dashboard-top {
@@ -895,14 +1067,14 @@
     }
 
     .telegram-channel-logo {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       flex-shrink: 0;
       border-radius: 50%;
       object-fit: cover;
       background: #229ed9;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 5px 20px rgba(34, 158, 217, 0.35);
+      border: 2px solid #00f5d4;
+      box-shadow: 0 0 20px rgba(0, 245, 212, 0.5);
     }
 
     .telegram-channel-info {
@@ -911,8 +1083,11 @@
     }
 
     .telegram-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, #70e6ff, #ffbe0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -925,22 +1100,22 @@
       gap: 6px;
       font-size: 10px;
       letter-spacing: 0.8px;
-      color: #70d9ff;
-      font-weight: 700;
+      color: #00ff87;
+      font-weight: 800;
     }
 
     .live-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #00ff87;
-      box-shadow: 0 0 8px #00ff87;
+      box-shadow: 0 0 10px #00ff87;
       animation: pulseGlow 1.2s infinite;
     }
 
     .telegram-open {
-      color: #72d8ff;
-      font-size: 14px;
+      color: #ffffff;
+      font-size: 15px;
     }
 
     .telegram-count-area {
@@ -949,27 +1124,30 @@
     }
 
     .telegram-count {
-      font-size: 2.35rem;
+      font-size: 2.5rem;
       line-height: 1;
       font-weight: 800;
       letter-spacing: 1px;
-      color: #fff;
-      text-shadow: 0 0 22px rgba(0, 210, 255, 0.35);
-      transition: transform 0.25s ease, color 0.25s ease;
+      background: linear-gradient(90deg, #00f5d4, #ffbe0b, #ff007f, #00bbf9);
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowFlow 5s linear infinite;
+      filter: drop-shadow(0 0 18px rgba(0, 245, 212, 0.35));
+      transition: transform 0.25s ease;
     }
 
     .telegram-count.count-changing {
-      transform: scale(1.06);
-      color: #70e6ff;
+      transform: scale(1.08);
     }
 
     .telegram-label {
       margin-top: 7px;
-      color: #cbd5e1;
-      font-size: 11px;
-      letter-spacing: 1.5px;
+      color: #ffffff;
+      font-size: 11.5px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 800;
     }
 
     .telegram-bottom {
@@ -978,28 +1156,30 @@
       justify-content: space-between;
       gap: 10px;
       padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 10px;
-      color: #94a3b8;
-    }
-
-    .telegram-bottom span:first-child {
-      color: #8edfff;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 10.5px;
+      color: #e2e8f0;
       font-weight: 600;
     }
 
+    .telegram-bottom span:first-child {
+      color: #00f5d4;
+      font-weight: 800;
+    }
+
     /* =====================================================
-       SECTION 2 & 3: IFRAME STREAMING VIEWERS (CRICKET & LIVE TV)
+       SECTION 2 & 3: COLORFUL IFRAME STREAMING VIEWERS
        ===================================================== */
     .stream-shell {
       width: 100%;
       max-width: 960px;
       border-radius: 28px;
-      background: rgba(15, 10, 30, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(18, 8, 38, 0.85);
+      border: 2px solid rgba(0, 245, 212, 0.45);
       box-shadow:
-        0 25px 65px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+        0 25px 65px rgba(255, 0, 127, 0.3),
+        0 0 30px rgba(0, 245, 212, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       overflow: hidden;
@@ -1008,9 +1188,9 @@
     }
 
     .stream-topbar {
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 13px 18px;
+      background: linear-gradient(90deg, rgba(255, 0, 127, 0.35), rgba(131, 56, 236, 0.35), rgba(0, 187, 249, 0.35));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1031,20 +1211,27 @@
     }
 
     .light-dot {
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
     }
-    .dot-red { background: #ff5f56; }
-    .dot-yellow { background: #ffbd2e; }
-    .dot-green { background: #27c93f; }
+    .dot-red { background: #ff5f56; box-shadow: 0 0 8px #ff5f56; }
+    .dot-yellow { background: #ffbd2e; box-shadow: 0 0 8px #ffbd2e; }
+    .dot-green { background: #27c93f; box-shadow: 0 0 8px #27c93f; }
 
     .stream-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
+      background: linear-gradient(90deg, #ffffff, #ffbe0b, #00f5d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stream-title i {
+      -webkit-text-fill-color: initial;
     }
 
     .stream-controls {
@@ -1054,13 +1241,13 @@
     }
 
     .stream-ctrl-btn {
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.45), rgba(131, 56, 236, 0.45));
       color: #fff;
       font-family: inherit;
       font-size: 11.5px;
-      font-weight: 700;
-      padding: 7px 12px;
+      font-weight: 800;
+      padding: 7px 13px;
       border-radius: 12px;
       cursor: pointer;
       text-decoration: none;
@@ -1071,8 +1258,8 @@
     }
 
     .stream-ctrl-btn:hover {
-      background: rgba(255, 255, 255, 0.16);
-      transform: translateY(-1px);
+      background: linear-gradient(135deg, #ff007f, #00bbf9);
+      transform: translateY(-2px);
     }
 
     .stream-Viewport {
@@ -1091,24 +1278,25 @@
     }
 
     /* =====================================================
-       BOTTOM iOS FLOATING GLASS DOCK (MOBILE-FIRST NAVIGATION)
+       BOTTOM iOS FLOATING GLASS DOCK (COLORFUL)
        ===================================================== */
     .ios-bottom-dock {
       position: fixed;
       bottom: 14px;
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - 28px);
-      max-width: 460px;
+      width: calc(100% - 26px);
+      max-width: 470px;
       padding: 8px;
-      border-radius: 26px;
-      background: rgba(16, 10, 34, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(28, 10, 56, 0.88), rgba(12, 20, 54, 0.88));
+      border: 1.5px solid rgba(255, 255, 255, 0.26);
       box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.65),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(28px) saturate(190%);
-      -webkit-backdrop-filter: blur(28px) saturate(190%);
+        0 18px 45px rgba(255, 0, 127, 0.35),
+        0 6px 25px rgba(0, 245, 212, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
@@ -1118,10 +1306,10 @@
     .dock-item {
       border: 0;
       background: transparent;
-      color: #a39eb8;
+      color: #cbd5e1;
       font-family: inherit;
       padding: 8px 4px;
-      border-radius: 18px;
+      border-radius: 20px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -1132,25 +1320,30 @@
     }
 
     .dock-item i {
-      font-size: 17px;
+      font-size: 18px;
       transition: transform 0.28s var(--spring-easing);
     }
 
+    .dock-item[data-target="home"] i { color: #ffbe0b; }
+    .dock-item[data-target="cricket"] i { color: #00f59b; }
+    .dock-item[data-target="livetv"] i { color: #ff007f; }
+    .dock-item[data-target="movies"] i { color: #00d2ff; }
+
     .dock-item span {
-      font-size: 10px;
-      font-weight: 700;
+      font-size: 10.5px;
+      font-weight: 800;
     }
 
     .dock-item.active {
       color: #fff;
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(6, 182, 212, 0.3));
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 6px 18px rgba(168, 85, 247, 0.28);
+      background: linear-gradient(135deg, #ff007f, #8338ec, #00bbf9);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 22px rgba(255, 0, 127, 0.45);
     }
 
     .dock-item.active i {
-      transform: translateY(-2px) scale(1.1);
-      color: #67e8f9;
+      transform: translateY(-2px) scale(1.12);
+      color: #ffffff !important;
     }
 
     /* =====================================================
@@ -1160,19 +1353,18 @@
       width: 100%;
       padding: 20px 20px 25px;
       text-align: center;
-      color: #8b849e;
-      font-size: 11px;
-      line-height: 1.75;
-    }
-
-    footer a {
-      color: #c084fc;
-      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 11.5px;
+      line-height: 1.8;
       font-weight: 600;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    footer a {
+      background: linear-gradient(90deg, #ffbe0b, #ff007f, #00f5d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-weight: 800;
     }
 
     /* =====================================================
@@ -1183,7 +1375,7 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .hero-title {
-        font-size: 24px;
+        font-size: 26px;
       }
       .bento-grid {
         grid-template-columns: 1fr;
@@ -1204,6 +1396,7 @@
   <!-- Ambient Colorful Neural Orbs -->
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
 
   <!-- =====================================================
        PRELOADER
@@ -1231,11 +1424,21 @@
       <div class="header-actions">
         <button class="share-pill" type="button" id="shareWebBtn">
           <i class="fas fa-share-nodes"></i>
-          <span>Share</span>
+          <span>Share Link</span>
         </button>
       </div>
     </div>
   </header>
+
+  <!-- =====================================================
+       COLORFUL TOP BANNER
+       ===================================================== -->
+  <div class="colorful-promo-banner">
+    <div class="promo-banner-inner">
+      <span class="promo-pill-badge">🔥 LIVE HUB</span>
+      <span>Free Study Batches • Live Cricket • Live TV • Movies & BSEB Special</span>
+    </div>
+  </div>
 
   <!-- =====================================================
        TOP iOS SEGMENTED SWITCHER
@@ -1274,7 +1477,7 @@
     <section id="section-home" class="tab-section active">
       <div class="home-container">
 
-        <!-- HERO APP CARD -->
+        <!-- HERO APP BANNER CARD -->
         <div class="hero-card">
           <a
             class="logo-link"
@@ -1299,9 +1502,11 @@
           <h1 class="hero-title">Study Mode Hrry</h1>
 
           <p class="description">
-            Get all batches, free batches (PW, Target Board, Disha, RWA, KGS),
-            <strong>Free Live Cricket Streaming</strong>, <strong>Live TV</strong>,
-            <strong>Free Movies & All Shows</strong>, and <strong>BSEB Special</strong> resources in one place.
+            Get all batches & free batches (PW, Target Board, Disha, RWA, KGS) +
+            <span class="highlight-tag hl-cricket">Free Live Cricket</span>
+            <span class="highlight-tag hl-tv">Live TV</span>
+            <span class="highlight-tag hl-movies">Free Movies & Shows</span>
+            <span class="highlight-tag hl-bseb">BSEB Special</span>
           </p>
 
           <!-- APK DOWNLOAD -->
@@ -1322,27 +1527,27 @@
             </div>
           </div>
 
-          <!-- FEATURES -->
+          <!-- COLORFUL FEATURES -->
           <div class="features">
-            <div class="feature">
+            <div class="feature feat-1">
               <i class="fas fa-bolt"></i>
               <span>Fast Server</span>
             </div>
-            <div class="feature">
+            <div class="feature feat-2">
               <i class="fas fa-shield-halved"></i>
               <span>100% Safe</span>
             </div>
-            <div class="feature">
+            <div class="feature feat-3">
               <i class="fas fa-arrows-rotate"></i>
               <span>Auto Update</span>
             </div>
           </div>
         </div>
 
-        <!-- ENTERTAINMENT & LIVE STREAMING HUB -->
-        <div class="section-heading">
-          <h3><i class="fas fa-play-circle"></i> Live Streaming & Movies</h3>
-          <span>100% Free Access</span>
+        <!-- ENTERTAINMENT & LIVE STREAMING COLORFUL BANNER -->
+        <div class="colorful-section-banner">
+          <h3><i class="fas fa-play-circle"></i> Live Cricket, TV & Movies</h3>
+          <span class="banner-badge">100% FREE HD</span>
         </div>
 
         <div class="bento-grid">
@@ -1353,7 +1558,7 @@
                 <i class="fas fa-baseball-bat-ball"></i>
               </div>
               <span class="bento-tag">
-                <span class="live-dot"></span> LIVE HD
+                <span class="live-dot"></span> LIVE CRICKET
               </span>
             </div>
             <div class="bento-body">
@@ -1369,7 +1574,7 @@
                 <i class="fas fa-tv"></i>
               </div>
               <span class="bento-tag">
-                <span class="live-dot"></span> 24x7 TV
+                <span class="live-dot"></span> 24x7 LIVE TV
               </span>
             </div>
             <div class="bento-body">
@@ -1390,7 +1595,7 @@
                 <i class="fas fa-clapperboard"></i>
               </div>
               <span class="bento-tag">
-                <i class="fas fa-star" style="color:#fbbf24;"></i> NEW RELEASES
+                <i class="fas fa-star" style="color:#ffbe0b;"></i> ALL SHOWS & FILMS
               </span>
             </div>
             <div class="bento-body">
@@ -1400,10 +1605,10 @@
           </a>
         </div>
 
-        <!-- OFFICIAL CHANNELS & BSEB SPECIAL -->
-        <div class="section-heading">
-          <h3><i class="fas fa-sparkles"></i> Official Channels & BSEB Special</h3>
-          <span>Join Now</span>
+        <!-- OFFICIAL CHANNELS & BSEB SPECIAL COLORFUL BANNER -->
+        <div class="colorful-section-banner">
+          <h3><i class="fas fa-crown"></i> Official Channels & BSEB Special</h3>
+          <span class="banner-badge">JOIN VIP</span>
         </div>
 
         <div class="channels-list">
@@ -1412,7 +1617,7 @@
             href="https://t.me/+ds8_uO3ESVc4NTM1"
             target="_blank"
             rel="noopener noreferrer"
-            class="channel-item"
+            class="channel-item item-bseb"
           >
             <div class="channel-left">
               <div class="channel-icon icon-bseb">
@@ -1433,7 +1638,7 @@
             href="https://t.me/hrryfilms"
             target="_blank"
             rel="noopener noreferrer"
-            class="channel-item"
+            class="channel-item item-films"
           >
             <div class="channel-left">
               <div class="channel-icon icon-films">
@@ -1454,7 +1659,7 @@
             href="https://whatsapp.com/channel/0029VbF7oDdLo4hdnj39Cw17"
             target="_blank"
             rel="noopener noreferrer"
-            class="channel-item"
+            class="channel-item item-whatsapp"
           >
             <div class="channel-left">
               <div class="channel-icon icon-whatsapp">
@@ -1475,7 +1680,7 @@
             href="https://youtube.com/@aaappmaker?si=WpgljKB_XqYLhh99"
             target="_blank"
             rel="noopener noreferrer"
-            class="channel-item"
+            class="channel-item item-youtube"
           >
             <div class="channel-left">
               <div class="channel-icon icon-youtube">
@@ -1550,7 +1755,7 @@
               <span class="light-dot dot-green"></span>
             </div>
             <div class="stream-title">
-              <i class="fas fa-baseball-bat-ball" style="color:#10b981;"></i>
+              <i class="fas fa-baseball-bat-ball" style="color:#00f59b;"></i>
               <span>Free Live Cricket Streaming</span>
             </div>
           </div>
@@ -1603,7 +1808,7 @@
               <span class="light-dot dot-green"></span>
             </div>
             <div class="stream-title">
-              <i class="fas fa-tv" style="color:#ec4899;"></i>
+              <i class="fas fa-tv" style="color:#ff007f;"></i>
               <span>Hrry Live TV Channels</span>
             </div>
           </div>
@@ -1653,7 +1858,7 @@
             <i class="fas fa-clapperboard"></i>
             <span>Entertainment & Study Super Hub</span>
           </div>
-          <h2 class="hero-title" style="font-size:24px;">Movies, Shows & Official Links</h2>
+          <h2 class="hero-title" style="font-size:26px;">Movies, Shows & Official Links</h2>
           <p class="description">
             Access Free Movies & Web Series, BSEB Special Exam Materials, Official WhatsApp Updates, and YouTube Tutorials.
           </p>
@@ -1664,7 +1869,7 @@
               href="https://t.me/hrryfilms"
               target="_blank"
               rel="noopener noreferrer"
-              class="channel-item"
+              class="channel-item item-films"
             >
               <div class="channel-left">
                 <div class="channel-icon icon-films">
@@ -1685,7 +1890,7 @@
               href="https://t.me/+ds8_uO3ESVc4NTM1"
               target="_blank"
               rel="noopener noreferrer"
-              class="channel-item"
+              class="channel-item item-bseb"
             >
               <div class="channel-left">
                 <div class="channel-icon icon-bseb">
@@ -1706,7 +1911,7 @@
               href="https://whatsapp.com/channel/0029VbF7oDdLo4hdnj39Cw17"
               target="_blank"
               rel="noopener noreferrer"
-              class="channel-item"
+              class="channel-item item-whatsapp"
             >
               <div class="channel-left">
                 <div class="channel-icon icon-whatsapp">
@@ -1727,7 +1932,7 @@
               href="https://youtube.com/@aaappmaker?si=WpgljKB_XqYLhh99"
               target="_blank"
               rel="noopener noreferrer"
-              class="channel-item"
+              class="channel-item item-youtube"
             >
               <div class="channel-left">
                 <div class="channel-icon icon-youtube">
@@ -1748,10 +1953,10 @@
               href="https://t.me/hrbseb10thallcorse"
               target="_blank"
               rel="noopener noreferrer"
-              class="channel-item"
+              class="channel-item item-bseb"
             >
               <div class="channel-left">
-                <div class="channel-icon" style="background:linear-gradient(135deg,#8b5cf6,#ec4899);">
+                <div class="channel-icon" style="background:linear-gradient(135deg,#ff007f,#8338ec);">
                   <i class="fab fa-telegram"></i>
                 </div>
                 <div class="channel-meta">
